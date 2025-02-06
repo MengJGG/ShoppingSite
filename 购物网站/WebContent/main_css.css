@@ -1,0 +1,10 @@
+@charset "UTF-8";
+/*  main_css.css 
+    Created by <Lee> on 2025-02-06.
+    Copyright © 2025年 <Lee>. All rights reserved.
+*/
+body {
+	margin: 0;
+	padding: 0;
+	font-family: Arial, sans-serif;
+}
