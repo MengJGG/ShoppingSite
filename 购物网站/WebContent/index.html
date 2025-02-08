@@ -30,11 +30,186 @@
                     <span>|</span>
                     <a href="#">注册</a>
                 </section>
-                
+                <script>
+                    // TODO: 由于未登录状态，暂时不显示登录注册按钮
+                </script>
             </div>
-            
-
         </div>
     </div>
+    <!-- 主要内容 -->
+    <div class="main_container">
+        <!-- 轮播图 -->
+        <div class="carousel-container">
+            <div class="carousel-track">
+                <div class="carousel-item" style="background: #FF6B6B;">1</div>
+                <div class="carousel-item" style="background: #4ECDC4;">2</div>
+                <div class="carousel-item" style="background: #45B7D1;">3</div>
+                <div class="carousel-item" style="background: #96CEB4;">4</div>
+            </div>
+            
+            <button class="carousel-button button-prev">❮</button>
+            <button class="carousel-button button-next">❯</button>
+            
+            <div class="carousel-indicators"></div>
+        </div>
+        <script>
+            class Carousel {
+                constructor(container) {
+                    this.container = container;
+                    this.track = container.querySelector('.carousel-track');
+                    this.items = Array.from(container.querySelectorAll('.carousel-item'));
+                    this.currentIndex = 0;
+                    this.isAnimating = false;
+                    this.init();  // TODO: 这里需要传入是由哪个主题的页面，从而决定播放什么
+                }
+    
+                init() {
+                    // 创建指示器
+                    this.createIndicators();
+        
+                    // 添加事件监听
+                    container.querySelector('.button-prev').addEventListener('click', () => this.slideToPrev());
+                    container.querySelector('.button-next').addEventListener('click', () => this.slideToNext());
+
+                    // 自动播放
+                    this.startAutoPlay();
+                }
+    
+                createIndicators() {
+                    const indicatorsContainer = this.container.querySelector('.carousel-indicators');
+                    this.items.forEach((_, index) => {
+                        const indicator = document.createElement('div');
+                        indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                        indicator.addEventListener('click', () => this.slideTo(index));
+                        indicatorsContainer.appendChild(indicator);
+                    });
+                }
+    
+                updateIndicators() {
+                    const indicators = this.container.querySelectorAll('.indicator');
+                    indicators.forEach((indicator, index) => {
+                        indicator.classList.toggle('active', index === this.currentIndex);
+                    });
+                }
+    
+                slideTo(index) {
+                    if (this.isAnimating) return;
+                    
+                    this.currentIndex = (index + this.items.length) % this.items.length;
+                    this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
+                    this.updateIndicators();
+                    
+                    this.isAnimating = true;
+                    setTimeout(() => {
+                        this.isAnimating = false;
+                    }, 500);
+                }
+    
+                slideToPrev() {
+                    this.slideTo(this.currentIndex - 1);
+                }
+    
+                slideToNext() {
+                    this.slideTo(this.currentIndex + 1);
+                }
+
+                startAutoPlay(interval = 6000) {
+                    setInterval(() => {
+                        if (!document.hidden) {
+                            this.slideToNext();
+                        }
+                    }, interval);
+                }
+            }
+            // 初始化轮播
+            const container = document.querySelector('.carousel-container');
+            new Carousel(container);
+        </script>
+        <div></div>
+        <!-- 推荐商品 -->
+        <div class="recommend_container">
+            <span class="recommend_title">新品推荐</span>
+            <br>
+            <div class="recommend_items">
+                <div class="item" id="item_1">
+                    <div class="msg">
+                        <span>新品上新</span>
+                        <img src="#" alt="购入">
+                    </div>
+                    <img src="../Resource/Img/food/20.jpeg" alt="" class="good_img">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="info">
+                        <span class="name">商品名称</span>
+                        <span class="price">￥199</span>
+                    </div>
+                </div>
+                <div class="item" id="item_2">
+                    <div class="msg">
+                        <span>新品上新</span>
+                        <img src="#" alt="购入">
+                    </div>
+                    <img src="../Resource/Img/food/21.jpeg" alt="" class="good_img">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="info">
+                        <span class="name">商品名称</span>
+                        <span class="price">￥199</span>
+                    </div>
+                </div>
+                <div class="item" id="item_3">
+                    <div class="msg">
+                        <span>新品上新</span>
+                        <img src="#" alt="购入">
+                    </div>
+                    <img src="../Resource/Img/food/22.jpeg" alt="" class="good_img">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="info">
+                        <span class="name">商品名称</span>
+                        <span class="price">￥199</span>
+                    </div>
+                </div>
+                <div class="item" id="item_4">
+                    <div class="msg">
+                        <span>新品上新</span>
+                        <img src="#" alt="购入">
+                    </div>
+                    <img src="../Resource/Img/food/23.jpg" alt="" class="good_img">
+                    <br>
+                    <br>
+                    <br>
+                    <div class="info">
+                        <span class="name">商品名称</span>
+                        <span class="price">￥199</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topBar = document.querySelector('.top_container');
+            const skyBar = document.querySelector('.sky_banner');
+            const mainContainer = document.querySelector('.main_container');
+            const topBarHeight = skyBar.offsetHeight;
+            console.log(topBarHeight);
+            window.addEventListener('scroll', function() {
+                const offset = window.pageYOffset || document.documentElement.scrollTop;
+                console.log(offset);
+
+                if (offset > topBarHeight) {
+                    topBar.classList.add('sticky');
+                    mainContainer.style.paddingTop = 5 + 'rem';
+                } else {
+                    topBar.classList.remove('sticky');
+                    mainContainer.style.paddingTop = 0;
+                }
+            });
+        });
+    </script>
 </body>
 </html>
