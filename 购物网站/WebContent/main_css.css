@@ -3,9 +3,17 @@
     Created by <Lee> on 2025-02-06.
     Copyright © 2025年 <Lee>. All rights reserved.
 */
+
+:root {
+	--dark-bg: #111111;
+	--gold: #D4AF37;
+	--light-text: #e0e0e0;
+	--dark-text: #333333;
+}
+
 body {
+	font-family: PingFangSC-Regular, HiraginoSansGB-W3, Microsoft YaHei, \5fae\8f6f\96c5\9ed1, sans-serif;
 	margin: 0;
 	padding: 0;
-	font-family: Arial, sans-serif;
 }
 
