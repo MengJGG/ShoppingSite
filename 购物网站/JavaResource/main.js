@@ -44,3 +44,4 @@ var food_list = [
     {"path":"../Resource/Img/food/40.jpeg", "name":"椒盐战斧羊排", "price": "$129.99"},
     {"path":"../Resource/Img/food/41.jpeg", "name":"猪排配烤薯虾米", "price": "$129.99"},
 ];
+
