@@ -1,6 +1,7 @@
 <!-- 商品详情页 -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,7 +11,19 @@
     </script>
     <link rel="stylesheet" href="main_css.css">
 </head>
+
 <body>
-    
+    <script>
+        const image = document.getElementById('商品.img');
+        //鼠标悬浮放大1.5倍
+        image.addEventListener('mouseenter', function () {
+            this.style.transform = 'scale(1.5)';
+        });
+        //鼠标离开恢复到原大小       
+        image.addEventListener('mouseleave', function () {
+            this.style.transform = 'scale(1)';
+        });
+    </script>
 </body>
+
 </html>
