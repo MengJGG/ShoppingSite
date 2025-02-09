@@ -1,4 +1,3 @@
-<!-- 商品详情页 -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -7,21 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xxxx商品</title>
     <script>
-        // TODO: 获取商品名称，并添加到页面标题
+        // 获取商品名称，并添加到页面标题
+        document.addEventListener('DOMContentLoaded', function () {
+            const productTitle = document.querySelector('.product-title').textContent;
+            document.title = productTitle;
+        });
     </script>
     <link rel="stylesheet" href="main_css.css">
+    <link rel="stylesheet" href="goodsDetail.css">
 </head>
 
 <body>
+    <header>
+        <div class="logo"></div>
+        <!-- 模拟导航栏 -->
+        <nav>
+            <a href="index.html">首页</a>
+            <a href="#">吉他</a>
+            <a href="#">音响</a>
+            <a href="#">美食</a>
+        </nav>
+    </header>
+    <!-- 头部区域 -->
+    <header>
+        <div class="contact-buttons">
+            <button class="contact-btn">联系客服</button>
+            <button class="enter-store-btn">进入店铺</button>
+        </div>
+    </header>
+    <!-- 主体内容区域 -->
+    <main>
+        <div class="product-container">
+            <div class="product-image-gallery">
+                <img src="../Resource/Img/food/20.jpeg" alt="主商品图" class="main-product-img">
+            </div>
+            <div class="product-details">
+                <h2 class="product-title">非常无敌巨好吃的风味三明治</h2>
+                <div class="price-info">
+                    <span class="after-coupon-price">券后￥169</span>
+                    <span class="before-coupon-price">优惠前￥180</span>
+                    <span class="sold-num">已售10w+</span>
+                    <div class="red-packet-info">
+                        <span>新春开门红</span>
+                        <span>2月23日24点结束</span>
+                    </div>
+                </div>
+                <div class="discount-info">
+                    <span>每300减40</span>
+                    <span>店铺券满20减2</span>
+                </div>
+                <div class="delivery-info">
+                    <span>配送：多仓发货 至 湖北 武汉</span>
+                    <span>快递：免运费 预计明天发货 | 承诺48小时内发货</span>
+                </div>
+                <div class="warranty-info">
+                    <span>保障：大促价保7天无理由退货 极速退款</span>
+                </div>
+                <div class="color-options">
+                    <span>颜色分类：</span>
+                    <input type="radio" id="option1" name="color" checked>
+                    <label for="option1">三明治原味</label>
+                    <input type="radio" id="option2" name="color">
+                    <label for="option2">三明治香辣味</label>
+                    <input type="radio" id="option3" name="color">
+                    <label for="option3">三明治黑椒味</label>
+                    <input type="radio" id="option4" name="color">
+                    <label for="option4">三明治奶酪味</label>
+                </div>
+                <div class="quantity-control">
+                    <span>数量：</span>
+                    <button class="minus-btn">-</button>
+                    <input type="number" value="1" class="quantity-input">
+                    <button class="plus-btn">+</button>
+                    <span class="stock-info">有货</span>
+                </div>
+                <div class="action-buttons">
+                    <button class="coupon-buy-btn">领券购买</button>
+                    <button class="add-cart-btn">加入购物车</button>
+                </div>
+            </div>
+        </div>
+    </main>
     <script>
-        const image = document.getElementById('商品.img');
-        //鼠标悬浮放大1.5倍.
-        image.addEventListener('mouseenter', function () {
-            this.style.transform = 'scale(1.5)';
-        });
-        //鼠标离开恢复到原大小       
-        image.addEventListener('mouseleave', function () {
-            this.style.transform = 'scale(1)';
+        document.addEventListener('DOMContentLoaded', function () {
+            // 获取加入购物车按钮元素
+            const addCartBtn = document.querySelector('.add-cart-btn');
+            // 为按钮添加点击事件监听器
+            addCartBtn.addEventListener('click', function () {
+                // 跳转到购物车界面，这里购物车界面的 URL 是 cart.html
+                window.location.href = 'cart.html';
+            });
         });
     </script>
 </body>
