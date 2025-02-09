@@ -14,12 +14,50 @@
     <div class="top_container">
         <span class="main_logo">LUXEHARMONY</span>
         <!-- 导航栏 -->
-        <div class="top_guide_nav">
-            <div class="header">首页</div>
-            <div class="guitar">吉他</div>
-            <div class="audio">音响</div>
-            <div class="food">美食</div>
+        <div class="top_guide_nav" id="top_drop_menu_container">
+            <div class="header">首页
+            </div>
+            <div class="guitar">吉他
+            </div>
+            <div class="audio">音响
+            </div>
+            <div class="food">美食
+            </div>
+            <div class="racket">羽毛球拍
+            </div>
         </div>
+        <!-- 下拉菜单 -->
+        <div class="top_drop_menu" id="top_drop_menu_container">
+            <div class="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <a>尤尼克斯Yonex</a> 
+                <a>李宁LI-NING</a>
+                <a>威克多VICTORY</a>
+                <br>
+            </div>
+            <div class="img_container">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="">
+            </div>
+        </div>
+        <script>
+            //const guitar = document.querySelector('.top_guide_nav .guitar');
+            //const audio = document.querySelector('.top_guide_nav .audio');
+            //const food = document.querySelector('.top_guide_nav .food');
+            const racket = document.querySelector('.top_guide_nav .racket');
+            const topDropMenu = document.querySelector('.top_drop_menu');
+            const topDropMenuContainer = document.querySelector('#top_drop_menu_container');
+            topDropMenuContainer.addEventListener('mouseenter', function() {
+                topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+                topDropMenu.style.display = 'flex';
+            });
+            topDropMenuContainer.addEventListener('mouseleave', function() {
+                topDropMenu.style.animation = 'fade-out 0.5s ease 1 forwards';
+            });
+
+        </script>
         <!-- 登录注册 -->
         <div class="login_container">
             <img src="../Resource/Img/system/default_user_head.png" alt="">
@@ -189,12 +227,14 @@
                 </div>
             </div>
         </div>
+
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const topBar = document.querySelector('.top_container');
             const skyBar = document.querySelector('.sky_banner');
             const mainContainer = document.querySelector('.main_container');
+            const guideMenu = document.querySelector('.top_drop_menu');
             const topBarHeight = skyBar.offsetHeight;
             console.log(topBarHeight);
             window.addEventListener('scroll', function() {
@@ -204,9 +244,11 @@
                 if (offset > topBarHeight) {
                     topBar.classList.add('sticky');
                     mainContainer.style.paddingTop = 5 + 'rem';
+                    guideMenu.style.top = 5 + 'rem';
                 } else {
                     topBar.classList.remove('sticky');
                     mainContainer.style.paddingTop = 0;
+                    guideMenu.style.top = 6.25 + 'rem';
                 }
             });
         });
