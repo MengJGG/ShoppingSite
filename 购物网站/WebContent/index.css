@@ -18,6 +18,39 @@
     background-color: #21222C;
 }
 
+/* 侧边工具栏 */
+.side_tool_bar {
+    display: flex;
+    position: fixed;
+    flex-direction: column;
+    text-align: center;
+    right: 0;
+    bottom: 25rem;
+    border-radius: 30px;
+    z-index: 50000;
+}
+
+.side_tool_bar div {
+    position: relative;
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+    background-color: white;
+}
+
+.side_tool_bar div:hover {
+    cursor: pointer;
+    background-color: var(--light-text);
+}
+
+.side_tool_bar div img {
+    position: relative;
+    object-fit: contain;
+    width: 100%;
+}
+
+
+
 .top_container {
     width: 100%;
     padding: 10px 0;
