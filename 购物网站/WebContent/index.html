@@ -74,6 +74,12 @@
             </div>
         </div>
     </div>
+    <!-- 侧边工具栏 -->
+    <div class="side_container">
+        <div class="lamp"></div>
+        <div class="cart"></div>
+        <div class="scroll_top"></div>
+    </div>
     <!-- 主要内容 -->
     <div class="main_container">
         <!-- 轮播图 -->
@@ -232,20 +238,55 @@
             </script>
         </div>
         <!-- 主题分区 -->
+        <span class="theme_title">主题分区</span>
         <div class="theme_container">
-            <div class="guitar">吉他
-                <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="">
-            </div>
-            <div class="audio">音响
-                <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="">
-            </div>
-            <div class="food">美食
-                <img src="../Resource/Img/system/theme_food_img.jpeg" alt="">
-            </div>
-            <div class="racket">羽毛球拍
-                <img src="../Resource/Img/system/theme_racket_img.jpeg" alt="">
-            </div>
+            <span id="guitar">吉他</span>
+            <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="">
+            <span id="audio">音响</span>
+            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="">
+            <span id="food">美食</span>
+            <img src="../Resource/Img/system/theme_food_img.jpeg" alt="">
+            <span id="racket">羽毛球拍</span>
+            <img src="../Resource/Img/system/theme_racket_img.jpeg" alt="">
         </div>
+        <script> 
+            
+            const themeItem = document.querySelector('.theme_container');
+            const theme_text_guitar = document.querySelector('.theme_container #guitar');
+            const theme_text_audio = document.querySelector('.theme_container #audio');
+            const theme_text_food = document.querySelector('.theme_container #food');
+            const theme_text_racket = document.querySelector('.theme_container #racket');
+            themeItem.addEventListener('mouseover', function(e) {
+                // 获取是第几个元素被点击
+                const index = Array.from(e.target.parentNode.children).indexOf(e.target);
+                hiddenThemeText();
+            
+                switch (index) {
+                    case 1:
+                        theme_text_guitar.style.display = 'block';
+                        break;
+                    case 3:
+                        theme_text_audio.style.display = 'block';
+                        break;
+                    case 5:
+                        theme_text_food.style.display = 'block';
+                        break;
+                    case 7:
+                        theme_text_racket.style.display = 'block';  
+                        break;
+                }
+            });
+            themeItem.addEventListener('mouseout', function() {
+                hiddenThemeText();  
+            });
+
+            function hiddenThemeText() {
+                theme_text_guitar.style.display = 'none';
+                theme_text_audio.style.display = 'none';
+                theme_text_food.style.display = 'none';
+                theme_text_racket.style.display = 'none';
+            }
+        </script>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {

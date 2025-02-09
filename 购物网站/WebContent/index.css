@@ -274,7 +274,7 @@
     align-items: center;
     max-width: 100%;
     width: 86rem;
-    height: 30rem;
+    height: 50rem;
 
 }
 
@@ -374,8 +374,65 @@
 
 /* 主题分区 */
 .theme_container {
-    display: flex;
-    width: 100%;
-    height: 50rem;
-    background-color: violet;
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    
+    width: 100rem;
+    /* 居中 */
+    justify-items: center;
+    align-items: center;
+    /* 间距 */
+}
+
+.theme_container img{
+    cursor: pointer;
+    box-sizing: border-box;
+    /* padding: 1rem; */
+    width: 50rem;
+    height: auto;
+}
+
+.theme_title {
+    font-size: 2.8rem;
+    color: var(--dark-text);
+    margin-bottom: 1rem;
+}
+
+.theme_container img:hover {
+    /* 模糊滤镜 */
+    filter: blur(5px);
+    transition: 0.3s;   
+}
+
+
+.theme_container span {
+    position: absolute;
+    font-size: 3rem;
+    z-index: 20;
+}
+
+.theme_container #guitar {
+    top: 14rem;
+    left: 22rem;
+    display: none;
+}
+
+.theme_container #audio {
+    top: 14rem;
+    right: 22rem;
+    display: none;
+}
+
+.theme_container #food {
+    bottom: 14rem;
+    left: 22rem;
+    display: none;
+}
+
+.theme_container #racket {
+    bottom: 14rem;
+    right: 18rem;
+    display: none;
 }
