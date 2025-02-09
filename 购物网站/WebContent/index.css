@@ -9,7 +9,7 @@
     --gold: #D4AF37;
 	--light-text: #e0e0e0;
 	--dark-text: #333333;
-
+    --brown: #757575;
 }
 
 .sky_banner {
@@ -87,7 +87,8 @@
     top: 6.25rem;
     width: 100%;
     height: auto;
-    background-color: green;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
     z-index: 10;
 }
 
@@ -111,7 +112,7 @@
     cursor: default;
 }
 
-.drop_content a, span {
+.drop_content a, .drop_content span {
     position: relative;
     padding-left: 1.5rem;
     cursor: pointer;
@@ -149,6 +150,7 @@
 .top_drop_menu .img_container img {
     min-width: 30%;
     max-width: 70%;
+    max-height: 50rem;
     padding: 2.9%;
     margin-bottom: 1.2rem;
 }
@@ -180,6 +182,7 @@
 .login_mes_container a, span {
     color: var(--light-text);
 }
+
 
 /* 主要内容 */
 .main_container {
@@ -316,7 +319,7 @@
 }
 
 .recommend_items .item .msg span {
-    color: #757575;
+    color: var(--brown);
     cursor:default;
 }
 
@@ -327,6 +330,7 @@
     max-height: 100%;
     height: auto;
     margin-top: 1.3rem;
+    border-bottom: #21222C solid 2px;
 }
 
 .recommend_items .item .good_img:hover {
@@ -347,4 +351,23 @@
     padding-top: 3px;
     row-gap: 0.4rem;
     cursor: default;
+}
+
+.recommend_container .change_btn {
+    position: absolute;
+    color: var(--brown);
+    text-align: center;
+    width: 5rem;
+    height: 1.5rem;
+    right: 12%;
+    margin-top: 1.2rem;
+    border: var(--brown) solid 1px;
+    border-radius: 5px;
+
+}
+
+.recommend_container .change_btn:hover {
+    background-color: var(--dark-bg);
+    color: var(--light-text);
+    cursor: pointer;
 }

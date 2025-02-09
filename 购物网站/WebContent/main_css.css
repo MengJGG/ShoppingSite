@@ -17,3 +17,20 @@ body {
 	padding: 0;
 }
 
+/* 渐渐淡入 */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+    } to {
+        opacity: 1;
+    }
+}
+
+/* 渐渐淡出 */
+@keyframes fade-out {
+    from {
+        opacity: 1;
+    } to {
+        opacity: 0;
+    }
+}

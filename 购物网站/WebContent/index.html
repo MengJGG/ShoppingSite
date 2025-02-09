@@ -53,7 +53,7 @@
                 topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
                 topDropMenu.style.display = 'flex';
             });
-            topDropMenuContainer.addEventListener('mouseleave', function() {
+            topDropMenu.addEventListener('mouseleave', function() {
                 topDropMenu.style.animation = 'fade-out 0.5s ease 1 forwards';
             });
 
@@ -62,10 +62,10 @@
         <div class="login_container">
             <img src="../Resource/Img/system/default_user_head.png" alt="">
             <div class="login_mes_container">
-                <span>未登录</span>
+                <span style="cursor: default;">未登录</span>
                 <section>
                     <a href="#">登录</a>
-                    <span>|</span>
+                    <span style="cursor: default;">|</span>
                     <a href="#">注册</a>
                 </section>
                 <script>
@@ -167,6 +167,7 @@
         <!-- 推荐商品 -->
         <div class="recommend_container">
             <span class="recommend_title">新品推荐</span>
+            <span class="change_btn">换一批</span>
             <br>
             <div class="recommend_items">
                 <div class="item" id="item_1">
@@ -226,8 +227,12 @@
                     </div>
                 </div>
             </div>
+            <script>
+                // TODO: 这里需要传入是由哪个主题的页面，从而决定推荐什么商品
+            </script>
         </div>
-
+        <!-- 主题商品 -->
+         
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
