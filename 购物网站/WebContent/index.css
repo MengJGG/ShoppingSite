@@ -11,6 +11,7 @@
 	--light-text: #e0e0e0;
 	--dark-text: #333333;
     --brown: #757575;
+    --blue: #0078D7;
 }
 
 body {
@@ -198,6 +199,7 @@ body {
     max-height: 50rem;
     padding: 2.9%;
     margin-bottom: 1.2rem;
+    cursor: pointer;
 }
 
 /* 登录注册 */
@@ -224,7 +226,7 @@ body {
     font-size: 0.8rem;
 }
 
-.login_mes-container a, span {
+.login_mes-container a, .login_mes-container span {
     color: var(--light-text);
 }
 
@@ -319,7 +321,7 @@ body {
     align-items: center;
     max-width: 100%;
     width: 86rem;
-    height: 50rem;
+    height: 45rem;
 
 }
 
@@ -379,7 +381,7 @@ body {
 }
 
 .recommend_items .item .good_img:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: 0.3s;
     cursor: pointer;
 }
@@ -455,6 +457,7 @@ body {
 .theme-container span {
     position: absolute;
     font-size: 3rem;
+    color: var(--light-text);
     z-index: 20;
 }
 
@@ -484,24 +487,115 @@ body {
 
 .bottom-container {
     display: flex;
-    justify-content: center;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
     background-color: var(--light-bg);
     width: 100%;
     height: 45rem;
     border-top: #757575 solid 1px;
-    margin-top: 3rem;
+    margin-top: 5rem;
 }
 
 .bottom-container .logo {
-    position: absolute;
     font-family: 'Playfair Display', serif;
     font-size: 2rem;
+    cursor: default;
+    margin-bottom: 1rem;
     color: var(--gold);
 }
 
-.bottom-container .help-content {
+.bottom-container .help_main-container {
+    display: flex;
+    position: absolute;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    transform: translateY(-40%);
+    transition: transform 0.4s ease;
+}   
+
+.bottom-container .help_main-container #items {
     display: flex;
     flex-direction: column;
-    text-align: left;
-    
+    padding-top: 5rem;
+}
+
+.bottom-container .help_main-container a {
+    margin: 1.3rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--dark-text);
+}
+
+.bottom-container .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+
+.bottom-container .quick-msg {
+    font-size: 1.5rem;
+    color: #111111;
+}
+
+.bottom-container .input-container input {
+    /* 只有下边框 */
+    border: none;
+    border-bottom: 1px solid #757575;
+    width: 80%;
+    padding: 0.2rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--dark-text);
+}
+
+.bottom-container .input-container input:focus {
+    outline: none;
+}
+
+.bottom-container .input-container span {
+    font-size: 0.8rem;
+}
+
+.bottom-container .input-container button {
+    display: none;
+    background-color: var(--brown);
+    color: var(--light-bg);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    width: 85%;
+    height: 3rem;
+    font-size: 0.8rem;
+    transform: translateY(-10%);
+    transition: transform 0.3s ease;
+}
+
+.bottom-container .input-container #msg {
+    display: none;
+    transform: translateY(-10%);
+    transition: transform 0.3s ease;
+}
+
+.bottom-container .copyright_msg-container {
+    position: absolute;
+    bottom: 1.5rem;
+}
+
+.bottom-container .copyright_msg-container span {
+    cursor: pointer;
+}
+
+
+.bottom-container .copyright {
+    position: absolute;
+    bottom: 0;
+    font-size: 0.8rem;
+    color: gray;
 }
