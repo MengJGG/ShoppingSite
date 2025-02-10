@@ -435,7 +435,7 @@
 
 .theme_container img:hover {
     /* 模糊滤镜 */
-    filter: blur(5px);
+    filter: blur(7px);
     transition: 0.3s;   
 }
 
