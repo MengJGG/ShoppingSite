@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="sky_banner"></div>
+    <div class="sky-banner"></div>
     <!-- 顶部导航栏 -->
-    <div class="top_container">
+    <div class="top-container">
         <span class="main_logo">LUXEHARMONY</span>
         <!-- 导航栏 -->
-        <div class="top_guide_nav" id="top_drop_menu_container">
+        <div class="top_guide_nav" id="top_drop_menu-container">
             <div class="header">首页
             </div>
             <div class="guitar">吉他
@@ -27,7 +27,7 @@
             </div>
         </div>
         <!-- 下拉菜单 -->
-        <div class="top_drop_menu" id="top_drop_menu_container">
+        <div class="top_drop_menu" id="top_drop_menu-container">
             <div class="drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
@@ -36,10 +36,10 @@
                 <a>威克多VICTORY</a>
                 <br>
             </div>
-            <div class="img_container">
+            <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <img src="../Resource/Img/food/11.jpeg" alt="">
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         <script>
@@ -47,21 +47,23 @@
             //const audio = document.querySelector('.top_guide_nav .audio');
             //const food = document.querySelector('.top_guide_nav .food');
             const racket = document.querySelector('.top_guide_nav .racket');
+            const topGuideNav = document.querySelector('.top_guide_nav');
             const topDropMenu = document.querySelector('.top_drop_menu');
-            const topDropMenuContainer = document.querySelector('#top_drop_menu_container');
+            const topDropMenuContainer = document.querySelector('#top_drop_menu-container');
             topDropMenuContainer.addEventListener('mouseenter', function() {
                 topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
                 topDropMenu.style.display = 'flex';
             });
             topDropMenu.addEventListener('mouseleave', function() {
-                topDropMenu.style.animation = 'fade-out 0.5s ease 1 forwards';
+                topDropMenu.style.display = 'none';
             });
+            
 
         </script>
         <!-- 登录注册 -->
-        <div class="login_container">
+        <div class="login-container">
             <img src="../Resource/Img/system/default_user_head.png" alt="">
-            <div class="login_mes_container">
+            <div class="login_mes-container">
                 <span style="cursor: default;">未登录</span>
                 <section>
                     <a href="#">登录</a>
@@ -78,16 +80,21 @@
     <div class="side_tool_bar">
         <div class="lamp" onclick=""><img src="../Resource/Img/system/lamp.png" style="width: 2.5rem; height: 2.5rem; margin-top: 5px;" alt="开关灯"></div>
         <div class="cart" onclick=""><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
-        <div class="scroll_top" onclick=""><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
+        <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
-        function onOffLamp() {
-            // 实现开光灯功能
-            
+        const lamp = document.querySelector('.side_tool_bar .lamp');
+        const cart = document.querySelector('.side_tool_bar .cart');
+        const scrollTop = document.querySelector('.side_tool_bar .scroll_top');
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     </script>
     <!-- 主要内容 -->
-    <div class="main_container">
+    <div class="main-container">
         <!-- 轮播图 -->
         <div class="carousel-container">
             <div class="carousel-track">
@@ -177,7 +184,7 @@
         </script>
         <div></div>
         <!-- 推荐商品 -->
-        <div class="recommend_container">
+        <div class="recommend-container">
             <span class="recommend_title">新品推荐</span>
             <span class="change_btn">换一批</span>
             <br>
@@ -185,7 +192,7 @@
                 <div class="item" id="item_1">
                     <div class="msg">
                         <span>新品上新</span>
-                        <img src="#" alt="购入">
+                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
                     </div>
                     <img src="../Resource/Img/food/20.jpeg" alt="" class="good_img">
                     <br>
@@ -199,7 +206,7 @@
                 <div class="item" id="item_2">
                     <div class="msg">
                         <span>新品上新</span>
-                        <img src="#" alt="购入">
+                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
                     </div>
                     <img src="../Resource/Img/food/21.jpeg" alt="" class="good_img">
                     <br>
@@ -213,7 +220,7 @@
                 <div class="item" id="item_3">
                     <div class="msg">
                         <span>新品上新</span>
-                        <img src="#" alt="购入">
+                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
                     </div>
                     <img src="../Resource/Img/food/22.jpeg" alt="" class="good_img">
                     <br>
@@ -227,7 +234,7 @@
                 <div class="item" id="item_4">
                     <div class="msg">
                         <span>新品上新</span>
-                        <img src="#" alt="购入">
+                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
                     </div>
                     <img src="../Resource/Img/food/23.jpg" alt="" class="good_img">
                     <br>
@@ -245,7 +252,7 @@
         </div>
         <!-- 主题分区 -->
         <span class="theme_title">主题分区</span>
-        <div class="theme_container">
+        <div class="theme-container">
             <span id="guitar">吉他</span>
             <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="">
             <span id="audio">音响</span>
@@ -257,11 +264,11 @@
         </div>
         <script> 
             
-            const themeItem = document.querySelector('.theme_container');
-            const theme_text_guitar = document.querySelector('.theme_container #guitar');
-            const theme_text_audio = document.querySelector('.theme_container #audio');
-            const theme_text_food = document.querySelector('.theme_container #food');
-            const theme_text_racket = document.querySelector('.theme_container #racket');
+            const themeItem = document.querySelector('.theme-container');
+            const theme_text_guitar = document.querySelector('.theme-container #guitar');
+            const theme_text_audio = document.querySelector('.theme-container #audio');
+            const theme_text_food = document.querySelector('.theme-container #food');
+            const theme_text_racket = document.querySelector('.theme-container #racket');
             themeItem.addEventListener('mouseover', function(e) {
                 // 获取是第几个元素被点击
                 const index = Array.from(e.target.parentNode.children).indexOf(e.target);
@@ -293,12 +300,96 @@
                 theme_text_racket.style.display = 'none';
             }
         </script>
+        <!-- 底部信息栏 -->
+        <br>
+        <br>
+        <div class="bottom-container">
+            <br>
+            <div class="logo">LUXEHARMONY</div>
+            <span class="quick-msg">立即订阅LuxeHarmony官方时讯快报，抢先获取最新商品资讯</span>
+            <!-- 输入框 -->
+            <div class="input-container">
+                <input type="text" placeholder="请在此处输入您的邮箱地址..." maxlength="30" autocomplete="off">
+                <span id="msg">使用订阅服务，即表示您同意我们向您的邮箱地址发送LuxeHarmony官方时讯快报，</span>
+                <span id="msg">并同意我们对您的个人信息的使用和保护。</span>
+                <button>订阅</button>
+
+            </div>
+            <br>
+            <div class="help_main-container">
+                <div class="left" id="items">
+                    <a href="#">联系我们</a>
+                    <a href="#">付款方式</a>
+                    <a href="#">配送说明</a>
+                    <a href="#">退货与换货</a>
+                </div>
+                <div class="right" id="items">
+                    <a href="#">关于我们</a>
+                    <a href="#">加入我们</a>
+                </div>
+            </div>
+
+            <div class="copyright_msg-container">
+                <span>使用条款</span>
+                <span>隐私政策</span>
+                <span>版本声明</span>
+            </div>
+            <div class="copyright">copyright © 2025 LUXEHARMONY. All rights reserved.</div>
+        </div>
+        <script>
+            // 当有用户输入时，才显示按钮
+            const input = document.querySelector('.input-container input');
+            const button = document.querySelector('.input-container button');
+            const msg = document.querySelectorAll('.input-container #msg');
+            const helpContainer = document.querySelector('.help_main-container');
+            input.addEventListener('input', function() {
+                if (input.value.trim() != '') {
+                    // 从上方慢慢出现
+                    button.style.display = 'block';
+                    msg.forEach(it => {
+                        it.style.display = 'block';
+                        it.style.animation = 'fade-in 0.3s ease 1 forwards';
+                        it.style.transform = 'translateY(0)';
+                    });
+                    button.style.animation = 'fade-in 0.3s ease 1 forwards';
+                    // helpContainer缓慢下降
+                    helpContainer.style.transform = 'translateY(-10%)';
+                    // 判断输入的内容是否为邮箱
+                    const email = input.value.trim();
+                    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                    if (emailRegex.test(email)) {
+                        button.disabled = false;
+                        button.style.cursor = 'pointer';
+                        // 悬浮时按钮变色
+                        button.addEventListener('mouseover', function() {
+                            button.style.backgroundColor = '#1f1f1f';
+                        });
+                        button.addEventListener('mouseout', function() {
+                            button.style.backgroundColor = '#111111';
+                        });
+                        button.style.backgroundColor = '#111111';
+                    } else {
+                        button.disabled = true;
+                        button.style.cursor = 'default';
+                        button.style.backgroundColor = 'gray';
+                    }
+
+                } else {
+                    msg.forEach(it => {
+                        it.style.animation = 'fade-out 0.3s ease 1 forwards';
+                        it.style.transform = 'translateY(-10%)';
+                    });
+                    button.style.animation = 'fade-out 0.3s ease 1 forwards';
+                    helpContainer.style.transform = 'translateY(-40%)';
+                }
+            });
+        </script>
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const topBar = document.querySelector('.top_container');
-            const skyBar = document.querySelector('.sky_banner');
-            const mainContainer = document.querySelector('.main_container');
+            const topBar = document.querySelector('.top-container');
+            const skyBar = document.querySelector('.sky-banner');
+            const mainContainer = document.querySelector('.main-container');
             const guideMenu = document.querySelector('.top_drop_menu');
             const topBarHeight = skyBar.offsetHeight;
             console.log(topBarHeight);

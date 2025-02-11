@@ -1,4 +1,3 @@
-/* 全局样式 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -13,9 +12,9 @@ header {
     background-color: #111111;
     padding: 10px 20px;
     width: 100%;
-    box-sizing: border - box;
+    box-sizing: border-box;
     display: flex;
-    justify-content: space - between;
+    justify-content: space-between;
     align-items: center;
 }
 
@@ -58,7 +57,7 @@ main {
     max-width: 1200px;
     /* 设置最大宽度，避免内容过宽 */
     padding: 20px;
-    box-sizing: border - box;
+    box-sizing: border-box;
     display: flex;
     justify-content: center;
 }
@@ -66,14 +65,16 @@ main {
 .product-container {
     display: flex;
     flex-direction: row;
+    align-items: stretch;
     gap: 20px;
     width: 100%;
 }
 
-.product-image-gallery,
 .product-details {
+    flex: 1;
     width: 50%;
-    box-sizing: border - box;
+    padding: 0 15px;
+    box-sizing: border-box;
 }
 
 .product-image-gallery {
@@ -81,19 +82,25 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
 }
 
 .main-product-img {
-    max-width: 100%;
-    max-height: 100%;
-    width: auto;
-    height: auto;
+    width: 100%;
     object-fit: contain;
+    transition: transform 0.3s ease;
+    /* 添加过渡效果 */
+}
+
+.main-product-img:hover {
+    transform: scale(1.2);
+    /* 鼠标悬浮时图片放大到 1.2 倍 */
 }
 
 .product-title {
-    font-size: 20px;
+    font-size: 50px;
     margin-bottom: 10px;
+    letter-spacing: 2px;
 }
 
 .price-info {
@@ -104,26 +111,30 @@ main {
     font-size: 20px;
     color: #dc3545;
     font-weight: bold;
+    letter-spacing: 2px;
 }
 
 .before-coupon-price {
-    text-decoration: line - through;
+    text-decoration: line-through;
     margin-left: 10px;
+    letter-spacing: 2px;
 }
 
 .sold-num {
     margin-left: 10px;
+    letter-spacing: 2px;
 }
 
 .red-packet-info {
     color: #e74c3c;
     margin-left: 10px;
+    letter-spacing: 2px;
 }
 
 .discount-info span {
     margin-right: 10px;
     margin-bottom: 10px;
-    display: inline - block;
+    display: inline-block;
 }
 
 .delivery-info span,
@@ -132,8 +143,20 @@ main {
     margin-bottom: 5px;
 }
 
+.color-options {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #333;
+    /* 添加边框 */
+    padding: 10px;
+    /* 添加内边距 */
+    border-radius: 5px;
+    /* 添加圆角 */
+    margin-bottom: 10px;
+    /* 添加底部外边距 */
+}
+
 .color-options span {
-    display: block;
     margin-bottom: 5px;
 }
 
@@ -188,19 +211,36 @@ main {
     padding: 0;
 }
 
-.main-product-img {
+/* 用户评价样式 */
+.product-reviews {
     width: 100%;
-    height: auto;
-    object-fit: contain;
-    transition: transform 0.3s ease;
-    /* 添加过渡效果 */
+    max-width: 1200px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-.main-product-img:hover {
-    transform: scale(1.2);
-    /* 鼠标悬浮时图片放大到 1.2 倍 */
+.product-reviews h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
 }
 
-.product-title {
-    letter-spacing: 1px;
+.review {
+    background-color: #f9f9f9;
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 15px;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.review-author {
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.review-content {
+    color: #666;
+    line-height: 1.5;
+
 }

@@ -6,13 +6,19 @@
 
 :root {
 	--dark-bg: #111111;
+    --light-bg: #f2f2f2;
     --gold: #D4AF37;
 	--light-text: #e0e0e0;
 	--dark-text: #333333;
     --brown: #757575;
+    --blue: #0078D7;
 }
 
-.sky_banner {
+body {
+    background-color: var(--light-bg);
+}
+
+.sky-banner {
     width: 100%;
     height: 1rem;
     background-color: #21222C;
@@ -49,9 +55,16 @@
     width: 100%;
 }
 
+.side_tool_bar .lamp {
+    transition: transform 0.3s ease;
+}
+
+.side_tool_bar .lamp:active, .side_tool_bar .cart:active, .side_tool_bar .scroll_top:active{
+    transform: scale(0.9);
+}
 
 
-.top_container {
+.top-container {
     width: 100%;
     padding: 10px 0;
     display: flex;
@@ -61,7 +74,7 @@
     background-color: var(--dark-bg);
 }
 
-.top_container.sticky {
+.top-container.sticky {
     position: fixed;
     top: 0;
     left: 0;
@@ -167,29 +180,30 @@
     color: var(--dark-text);
 }
 
-.top_drop_menu .img_container {
+.top_drop_menu .img-container {
     display: flex;
     flex-direction: column;
     margin-left: 35%;
 }
 
-.top_drop_menu .img_container span {
+.top_drop_menu .img-container span {
     position: relative;
     font-size: 12px;
     cursor: default;
 
 }
 
-.top_drop_menu .img_container img {
+.top_drop_menu .img-container img {
     min-width: 30%;
     max-width: 70%;
     max-height: 50rem;
     padding: 2.9%;
     margin-bottom: 1.2rem;
+    cursor: pointer;
 }
 
 /* 登录注册 */
-.login_container {
+.login-container {
     display: flex;
     position: absolute;
     right: 12%;
@@ -198,13 +212,13 @@
     height: 100%;
 }
 
-.login_container img {
+.login-container img {
     width: 2.4rem;
     height: 2.4rem;
     border-radius: 50%;
 }
 
-.login_mes_container {
+.login_mes-container {
     display: flex;
     flex-direction: column;
     margin-left: 1rem;
@@ -212,13 +226,13 @@
     font-size: 0.8rem;
 }
 
-.login_mes_container a, span {
+.login_mes-container a, .login_mes-container span {
     color: var(--light-text);
 }
 
 
 /* 主要内容 */
-.main_container {
+.main-container {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -301,13 +315,13 @@
 }
 
 /* 新品推荐 */
-.recommend_container {
+.recommend-container {
     display: flex;
     flex-direction: column;
     align-items: center;
     max-width: 100%;
     width: 86rem;
-    height: 50rem;
+    height: 45rem;
 
 }
 
@@ -367,7 +381,7 @@
 }
 
 .recommend_items .item .good_img:hover {
-    transform: scale(1.1);
+    transform: scale(1.05);
     transition: 0.3s;
     cursor: pointer;
 }
@@ -386,7 +400,7 @@
     cursor: default;
 }
 
-.recommend_container .change_btn {
+.recommend-container .change_btn {
     position: absolute;
     color: var(--brown);
     text-align: center;
@@ -399,14 +413,14 @@
 
 }
 
-.recommend_container .change_btn:hover {
+.recommend-container .change_btn:hover {
     background-color: var(--dark-bg);
     color: var(--light-text);
     cursor: pointer;
 }
 
 /* 主题分区 */
-.theme_container {
+.theme-container {
     position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -419,7 +433,7 @@
     /* 间距 */
 }
 
-.theme_container img{
+.theme-container img{
     cursor: pointer;
     box-sizing: border-box;
     /* padding: 1rem; */
@@ -433,39 +447,155 @@
     margin-bottom: 1rem;
 }
 
-.theme_container img:hover {
+.theme-container img:hover {
     /* 模糊滤镜 */
     filter: blur(7px);
     transition: 0.3s;   
 }
 
 
-.theme_container span {
+.theme-container span {
     position: absolute;
     font-size: 3rem;
+    color: var(--light-text);
     z-index: 20;
 }
 
-.theme_container #guitar {
+.theme-container #guitar {
     top: 14rem;
     left: 22rem;
     display: none;
 }
 
-.theme_container #audio {
+.theme-container #audio {
     top: 14rem;
     right: 22rem;
     display: none;
 }
 
-.theme_container #food {
+.theme-container #food {
     bottom: 14rem;
     left: 22rem;
     display: none;
 }
 
-.theme_container #racket {
+.theme-container #racket {
     bottom: 14rem;
     right: 18rem;
     display: none;
+}
+
+.bottom-container {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--light-bg);
+    width: 100%;
+    height: 45rem;
+    border-top: #757575 solid 1px;
+    margin-top: 5rem;
+}
+
+.bottom-container .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    cursor: default;
+    margin-bottom: 1rem;
+    color: var(--gold);
+}
+
+.bottom-container .help_main-container {
+    display: flex;
+    position: absolute;
+    justify-content: space-evenly;
+    flex-direction: row;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    transform: translateY(-40%);
+    transition: transform 0.4s ease;
+}   
+
+.bottom-container .help_main-container #items {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5rem;
+}
+
+.bottom-container .help_main-container a {
+    margin: 1.3rem;
+    font-size: 1.2rem;
+    text-decoration: none;
+    color: var(--dark-text);
+}
+
+.bottom-container .input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 40%;
+}
+
+.bottom-container .quick-msg {
+    font-size: 1.5rem;
+    color: #111111;
+}
+
+.bottom-container .input-container input {
+    /* 只有下边框 */
+    border: none;
+    border-bottom: 1px solid #757575;
+    width: 80%;
+    padding: 0.2rem;
+    margin-bottom: 1rem;
+    margin-top: 2rem;
+    font-size: 1rem;
+    text-align: center;
+    color: var(--dark-text);
+}
+
+.bottom-container .input-container input:focus {
+    outline: none;
+}
+
+.bottom-container .input-container span {
+    font-size: 0.8rem;
+}
+
+.bottom-container .input-container button {
+    display: none;
+    background-color: var(--brown);
+    color: var(--light-bg);
+    border: none;
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+    width: 85%;
+    height: 3rem;
+    font-size: 0.8rem;
+    transform: translateY(-10%);
+    transition: transform 0.3s ease;
+}
+
+.bottom-container .input-container #msg {
+    display: none;
+    transform: translateY(-10%);
+    transition: transform 0.3s ease;
+}
+
+.bottom-container .copyright_msg-container {
+    position: absolute;
+    bottom: 1.5rem;
+}
+
+.bottom-container .copyright_msg-container span {
+    cursor: pointer;
+}
+
+
+.bottom-container .copyright {
+    position: absolute;
+    bottom: 0;
+    font-size: 0.8rem;
+    color: gray;
 }
