@@ -9,6 +9,69 @@
     <link rel="stylesheet" href="user.css"> 
 </head>
 <body>
+    <div id="auth">
+        <div id="login-form">
+            <h2>登录</h2>
+            <input type="text" id="login-username" placeholder="用户名">
+            <input type="password" id="login-password" placeholder="密码">
+            <button onclick="login()">登录</button>
+            <p>还没有账号？<a href="#" onclick="showRegisterForm()">注册</a></p>
+        </div>
+        <div id="register-form" style="display: none;">
+            <h2>注册</h2>
+            <input type="text" id="register-username" placeholder="用户名">
+            <input type="password" id="register-password" placeholder="密码">
+            <button onclick="register()">注册</button>
+            <p>已有账号？<a href="#" onclick="showLoginForm()">登录</a></p>
+        </div>
+    </div>
     
+    <script>
+        // 模拟用户数据
+        let users = JSON.parse(localStorage.getItem("users")) || [];
+    
+        // 显示登录表单
+        function showLoginForm() {
+            document.getElementById("login-form").style.display = "block";
+            document.getElementById("register-form").style.display = "none";
+        }
+    
+        // 显示注册表单
+        function showRegisterForm() {
+            document.getElementById("login-form").style.display = "none";
+            document.getElementById("register-form").style.display = "block";
+        }
+    
+        // 注册功能
+        function register() {
+            const username = document.getElementById("register-username").value;
+            const password = document.getElementById("register-password").value;
+    
+            if (users.some(user => user.username === username)) {
+                alert("用户名已存在");
+                return;
+            }
+    
+            users.push({ username, password });
+            localStorage.setItem("users", JSON.stringify(users));
+            alert("注册成功");
+            showLoginForm();
+        }
+    
+        // 登录功能
+        function login() {
+            const username = document.getElementById("login-username").value;
+            const password = document.getElementById("login-password").value;
+    
+            const user = users.find(user => user.username === username && user.password === password);
+            if (user) {
+                alert("登录成功");
+                // 跳转到首页，并传递用户名
+                window.location.href = `index.html?username=${username}`;
+            } else {
+                alert("用户名或密码错误");
+            }
+        }
+    </script>
 </body>
 </html>
