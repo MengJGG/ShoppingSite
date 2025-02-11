@@ -12,6 +12,7 @@ const GoodsItemsForInit = [
     {"racket":["../Resource/JSONData/racket/gongjianxilie.json",
                "../Resource/JSONData/racket/jiguangxilie.json",
                "../Resource/JSONData/racket/tianfuxilie.json"
+    
     ]}
 ]
 

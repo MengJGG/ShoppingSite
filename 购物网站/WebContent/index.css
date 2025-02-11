@@ -330,6 +330,11 @@ body {
     color: var(--dark-text);
 }
 
+#title {
+    font-size: 2.8rem;
+    color: var(--dark-text);
+}
+
 .recommend_items {
     display: flex;
     /* 每个元素之间的间隔和容器的边距相同 */
