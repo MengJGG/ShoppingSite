@@ -16,9 +16,9 @@
         <span class="main_logo">LUXEHARMONY</span>
         <!-- 导航栏 -->
         <div class="top_guide_nav" id="top_drop_menu-container">
-            <div class="header">首页
+            <div class="header" onclick="API_jumpToPage('../WebContent/index.html')">首页
             </div>
-            <div class="guitar">吉他
+            <div class="guitar" onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他
             </div>
             <div class="audio">音响
             </div>
@@ -27,6 +27,47 @@
             <div class="racket">羽毛球拍
             </div>
         </div>
+        <div class="search-container">
+
+        </div>
+        <div class="search-icon">
+            <img src="../Resource/Img/system/clear_ico.png" id="clear" alt="X">
+            <input type="text" id="search_input" placeholder="搜索...">
+            <img src="../Resource/Img/system/search_ico.png" id="search" alt="搜索">
+        </div>
+        <script>
+            const search = document.querySelector('.top-container .search-icon #search');
+            const clear = document.querySelector('.top-container .search-icon #clear');
+            const GuideNav = document.querySelector('.top_guide_nav');
+            const searchInput = document.querySelector('.top-container .search-icon #search_input');
+            search.addEventListener('click', function() {
+                search.style.transform = 'translateX(-32rem)';
+                searchInput.style.display = 'block';
+                searchInput.focus();
+                searchInput.style.width = '29.4rem';
+                // clear缓慢显示
+                clear.style.display = 'block';
+                GuideNav.style.animation = 'fade-out 0.2s ease 1 forwards';
+                setTimeout(() => {
+                    GuideNav.style.display = 'none';
+                }, 200);
+            });
+            clear.addEventListener('click', function() {
+                search.style.transform = 'translateX(0)';
+                searchInput.style.transition = 'width 0.2s linear, transform 0.2s linear'; // 添加transform的过渡
+                searchInput.style.width = '0rem';
+                searchInput.value = '';
+                clear.style.display = 'none';
+                GuideNav.style.display = 'flex';
+                GuideNav.style.animation = 'fade-in 0.2s ease 1 forwards';
+                searchInput.blur();
+                setTimeout(() => {
+                    searchInput.style.display = 'none';
+                }, 200);
+            });
+
+
+        </script>
         <!-- 下拉菜单 -->
         <div class="top_drop_menu" id="top_drop_menu-container">
             <div class="drop_content">
@@ -65,15 +106,12 @@
         <div class="login-container">
             <img src="../Resource/Img/system/default_user_head.png" alt="">
             <div class="login_mes-container">
-                <span style="cursor: default;">未登录</span>
+                <span style="cursor: default;" id="username">未登录</span>
                 <section>
-                    <a href="user.html">登录</a>
+                    <a href="user.html" id="msg">登录</a>
                     <span style="cursor: default;">|</span>
-                    <a href="user.html">注册</a>
+                    <a href="user.html" id="msg">注册</a>
                 </section>
-                <script>
-                    // TODO: 由于未登录状态，暂时不显示登录注册按钮
-                </script>
             </div>
         </div>
     </div>
