@@ -118,6 +118,16 @@ function API_jumpToPage(page="../WebContent/index.html") {
     window.location.href = page;
 }
 
+// 搜索接口
+// 当用户输入搜索内容时，调用该接口, text为搜索内容 text: string
+// 跳转到搜索结果的页面
+function API_search(text) {
+    if (text == '') {
+        return;
+    }
+    
+}
+
 // 检查登录状态
 function checkLoginState(timer=null) {
     //console.log('checkLoginState');

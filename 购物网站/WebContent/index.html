@@ -52,6 +52,13 @@
                     GuideNav.style.display = 'none';
                 }, 200);
             });
+            searchInput.addEventListener('keydown', function(e) {
+                // 按下回车键，跳转到搜索结果页面
+                if (e.keyCode === 13) {
+                    let keyword = toString(searchInput.value);
+                    API_jumpToPage(keyword);
+                }
+            });
             clear.addEventListener('click', function() {
                 search.style.transform = 'translateX(0)';
                 searchInput.style.transition = 'width 0.2s linear, transform 0.2s linear'; // 添加transform的过渡
@@ -65,8 +72,6 @@
                     searchInput.style.display = 'none';
                 }, 200);
             });
-
-
         </script>
         <!-- 下拉菜单 -->
         <div class="top_drop_menu" id="top_drop_menu-container">
@@ -84,6 +89,7 @@
                 <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
+        
         <script>
             //const guitar = document.querySelector('.top_guide_nav .guitar');
             //const audio = document.querySelector('.top_guide_nav .audio');
@@ -99,8 +105,6 @@
             topDropMenu.addEventListener('mouseleave', function() {
                 topDropMenu.style.display = 'none';
             });
-            
-
         </script>
         <!-- 登录注册 -->
         <div class="login-container">
@@ -293,13 +297,13 @@
         <span class="theme_title" id="title">主题分区</span>
         <div class="theme-container">
             <span id="guitar">吉他</span>
-            <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_guitar.html')">
             <span id="audio">音响</span>
-            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_audio.html')">
             <span id="food">美食</span>
-            <img src="../Resource/Img/system/theme_food_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_food_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_food.html')">
             <span id="racket">羽毛球拍</span>
-            <img src="../Resource/Img/system/theme_racket_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_racket_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_racket.html')">
         </div>
         <script> 
             
