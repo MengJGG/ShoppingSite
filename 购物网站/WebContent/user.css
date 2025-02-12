@@ -1,40 +1,99 @@
-@charset "UTF-8";
-/*  user.css 
-    Created by <Lee> on 2025-02-06.
-    Copyright © 2025年 <Lee>. All rights reserved.
-*/
-#auth {
-    width: 300px;
-    margin: 0 auto;
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+  }
+  
+  .container {
+    background-color: #edeceb;
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 8px;
-}
-#auth input {
-    width: 100%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    text-align: center;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .form h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form input {
     padding: 10px;
-    margin: 10px 0; 
-    border: 1px solid #ccc;
-    border-radius: 4px;
-}
-#auth button {
-    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #9f9090;
+    border-radius: 6px;
+    font-size: 16px;
+    width: 250px;
+  }
+  
+  .form button {
     padding: 10px;
     background-color: #28a745;
-    color: white;
+    color: #fff;
     border: none;
     border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-}
-#user-info {
+    width: 100px;
+  }
+  
+  .form button:hover {
+    background-color: #218838;
+  }
+  
+  .form p {
+    margin-top: 10px;
+  }
+  
+  .form a {
+    color: #3688e0e2;
+    text-decoration: none;
+  }
+  
+  .form a:hover {
+    text-decoration: underline;
+  }
+  
+  .hidden {
+    display: none;
+  }
+
+ #user-home {
+    display: flex;
+    align-items: cneter ;
     text-align: center;
-    margin-top: 20px;
-}
-#user-info button {
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: white;
+  }
+  
+  #user-home h2 {
+    margin-bottom: 20px;
+    display: none;
+  }
+
+  #user-home button {
+    display: none;
+  }
+  
+  #logout {
+    padding:10px;
+    background-color: #d46772;
+    color: #fff;
     border: none;
     border-radius: 4px;
+    font-size: 16px;
     cursor: pointer;
-}
+    text-align: center;
+  }
+  
+  #logout:hover {
+    background-color: #d46772;
+  }
