@@ -272,6 +272,28 @@ function API_clearCart() {
     localStorage.setItem("CurrentUser", JSON.stringify(user));
 }
 
+function API_getGoods(num, category_paths=[]) {
+    if (category_paths == [] || category_paths == "null") {
+        category_paths = ["../Resource/JSONData/guitar/fender.json",
+                        "../Resource/JSONData/food/xican.json",
+                        "../Resource/JSONData/racket/Yonex/gongjianxilie.json"
+        ];
+    }
+    // 根据分类路径获取商品列表
+    let result = [];
+    for (let category_path in category_paths) {
+        if (goods_data[category_path].length < num) {  // 如果商品数量不足num，则返回全部商品
+            result.push(goods_data[category_path]);
+            continue;
+        }
+        for (let i = 0; i < num; i++) {  // 随机获取num个商品
+            let index = Math.floor(Math.random() * goods_data[category_path].length);
+            result.push(goods_data[category_path][index]);
+        }
+    }
+    return result;
+}
+
 // 根据商品ID列表获取商品信息列表
 // id_list: 商品ID列表
 // 返回对应商品的详细信息的列表，如果没有则返回空列表
