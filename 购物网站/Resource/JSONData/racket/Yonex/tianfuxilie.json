@@ -1,4 +1,5 @@
-[
+{
+  "data":[
     {
       "name": "【天斧系列】ASTROX 88S PRO羽毛球拍",
       "price": "¥ 1850",
@@ -144,4 +145,5 @@
       "price": "¥ 350",
       "image_url": "https://www.yonex.cn/public/uploads/20240306/15424cea1802fafa0214cc97e70b4e35.jpg"
     }
-]
+  ]
+}

@@ -7,6 +7,7 @@
     <title></title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="index.css">
+    <script src="../JavaResource/main.js"></script>
 </head>
 <body>
     <div class="sky-banner"></div>
@@ -15,9 +16,9 @@
         <span class="main_logo">LUXEHARMONY</span>
         <!-- 导航栏 -->
         <div class="top_guide_nav" id="top_drop_menu-container">
-            <div class="header">首页
+            <div class="header" onclick="API_jumpToPage('../WebContent/index.html')">首页
             </div>
-            <div class="guitar">吉他
+            <div class="guitar" onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他
             </div>
             <div class="audio">音响
             </div>
@@ -26,6 +27,52 @@
             <div class="racket">羽毛球拍
             </div>
         </div>
+        <div class="search-container">
+
+        </div>
+        <div class="search-icon">
+            <img src="../Resource/Img/system/clear_ico.png" id="clear" alt="X">
+            <input type="text" id="search_input" placeholder="搜索...">
+            <img src="../Resource/Img/system/search_ico.png" id="search" alt="搜索">
+        </div>
+        <script>
+            const search = document.querySelector('.top-container .search-icon #search');
+            const clear = document.querySelector('.top-container .search-icon #clear');
+            const GuideNav = document.querySelector('.top_guide_nav');
+            const searchInput = document.querySelector('.top-container .search-icon #search_input');
+            search.addEventListener('click', function() {
+                search.style.transform = 'translateX(-32rem)';
+                searchInput.style.display = 'block';
+                searchInput.focus();
+                searchInput.style.width = '29.4rem';
+                // clear缓慢显示
+                clear.style.display = 'block';
+                GuideNav.style.animation = 'fade-out 0.2s ease 1 forwards';
+                setTimeout(() => {
+                    GuideNav.style.display = 'none';
+                }, 200);
+            });
+            searchInput.addEventListener('keydown', function(e) {
+                // 按下回车键，跳转到搜索结果页面
+                if (e.keyCode === 13) {
+                    let keyword = toString(searchInput.value);
+                    API_jumpToPage(keyword);
+                }
+            });
+            clear.addEventListener('click', function() {
+                search.style.transform = 'translateX(0)';
+                searchInput.style.transition = 'width 0.2s linear, transform 0.2s linear'; // 添加transform的过渡
+                searchInput.style.width = '0rem';
+                searchInput.value = '';
+                clear.style.display = 'none';
+                GuideNav.style.display = 'flex';
+                GuideNav.style.animation = 'fade-in 0.2s ease 1 forwards';
+                searchInput.blur();
+                setTimeout(() => {
+                    searchInput.style.display = 'none';
+                }, 200);
+            });
+        </script>
         <!-- 下拉菜单 -->
         <div class="top_drop_menu" id="top_drop_menu-container">
             <div class="drop_content">
@@ -42,6 +89,7 @@
                 <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
+        
         <script>
             //const guitar = document.querySelector('.top_guide_nav .guitar');
             //const audio = document.querySelector('.top_guide_nav .audio');
@@ -57,22 +105,17 @@
             topDropMenu.addEventListener('mouseleave', function() {
                 topDropMenu.style.display = 'none';
             });
-            
-
         </script>
         <!-- 登录注册 -->
         <div class="login-container">
             <img src="../Resource/Img/system/default_user_head.png" alt="">
             <div class="login_mes-container">
-                <span style="cursor: default;">未登录</span>
+                <span style="cursor: default;" id="username">未登录</span>
                 <section>
-                    <a href="#">登录</a>
+                    <a href="user.html" id="msg">登录</a>
                     <span style="cursor: default;">|</span>
-                    <a href="#">注册</a>
+                    <a href="user.html" id="msg">注册</a>
                 </section>
-                <script>
-                    // TODO: 由于未登录状态，暂时不显示登录注册按钮
-                </script>
             </div>
         </div>
     </div>
@@ -185,7 +228,7 @@
         <div></div>
         <!-- 推荐商品 -->
         <div class="recommend-container">
-            <span class="recommend_title">新品推荐</span>
+            <span class="recommend_title" id="title">新品推荐</span>
             <span class="change_btn">换一批</span>
             <br>
             <div class="recommend_items">
@@ -251,16 +294,16 @@
             </script>
         </div>
         <!-- 主题分区 -->
-        <span class="theme_title">主题分区</span>
+        <span class="theme_title" id="title">主题分区</span>
         <div class="theme-container">
             <span id="guitar">吉他</span>
-            <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_guitar.html')">
             <span id="audio">音响</span>
-            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_audio.html')">
             <span id="food">美食</span>
-            <img src="../Resource/Img/system/theme_food_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_food_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_food.html')">
             <span id="racket">羽毛球拍</span>
-            <img src="../Resource/Img/system/theme_racket_img.jpeg" alt="">
+            <img src="../Resource/Img/system/theme_racket_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_racket.html')">
         </div>
         <script> 
             

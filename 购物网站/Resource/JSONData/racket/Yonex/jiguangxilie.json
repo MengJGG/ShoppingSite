@@ -1,4 +1,5 @@
-[
+{
+  "data":[
     {
       "name": "【疾光系列】NANOFLARE 700 PRO 羽毛球拍",
       "price": "¥ 1780",
@@ -119,4 +120,5 @@
       "price": "¥ 450",
       "image_url": "https://www.yonex.cn/public/uploads/20230808/c15c73c6ac2dd43de753013fb477e67f.jpg"
     }
-]
+  ]
+}
