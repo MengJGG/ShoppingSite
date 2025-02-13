@@ -1,0 +1,92 @@
+*******API接口设计文档*******
+
+调用须知：
+1. 请在html文件中的</body>标签之后添加以下代码，以便调用API接口：
+<script src="main.js"></script>
+
+2. localStorage存储内容：
+- "CurrentUser"：当前登录的用户信息，user
+- "UserList"：所有用户信息的列表，如：[user, ...]
+
+3. 字典详细说明：
+- "user"：用户信息字典，如：{"username": "Lee", "password": "123456", "cart": []}
+- "cart": 购物车中的商品信息列表，如：[{"id": 1, "name": "商品1", "price": 100, "image_url": "http://xxx.jpg"}, 
+                                     {"id": 2, "name": "商品2", "price": 200, "image_url": "http://xxx.jpg"},...]
+
+4. 商品的字典：
+如：{
+    "id": 1,                                      // 商品ID (int)
+     "image_url":"../Resource/Img/food/1.jpg",    // 商品图片路径 (string)
+     "name":"惠灵顿牛排",                          // 商品名称 (string)
+     "price": "$129.99"                           // 商品价格 (string)
+    }
+
+接口名称：注册接口
+使用：当用户点击注册按钮时，调用该接口
+介绍：注册失败显示错误信息，注册成功跳转到登录页面
+返回值：无
+function API_register()
+
+
+接口名称：登录接口
+使用：当用户点击登录按钮时，调用该接口
+介绍：登录失败时显示错误信息
+返回值：登录成功返回true，登录失败返回false
+function API_login()
+
+
+接口名称：退出登录接口
+使用：当用户点击注销按钮时，调用该接口
+返回值：无
+function API_logout()
+
+
+接口名称：跳转到指定页面接口
+介绍：page: 要跳转的页面路径，如果传入空字符串则跳转到首页(../WebContent/index.html)
+参数：page: string  (格式："../WebContent/你要跳转的页面.html")
+返回值：无
+function API_jumpToPage(page="../WebContent/index.html")
+
+
+接口名称：搜索接口
+使用：当用户输入搜索内容时，调用该接口
+参数：text为搜索内容 text: string
+介绍：跳转到搜索结果的页面
+返回值：无
+function API_search(text)
+
+
+接口名称：检查登录状态接口
+返回值：true表示已登录，false表示未登录
+function API_checkLogin()
+
+
+接口名称：加入购物车接口
+使用：当用户点击商品时，调用该接口
+参数：id为商品ID id: number
+返回值：无
+function API_addToCart(id)
+
+
+接口名称：从购物车中移除商品接口
+使用：当用户点击购物车中的商品时，调用该接口
+参数：id为商品ID id: number
+返回值：无
+function API_removeFromCart(id)
+
+
+接口名称：根据商品ID获取商品信息
+参数：id: 商品ID
+返回值：应商品的详细信息的字典，如果没有则返回null
+function API_parseGoodId(id)
+
+
+接口名称：获取购物车中的商品信息列表
+返回值：返回对应商品的详细信息的 字典列表，如果没有则返回null
+function API_getGoodsFromCart()
+
+
+接口名称：清空购物车接口
+使用：当用户点击清空购物车时，调用该接口
+返回值：无
+function API_clearCart()

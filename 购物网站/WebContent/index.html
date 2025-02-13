@@ -122,7 +122,7 @@
     <!-- 侧边工具栏 -->
     <div class="side_tool_bar">
         <div class="lamp" onclick=""><img src="../Resource/Img/system/lamp.png" style="width: 2.5rem; height: 2.5rem; margin-top: 5px;" alt="开关灯"></div>
-        <div class="cart" onclick=""><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
+        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html')"><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
         <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
@@ -233,9 +233,11 @@
             <br>
             <div class="recommend_items">
                 <div class="item" id="item_1">
+                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
                     <div class="msg">
-                        <span>新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
+                        <span id="s">新品上新</span>
+                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                        
                     </div>
                     <img src="../Resource/Img/food/20.jpeg" alt="" class="good_img">
                     <br>
@@ -247,9 +249,10 @@
                     </div>
                 </div>
                 <div class="item" id="item_2">
+                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="1" alt="已购入" class="bingo-icon">
                     <div class="msg">
-                        <span>新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
+                        <span id="s">新品上新</span>
+                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="1">购入</span>
                     </div>
                     <img src="../Resource/Img/food/21.jpeg" alt="" class="good_img">
                     <br>
@@ -261,9 +264,10 @@
                     </div>
                 </div>
                 <div class="item" id="item_3">
+                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="2" alt="已购入" class="bingo-icon">
                     <div class="msg">
-                        <span>新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
+                        <span id="s">新品上新</span>
+                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="2">购入</span>
                     </div>
                     <img src="../Resource/Img/food/22.jpeg" alt="" class="good_img">
                     <br>
@@ -275,9 +279,10 @@
                     </div>
                 </div>
                 <div class="item" id="item_4">
+                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="3" alt="已购入" class="bingo-icon">
                     <div class="msg">
-                        <span>新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;">购入</span>
+                        <span id="s">新品上新</span>
+                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="3">购入</span>
                     </div>
                     <img src="../Resource/Img/food/23.jpg" alt="" class="good_img">
                     <br>
@@ -290,7 +295,29 @@
                 </div>
             </div>
             <script>
-                // TODO: 这里需要传入是由哪个主题的页面，从而决定推荐什么商品
+                const BingoBtns = document.querySelectorAll('.recommend-container .recommend_items .item .bingo-icon');
+                const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                BuyBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        // 获取其父类的id
+                        const parent = btn.parentNode.parentNode;
+                        const id = parent.getAttribute('data-GoodId');
+                        // 加入到购物车
+                        API_addToCart(id);
+                        btn.style.display = 'none';
+                        // 获取btn的data-ind
+                        const index = parseInt(btn.getAttribute('data-ind'));
+                        BingoBtns[index].style.display = 'block';
+                    });
+                });
+                BingoBtns.forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        btn.style.display = 'none';
+                        // 获取btn的data-ind
+                        const index = parseInt(btn.getAttribute('data-ind'));
+                        BuyBtns[index].style.display = 'block';
+                    });
+                });
             </script>
         </div>
         <!-- 主题分区 -->
@@ -451,17 +478,6 @@
                 }
             });
         });
-    </script>
-        //登录页面跳转到首页
-    <div id="welcome-message"></div>
-    <script>
-        // 获取 URL 参数
-        const urlParams = new URLSearchParams(window.location.search);
-        const username = urlParams.get("username");
-    
-        if (username) {
-            document.getElementById("welcome-message").textContent = `欢迎回来，${username}！`;
-        }
     </script>
 </body>
 </html>

@@ -361,7 +361,6 @@ body {
     max-width: 100%;
     width: 86rem;
     height: 45rem;
-
 }
 
 .recommend_title {
@@ -401,17 +400,26 @@ body {
     display: grid;
     position: absolute;
     grid-template-columns: 1fr 1fr;
-    gap: 8rem;
+  
     top: 0;
     align-items: center;
     /* 两边分 */
     justify-content: space-between;
-    
 }
 
 .recommend_items .item .msg span {
+    position: absolute;
     color: var(--brown);
+    width: 5rem;
     cursor:default;
+}
+
+.recommend_items .item .msg #s {
+    right: 3rem;
+}
+
+.recommend_items .item .msg #buy {
+    left: 3rem;
 }
 
 .recommend_items .item .good_img {
@@ -454,13 +462,23 @@ body {
     margin-top: 1.2rem;
     border: var(--brown) solid 1px;
     border-radius: 5px;
-
 }
 
 .recommend-container .change_btn:hover {
     background-color: var(--dark-bg);
     color: var(--light-text);
     cursor: pointer;
+}
+
+.recommend-container .recommend_items .item .bingo-icon {
+    position: absolute;
+    display: none;
+    width: 1.3rem;
+    height: 1.3rem;
+    top: -7px;
+    right: 2.9rem;
+    cursor: pointer;
+    transition: display 0.3s linear;
 }
 
 /* 主题分区 */
