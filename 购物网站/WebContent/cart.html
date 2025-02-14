@@ -9,8 +9,165 @@
         // TODO: 获取名字，添加到title标签当中
     </script>
     <link rel="stylesheet" href="main_css.css">
+    <link rel="stylesheet" href="cart.css">
 </head>
 <body>
-    
+    <div class="container">
+        <span class="main_logo">LUXEHARMONY </span>
+        <span class="cart_logo">购物车</span>
+        <br>
+        <div class="cart">
+            <!-- 全选 -->
+            <div class="cart-header">
+                <span>
+                    <input type="checkbox" id="select-all" > 全选
+                </span>
+            </div>
+
+            <!-- 商品栏 -->
+            <div id="cart-items">
+                <!-- 商品图片会通过JavaScript动态插入到这里 -->
+            </div>
+
+            <!-- 底部结算栏 -->
+            <div class="cart-footer">
+                <div class="total">
+                    <span>总价：<span id="total-price">0</span>元</span>
+                </div>
+                <button id="checkout">结算</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 购物车（商品）数据
+        let cart = [
+            {
+                id: 1,
+                name: "商品A",
+                price: 156,
+                quantity: 1,
+                image: "image/2.jpeg",
+                selected: true,
+            },
+            {
+                id: 2,
+                name: "商品B",
+                price: 243,
+                quantity: 2,
+                image: "image/21.jpeg", 
+                selected: false,
+            },
+            {
+                id: 3,
+                name: "商品C",
+                price: 99,
+                quantity: 1,
+                image: "image/3.jpeg", 
+                selected: true,
+            },
+            {
+                id: 4,
+                name: "商品D",
+                price: 106,
+                quantity: 3,
+                image: "image/22.jpeg", 
+                selected: false,
+            },
+            {
+                id: 5,
+                name: "商品E",
+                price: 188,
+                quantity: 2,
+                image: "image/16.jpeg", 
+                selected: true,
+            },
+        ]
+
+        // 渲染购物车
+        function renderCart() {
+            const cartItems = document.getElementById("cart-items")
+            const totalPrice = document.getElementById("total-price")
+            let total = 0
+
+            // 清空购物车列表
+            cartItems.innerHTML = ""
+
+           //进行渲染
+            cart.forEach((item, index) => {
+                const itemElement = document.createElement("div")
+                itemElement.classList.add("cart-item")
+
+                itemElement.innerHTML = `
+                    <label>
+                        <input type="checkbox" class="item-checkbox" data-index="${index}" ${item.selected ? "checked" : ""}>
+                    </label>
+                    <img src="${item.image}" alt="${item.name}">
+                    <div class="info">
+                        <h3>${item.name}</h3>
+                        <p>价格：${item.price}元</p>
+                    </div>
+                    <div class="quantity">
+                        <button onclick="changeQuantity(${index}, -1)">-</button>
+                        <input type="text" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)">
+                        <button onclick="changeQuantity(${index}, 1)">+</button>
+                    </div>
+                    <div class="delete" onclick="removeItem(${index})">删除</div>
+                `
+
+                cartItems.appendChild(itemElement)
+
+                // 计算总价
+                if (item.selected) {
+                    total += item.price * item.quantity
+                }
+            })
+
+            // 更新总价
+            totalPrice.textContent = total
+        }
+
+        // 修改商品数量
+        function changeQuantity(index, delta) {
+            cart[index].quantity += delta
+            if (cart[index].quantity < 1) {
+                cart[index].quantity = 1
+            }
+            renderCart()
+        }
+
+        // 更新商品数量
+        function updateQuantity(index, value) {
+            const quantity = parseInt(value, 10)
+            if (!isNaN(quantity)) {
+                cart[index].quantity = quantity
+                renderCart()
+            }
+        }
+
+        // 删除商品
+        function removeItem(index) {
+            cart.splice(index, 1)
+            renderCart()
+        }
+
+        // 全选/反选
+        document.getElementById("select-all").addEventListener("change", function () {
+            const isChecked = this.checked
+            cart.forEach((item) => (item.selected = isChecked))
+            renderCart()
+        })
+
+        // 结算
+        document.getElementById("checkout").addEventListener("click", function () {
+            const selectedItems = cart.filter((item) => item.selected)
+            if (selectedItems.length === 0) {
+                alert("请选择至少一件商品！")
+            } else {
+                alert(`结算成功！共 ${selectedItems.length} 件商品，总价：${document.getElementById("total-price").textContent}元`)
+            }
+        })
+        renderCart()
+    </script>
 </body>
 </html>

@@ -3,3 +3,154 @@
     Created by <Lee> on 2025-02-06.
     Copyright © 2025年 <Lee>. All rights reserved.
 */
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .container {
+    width: 95%;
+    margin: 0 auto;
+    padding: 2%;
+    background-color: var(--light-bg)
+    box-shadow 0 0 1% rgba(0, 0, 0, 0.1);
+  }
+  
+  .main_logo {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    left: 3%;
+  }
+  
+  .cart_logo {
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    color: var(--gold);
+    left: 15%;
+  }
+  
+  :root {
+      --dark-bg: #111111;
+      --light-bg: #f2f2f2;
+      --gold: #D4AF37;
+      --light-text: #e0e0e0;
+      --dark-text: #333333;
+      --brown: #757575;
+      --blue: #0078D7;
+  }
+  
+  h1 {
+    text-align:left;
+    color:var(--dark-text) ;
+  }
+  
+  .cart {
+    margin-top: 2%;
+  }
+  
+  .cart-header {
+    padding: 1%;
+    border-bottom: 1% solid #ddd;
+    background-color: #f9f9f9;
+  }
+  
+  .cart-header label {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+  
+  .cart-item {
+    display: flex;
+    align-items: center;
+    padding: 1%;
+    border-bottom: 1% solid #ddd;
+  }
+  
+  .cart-item img {
+    width: 10%;
+    height: 10%;
+    margin-right: 10%;
+  }
+  /* TODO:图片尺寸 、路径 */
+  
+  .cart-item .info {
+    flex: 1;
+  }
+  
+  .cart-item .info h3 {
+    margin: 0;
+    font-size: 1rem;
+    color:var(--dark-text);
+  }
+  
+  .cart-item .info p {
+    margin: 5px 0;
+    color: var(--brown);
+  }
+  
+  .cart-item .quantity {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-item .quantity button {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+    cursor: pointer;
+  }
+  
+  .cart-item .quantity input {
+    width: 50px;
+    height: 30px;
+    text-align: center;
+    border: 1px solid #ddd;
+    margin: 0 5px;
+  }
+  
+  .cart-item .delete {
+    margin-left: 20px;
+    color: #b56668;
+    cursor: pointer;
+  }
+  
+  .cart-footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    background-color: #f9f9f9;
+  }
+  
+  .cart-footer .total {
+    margin-right: 20px;
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .cart-footer #checkout {
+    padding: 10px 20px;
+    background-color: #cab180;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .cart-footer #checkout:hover {
+    background-color: #ff7875;
+  }
+  
+  .select_first{
+    background-color: var(--gold);
+    border-color: var(--gold);
+  }
