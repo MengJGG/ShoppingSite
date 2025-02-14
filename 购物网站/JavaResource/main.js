@@ -1,7 +1,7 @@
 'use strict';
 
 var good_id = 0;  // 当前商品ID
-var goods_data = {
+var goods_item = {
     "../Resource/JSONData/guitar/fender.json" : [],
     "../Resource/JSONData/guitar/martin.json" : [],
     "../Resource/JSONData/guitar/taylor.json" : [],
@@ -38,9 +38,19 @@ const search_tree = [
 
 // 初始化商品数据保存在goods_data字典中
 function initGoodsData() {
+    let goods_data = { 
+        "../Resource/JSONData/guitar/fender.json" : [],
+        "../Resource/JSONData/guitar/martin.json" : [],
+        "../Resource/JSONData/guitar/taylor.json" : [],
+        "../Resource/JSONData/guitar/yamaha.json" : [],
+        "../Resource/JSONData/food/xican.json" : [],
+        "../Resource/JSONData/racket/Yonex/gongjianxilie.json" : [],
+        "../Resource/JSONData/racket/Yonex/jiguangxilie.json" : [],
+        "../Resource/JSONData/racket/Yonex/tianfuxilie.json" : []
+    };  // 商品数据字典
     good_id = 0;  // 重置商品ID
     let init_flag = false;
-    const keys = Object.keys(goods_data);
+    const keys = Object.keys(goods_item);
     for (let i = 0; i < keys.length; i++) {
         if (goods_data[keys[i]].length == 0) {
             init_flag = true;
@@ -64,6 +74,7 @@ function initGoodsData() {
             goods_data[key] = data;
         });
     }
+    localStorage.setItem("goods_data", JSON.stringify(goods_data));  // 缓存商品数据到sessionStorage中
 }
 
 function output() {
@@ -176,7 +187,7 @@ function API_search(text) {
     if (text == '') {
         return;
     }  // TODO: 优化搜索功能，实现模糊搜索
-    for (let key in goods_data) {
+    for (let key of goods_item) {
         for (let i = 0; i < goods_data[key].length; i++) {
             if (goods_data[key][i].name.includes(text)) {
                 API_jumpToPage(`../WebContent/search_result.html?id=${goods_data[key][i].id}`);
@@ -232,7 +243,7 @@ function API_removeFromCart(id) {
 // id: 商品ID
 // 返回对应商品的详细信息的字典，如果没有则返回null
 function API_parseGoodId(id) {
-    for (let key in goods_data) {
+    for (let key of goods_item) {
         for (let i = 0; i < goods_data[key].length; i++) {
             if (goods_data[key][i].id == id) {
                 return goods_data[key][i];
@@ -281,7 +292,7 @@ function API_getGoods(num, category_paths=[]) {
     }
     // 根据分类路径获取商品列表
     let result = [];
-    for (let category_path in category_paths) {
+    for (let category_path of category_paths) {
         if (goods_data[category_path].length < num) {  // 如果商品数量不足num，则返回全部商品
             result.push(goods_data[category_path]);
             continue;
@@ -299,7 +310,7 @@ function API_getGoods(num, category_paths=[]) {
 // 返回对应商品的详细信息的列表，如果没有则返回空列表
 function parseGoodIdList(id_list) {
     let result = [];
-    for (let key in goods_data) {
+    for (let key of goods_item) {
         for (let i = 0; i < goods_data[key].length; i++) {
             if (id_list.includes(goods_data[key][i].id)) {
                 result.push(goods_data[key][i]);
@@ -346,5 +357,6 @@ window.addEventListener('load', function() {
     if (current_page == "index.html") {  // 只在首页初始化一次商品数据
         initGoodsData();
     }
-    //output();
+    goods_data = JSON.parse(this.localStorage.getItem("goods_data"));
+    output();
 });

@@ -293,14 +293,30 @@
             </div>
         </div>
         <br>
-        <!-- 商品主要内容 -->
+        <!-- 商品主要内容 4*5 -->
         <span id="title">商品展览</span>
         <div class="good_main-container">
             <div class="good-content">
                 <!-- TODO: 由后端返回的商品信息 -->
             </div>
+            <div class="good-content">
+
+            </div>
+            <div class="good-content">
+
+            </div>
+            <div class="good-content">
+
+            </div>
         </div>
-        
+        <script>
+            let category_paths = ["../Resource/JSONData/guitar/fender.json",
+                                "../Resource/JSONData/guitar/martin.json",
+                                "../Resource/JSONData/guitar/taylor.json",
+                                "../Resource/JSONData/guitar/yamaha.json"];
+            const goods = API_getGoods(5, category_paths);
+            console.log(goods);
+        </script>
         <!-- 底部信息栏 -->
         <br>
         <br>
