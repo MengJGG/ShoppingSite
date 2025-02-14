@@ -1,6 +1,12 @@
 'use strict';
 
 var good_id = 0;  // 当前商品ID
+// 判断localStorage是否存在goods_data，如果不存在则初始化goods_data
+if (!localStorage.getItem("goods_data")) {
+    localStorage.setItem("goods_data", JSON.stringify({}));
+}
+
+var goods_data = localStorage.getItem("goods_data");  // 商品数据字典
 var goods_item = {
     "../Resource/JSONData/guitar/fender.json" : [],
     "../Resource/JSONData/guitar/martin.json" : [],
@@ -62,19 +68,33 @@ function initGoodsData() {
         return;
     }
 
-    for (let i = 0; i < keys.length; i++) {
-        const key = keys[i];
-        // 异步获取数据
-        fetchData(key).then(data => {  // data: array
-            // 分配商品ID
-            for (let j = 0; j < data.length; j++) {
-                data[j]["id"] = good_id;
-                good_id++;
-            }
-            goods_data[key] = data;
-        });
-    }
-    localStorage.setItem("goods_data", JSON.stringify(goods_data));  // 缓存商品数据到sessionStorage中
+    keys.map(key => {
+        let data = fetchData(key) // data: array            
+        // 分配商品ID
+        for (let j = 0; j < data.length; j++) {
+            data[j]["id"] = good_id;
+            good_id++;
+        }
+        goods_data[key] = data;
+    });
+    localStorage.setItem("goods_data", JSON.stringify(goods_data));
+    // const fetchPromises = keys.map(key => {
+    //     // 异步获取数据
+    //     return fetchData(key).then(data => {  // data: array
+    //         // 分配商品ID
+    //         for (let j = 0; j < data.length; j++) {
+    //             data[j]["id"] = good_id;
+    //             good_id++;
+    //         }
+    //         goods_data[key] = data;
+    //     });
+    // });
+
+    // 等待所有数据获取完成
+    // Promise.all(fetchPromises).then(() => {
+    //     localStorage.setItem("goods_data", JSON.stringify(goods_data));  // 缓存商品数据到sessionStorage中
+        
+    // });
 }
 
 function output() {
@@ -91,7 +111,7 @@ function output() {
 
 // 从服务器获取数据, path为请求的路径
 // 返回对应的数据，如果出错则返回null
-async function fetchData(path) {
+async function fetchDataAsync(path) {
     try {
         const response = await fetch(path);
         const data = await response.json();
@@ -101,6 +121,78 @@ async function fetchData(path) {
         return null;
     }
 }
+
+function fetchData(path) {
+    const xhr = new XMLHttpRequest();
+    xhr.open('GET', path, false);
+    xhr.send();
+    if (xhr.status === 200) {
+        console.log(xhr.responseText);
+        return JSON.parse(xhr.responseText);
+    } else {
+        console.error('Failed to fetch data:', xhr.statusText);
+        return null;
+    }
+}
+
+
+// 根据商品ID列表获取商品信息列表
+// id_list: 商品ID列表
+// 返回对应商品的详细信息的列表，如果没有则返回空列表
+function parseGoodIdList(id_list) {
+    let result = [];
+    for (let key of goods_item) {
+        for (let i = 0; i < goods_data[key].length; i++) {
+            if (id_list.includes(goods_data[key][i].id)) {
+                result.push(goods_data[key][i]);
+            }
+        }
+    }
+    return result;
+}
+
+// 检查登录状态
+function checkLoginState(timer=null) {
+    //console.log('checkLoginState');
+    let user = localStorage.getItem("CurrentUser");
+    if (user) {
+        const UserMsg = document.querySelector('.login_mes-container #username');
+        const section = document.querySelector('.login_mes-container section');
+        UserMsg.textContent = user;
+        section.innerHTML = `<a onclick="API_logout()" id="msg">退出登录</a>`;
+        if (timer) {
+            clearInterval(timer);
+        }
+    } else {
+        const section = document.querySelector('.login_mes-container section');
+        section.innerHTML = `
+            <a href="user.html" id="msg">登录</a>
+            <span style="cursor: default;">|</span>
+            <a href="user.html" id="msg">注册</a>`;
+    }
+}
+
+// 监听页面加载事件，添加定时器检查登录状态
+function addCheckLoginTimer() {
+    const timerForCheckLogin = setInterval(() => checkLoginState(timerForCheckLogin), 1000);
+}
+
+window.addEventListener('load', function() {
+    
+    var current_page = this.location.href.split('/').pop();  // 获取当前页面名称
+    //console.log(current_page);
+    /* 检查登录状态 */
+    if (current_page != "user.html") {  // 除了登录页面外都要检查登录状态
+        console.log('check login state');
+        addCheckLoginTimer();
+    }
+});
+
+function init() {
+    console.log('main.json init');
+    initGoodsData();
+}
+init();
 
 
 // 注册接口
@@ -284,6 +376,7 @@ function API_clearCart() {
 }
 
 function API_getGoods(num, category_paths=[]) {
+    let goods_data = JSON.parse(localStorage.getItem("goods_data"));
     if (category_paths == [] || category_paths == "null") {
         category_paths = ["../Resource/JSONData/guitar/fender.json",
                         "../Resource/JSONData/food/xican.json",
@@ -293,70 +386,16 @@ function API_getGoods(num, category_paths=[]) {
     // 根据分类路径获取商品列表
     let result = [];
     for (let category_path of category_paths) {
-        if (goods_data[category_path].length < num) {  // 如果商品数量不足num，则返回全部商品
+        if (goods_data[category_path].data.length < num) {  // 如果商品数量不足num，则返回全部商品
             result.push(goods_data[category_path]);
             continue;
         }
         for (let i = 0; i < num; i++) {  // 随机获取num个商品
-            let index = Math.floor(Math.random() * goods_data[category_path].length);
-            result.push(goods_data[category_path][index]);
+            let index = Math.floor(Math.random() * goods_data[category_path].data.length);
+            result.push(goods_data[category_path].data[index]);
         }
     }
     return result;
 }
 
-// 根据商品ID列表获取商品信息列表
-// id_list: 商品ID列表
-// 返回对应商品的详细信息的列表，如果没有则返回空列表
-function parseGoodIdList(id_list) {
-    let result = [];
-    for (let key of goods_item) {
-        for (let i = 0; i < goods_data[key].length; i++) {
-            if (id_list.includes(goods_data[key][i].id)) {
-                result.push(goods_data[key][i]);
-            }
-        }
-    }
-    return result;
-}
 
-// 检查登录状态
-function checkLoginState(timer=null) {
-    //console.log('checkLoginState');
-    let user = localStorage.getItem("CurrentUser");
-    if (user) {
-        const UserMsg = document.querySelector('.login_mes-container #username');
-        const section = document.querySelector('.login_mes-container section');
-        UserMsg.textContent = user;
-        section.innerHTML = `<a onclick="API_logout()" id="msg">退出登录</a>`;
-        if (timer) {
-            clearInterval(timer);
-        }
-    } else {
-        const section = document.querySelector('.login_mes-container section');
-        section.innerHTML = `
-            <a href="user.html" id="msg">登录</a>
-            <span style="cursor: default;">|</span>
-            <a href="user.html" id="msg">注册</a>`;
-    }
-}
-
-// 监听页面加载事件，添加定时器检查登录状态
-function addCheckLoginTimer() {
-    const timerForCheckLogin = setInterval(() => checkLoginState(timerForCheckLogin), 1000);
-}
-
-window.addEventListener('load', function() {
-    var current_page = this.location.href.split('/').pop();  // 获取当前页面名称
-    //console.log(current_page);
-    /* 检查登录状态 */
-    if (current_page != "user.html") {  // 除了登录页面外都要检查登录状态
-        console.log('check login state');
-        addCheckLoginTimer();
-    }
-    if (current_page == "index.html") {  // 只在首页初始化一次商品数据
-        initGoodsData();
-    }
-    goods_data = JSON.parse(this.localStorage.getItem("goods_data"));
-    output();
-});

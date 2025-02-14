@@ -136,14 +136,6 @@
 }
 
 .good_main-container {
-    display: flex;
-    position: relative;
-    background-color: var(--blue);
-    width: 100%;
-    height: 30rem;
-}
-
-.good_main-container {
 	display: flex;
 	flex-direction: row;
 	width: 100rem;
@@ -189,3 +181,4 @@
 .good_main-container .good-content .content > p, .good_main-container .good-content .content > span {
 	font-size: 1rem;
 }
+

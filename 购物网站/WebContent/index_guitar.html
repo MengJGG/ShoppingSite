@@ -314,7 +314,12 @@
                                 "../Resource/JSONData/guitar/martin.json",
                                 "../Resource/JSONData/guitar/taylor.json",
                                 "../Resource/JSONData/guitar/yamaha.json"];
-            const goods = API_getGoods(5, category_paths);
+            // TODO: 异步获取商品信息
+        
+            const goods = API_getGoods(5, category_paths);  // goods: array of goods objects
+            for (let i = 0; i < goods.length; i++) {
+                
+            }
             console.log(goods);
         </script>
         <!-- 底部信息栏 -->
