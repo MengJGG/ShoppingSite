@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
+    <title>首页-LuxeHarmony</title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="index.css">
     <script src="../JavaResource/main.js"></script>
 </head>
 <body>
-    <div class="sky-banner"></div>
+    <div class="sky-banner" style="cursor: pointer;"></div>
     <!-- 顶部导航栏 -->
     <div class="top-container">
         <span class="main_logo">LUXEHARMONY</span>
@@ -382,7 +382,7 @@
                 <input type="text" placeholder="请在此处输入您的邮箱地址..." maxlength="30" autocomplete="off">
                 <span id="msg">使用订阅服务，即表示您同意我们向您的邮箱地址发送LuxeHarmony官方时讯快报，</span>
                 <span id="msg">并同意我们对您的个人信息的使用和保护。</span>
-                <button>订阅</button>
+                <button onclick="API_subscribe()">订阅</button>
 
             </div>
             <br>
@@ -461,11 +461,17 @@
             const skyBar = document.querySelector('.sky-banner');
             const mainContainer = document.querySelector('.main-container');
             const guideMenu = document.querySelector('.top_drop_menu');
+            const topGuideNav = document.querySelector('.top_guide_nav');
+            const loginSpan = document.querySelector('.login_mes-container #username');
+            const loginSection = document.querySelector('.login_mes-container section');
+            const searchIcon = document.querySelector('.search-icon #search');
+            const clearIcon = document.querySelector('.search-icon #clear');
+            const searchInput = document.querySelector('.search-icon #search_input');
             const topBarHeight = skyBar.offsetHeight;
             console.log(topBarHeight);
+            console.log(document.body.offsetHeight);
             window.addEventListener('scroll', function() {
                 const offset = window.pageYOffset || document.documentElement.scrollTop;
-                console.log(offset);
 
                 if (offset > topBarHeight) {
                     topBar.classList.add('sticky');
@@ -475,6 +481,35 @@
                     topBar.classList.remove('sticky');
                     mainContainer.style.paddingTop = 0;
                     guideMenu.style.top = 6.25 + 'rem';
+                }
+                // 如果页面到达底部
+                console.log("gi" + offset + topBarHeight);
+                if (offset + topBarHeight >= document.body.offsetHeight - 1000) {
+                    for (let i = 0; i < topGuideNav.children.length; i++) {
+                        topGuideNav.children[i].style.color = '#333333';
+                    }
+                    for (let i = 0; i < loginSection.children.length; i++) {
+                        loginSection.children[i].style.color = '#333333';
+                    }
+                    // 获取searchInput的style的border-bottom
+                    searchInput.style.borderBottom = '1px solid #333333';
+                    searchIcon.src = '../Resource/Img/system/searchd_ico.png';
+                    clearIcon.src = '../Resource/Img/system/cleard_ico.png';
+                    loginSpan.style.color = '#333333';
+                    topBar.style.transition = 'background-color 0.3s ease';
+                    topBar.style.backgroundColor = '#f2f2f2';
+                } else {
+                    for (let i = 0; i < topGuideNav.children.length; i++) {
+                        topGuideNav.children[i].style.color = '#e0e0e0';
+                    }
+                    for (let i = 0; i < loginSection.children.length; i++) {
+                        loginSection.children[i].style.color = '#e0e0e0';
+                    }
+                    searchIcon.src = '../Resource/Img/system/search_ico.png';
+                    clearIcon.src = '../Resource/Img/system/clear_ico.png';
+                    loginSpan.style.color = '#e0e0e0';
+                    topBar.style.transition = 'background-color 0.3s ease';
+                    topBar.style.backgroundColor = '#111111';
                 }
             });
         });

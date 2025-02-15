@@ -71,8 +71,8 @@ function initGoodsData() {
     keys.map(key => {
         let data = fetchData(key) // data: array            
         // 分配商品ID
-        for (let j = 0; j < data.length; j++) {
-            data[j]["id"] = good_id;
+        for (let j = 0; j < data.data.length; j++) {
+            data.data[j]["id"] = good_id;
             good_id++;
         }
         goods_data[key] = data;
@@ -165,10 +165,13 @@ function checkLoginState(timer=null) {
         }
     } else {
         const section = document.querySelector('.login_mes-container section');
-        section.innerHTML = `
-            <a href="user.html" id="msg">登录</a>
-            <span style="cursor: default;">|</span>
-            <a href="user.html" id="msg">注册</a>`;
+        if (section.innerHTML == `<a onclick="API_logout()" id="msg">退出登录</a>`) {
+            section.innerHTML = `
+                <a href="user.html" id="msg">登录</a>
+                <span style="cursor: default;">|</span>
+                <a href="user.html" id="msg">注册</a>`;
+        }
+        
     }
 }
 
@@ -398,4 +401,9 @@ function API_getGoods(num, category_paths=[]) {
     return result;
 }
 
-
+function API_subscribe() {
+    const input = document.querySelector('.bottom-container .input-container input');
+    // 选中内容
+    input.select();
+    alert('订阅成功! 我们会第一时间推送最新消息。');
+}

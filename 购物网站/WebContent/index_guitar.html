@@ -296,18 +296,10 @@
         <!-- 商品主要内容 4*5 -->
         <span id="title">商品展览</span>
         <div class="good_main-container">
-            <div class="good-content">
-                <!-- TODO: 由后端返回的商品信息 -->
-            </div>
-            <div class="good-content">
-
-            </div>
-            <div class="good-content">
-
-            </div>
-            <div class="good-content">
-
-            </div>
+            <div class="good-content"></div>
+            <div class="good-content"></div>
+            <div class="good-content"></div>
+            <div class="good-content"></div>
         </div>
         <script>
             let category_paths = ["../Resource/JSONData/guitar/fender.json",
@@ -319,9 +311,20 @@
             const goods = API_getGoods(5, category_paths);  // goods: array of goods objects
             // 显示商品信息
             const GoodContainer = document.querySelector('.good_main-container');
-            let per_num = goods.length / 4;
             for (let i = 0; i < goods.length; i++) {
-                
+                // 0-3余数循环
+                let row = i % 4;
+                let good = goods[i];
+                GoodContainer.children[row].innerHTML += `
+                <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
+                    <div class="images">
+                        <img src="${good.image_url}" alt="">
+                    </div>
+                    <div class="content">
+                        <p>${good.name}</p>
+                        <span>${good.price}</span>
+                    </div>
+                </div>`;
             }
             console.log(goods);
         </script>

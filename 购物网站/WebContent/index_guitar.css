@@ -156,6 +156,7 @@
 	width: 90%;
 	height: auto;
 	margin: 1rem;
+    cursor: pointer;
 }
 
 .good_main-container .good-content .item .images {
@@ -165,13 +166,14 @@
 
 .good_main-container .good-content .item .images img {
 	width: 100%;
-	height: auto;		
+	height: auto;
+    border-bottom: var(--dark-bg) solid 2px;
 }
 
 .good_main-container .good-content .item:hover {
 	box-shadow: 0 0 10px #ccc;
 	transition: 0.3s;
-	transform: scale(1.05);
+	transform: scale(1.02);
 }
 
 .good_main-container .good-content .content {

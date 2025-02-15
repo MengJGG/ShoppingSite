@@ -104,6 +104,7 @@ body {
     align-items: center;
     color: var(--light-text);
     cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .header:hover, .guitar:hover, .audio:hover, .food:hover, .racket:hover {
@@ -134,7 +135,7 @@ body {
     width: 100%;
     height: auto;
     background-color: rgb(250, 250, 250);
-    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    box-shadow: 0 0 3px rgba(16, 16, 16, 0.3);
     z-index: 10;
 }
 
@@ -267,6 +268,7 @@ body {
 
 .login_mes-container a, .login_mes-container span {
     color: var(--light-text);
+    transition: color 0.3s ease;
 }
 
 
