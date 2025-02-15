@@ -64,7 +64,7 @@ function API_checkLogin()
 接口名称：加入购物车接口
 使用：当用户点击商品时，调用该接口
 参数：id为商品ID id: number
-返回值：无
+返回值：加入成功返回true，加入失败返回false
 function API_addToCart(id)
 
 

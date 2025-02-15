@@ -20,7 +20,7 @@
             </div>
             <div class="guitar" onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他
             </div>
-            <div class="audio">音响
+            <div class="audio" onclick="API_dialog('暂未开放')">音响
             </div>
             <div class="food">美食
             </div>
@@ -85,11 +85,11 @@
             </div>
             <div class="img-container">
                 <br>
-                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
                 <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
-        
+        <!-- TODO: 后端返回数据 -->
         <script>
             //const guitar = document.querySelector('.top_guide_nav .guitar');
             //const audio = document.querySelector('.top_guide_nav .audio');
@@ -141,10 +141,10 @@
         <!-- 轮播图 -->
         <div class="carousel-container">
             <div class="carousel-track">
-                <div class="carousel-item" style="background: #FF6B6B;">1</div>
-                <div class="carousel-item" style="background: #4ECDC4;">2</div>
-                <div class="carousel-item" style="background: #45B7D1;">3</div>
-                <div class="carousel-item" style="background: #96CEB4;">4</div>
+                <div class="carousel-item"><img src="../Resource/Img/food/2.jpeg" alt=""></div>
+                <div class="carousel-item"><img src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/2204197015356/O1CN01FvKr4C1pR5t8tz7XI_!!0-item_pic.jpg" alt=""></div>
+                <div class="carousel-item"><img src="https://www.yonex.cn/public/uploads/20220224/3d37d74fd66ed1d06c00fbf35e2ba6e6.jpg" alt=""></div>
+                <div class="carousel-item"><img src="" alt=""></div>
             </div>
             
             <button class="carousel-button button-prev">❮</button>
@@ -232,82 +232,84 @@
             <span class="change_btn">换一批</span>
             <br>
             <div class="recommend_items">
-                <div class="item" id="item_1">
-                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
-                    <div class="msg">
-                        <span id="s">新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
-                        
-                    </div>
-                    <img src="../Resource/Img/food/20.jpeg" alt="" class="good_img">
-                    <br>
-                    <br>
-                    <br>
-                    <div class="info">
-                        <span class="name">商品名称</span>
-                        <span class="price">￥199</span>
-                    </div>
-                </div>
-                <div class="item" id="item_2">
-                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="1" alt="已购入" class="bingo-icon">
-                    <div class="msg">
-                        <span id="s">新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="1">购入</span>
-                    </div>
-                    <img src="../Resource/Img/food/21.jpeg" alt="" class="good_img">
-                    <br>
-                    <br>
-                    <br>
-                    <div class="info">
-                        <span class="name">商品名称</span>
-                        <span class="price">￥199</span>
-                    </div>
-                </div>
-                <div class="item" id="item_3">
-                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="2" alt="已购入" class="bingo-icon">
-                    <div class="msg">
-                        <span id="s">新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="2">购入</span>
-                    </div>
-                    <img src="../Resource/Img/food/22.jpeg" alt="" class="good_img">
-                    <br>
-                    <br>
-                    <br>
-                    <div class="info">
-                        <span class="name">商品名称</span>
-                        <span class="price">￥199</span>
-                    </div>
-                </div>
-                <div class="item" id="item_4">
-                    <img src="../Resource/Img/system/bingo_ico.png" data-ind="3" alt="已购入" class="bingo-icon">
-                    <div class="msg">
-                        <span id="s">新品上新</span>
-                        <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="3">购入</span>
-                    </div>
-                    <img src="../Resource/Img/food/23.jpg" alt="" class="good_img">
-                    <br>
-                    <br>
-                    <br>
-                    <div class="info">
-                        <span class="name">商品名称</span>
-                        <span class="price">￥199</span>
-                    </div>
-                </div>
+                
             </div>
+            
             <script>
+                // 从后端获取商品数据
+                const goods = API_getGoods(4);
+                const recommendItems = document.querySelector('.recommend-container .recommend_items');
+                for (let i = 0; i < 4; i++) {
+                    recommendItems.innerHTML += `
+                    <div class="item" id="item_1" data-GoodId="${goods[i].id}">
+                        <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
+                        <div class="msg">
+                            <span id="s">新品上新</span>
+                            <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                        </div>
+                        <div class="good_img-container">
+                            <img src="${goods[i].image_url}" alt="" class="good_img">
+                        </div>
+                        <br>
+                        <br>
+                        <br>
+                        <div class="info">
+                            <span class="name">${goods[i].name}</span>
+                            <span class="price">￥${goods[i].price}</span>
+                        </div>
+                    </div>`;
+                }
+
+
                 const BingoBtns = document.querySelectorAll('.recommend-container .recommend_items .item .bingo-icon');
                 const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                const ChangeBtn = document.querySelector('.recommend-container .change_btn');
+                ChangeBtn.addEventListener('click', function() {
+                    // 为每个item添加卡片翻转动画
+                    const goods = API_getGoods(4);
+                    const items = document.querySelectorAll('.recommend-container .recommend_items .item');
+                    items.forEach(item => {
+                        item.style.animation = 'flip 0.5s ease 1 forwards';
+                    });
+                    setTimeout(() => {
+                        // 删除items所有子元素 items: NodeList
+                        recommendItems.innerHTML = '';
+                        
+                        for (let i = 0; i < goods.length; i++) {
+                            recommendItems.innerHTML += `
+                            <div class="item" id="item_1" data-GoodId="${goods[i].id}">
+                                <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
+                                <div class="msg">
+                                    <span id="s">新品上新</span>
+                                    <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                                </div>
+                                <div class="good_img-container">
+                                    <img src="${goods[i].image_url}" alt="" class="good_img">
+                                </div>
+                                <br>
+                                <br>
+                                <br>
+                                <div class="info">
+                                    <span class="name">${goods[i].name}</span>
+                                    <span class="price">￥${goods[i].price}</span>
+                                </div>
+                            </div>`;
+                        }
+                    }, 450);
+                });
                 BuyBtns.forEach(btn => {
                     btn.addEventListener('click', function() {
                         // 获取其父类的id
                         const parent = btn.parentNode.parentNode;
                         const id = parent.getAttribute('data-GoodId');
                         // 加入到购物车
-                        API_addToCart(id);
-                        btn.style.display = 'none';
-                        // 获取btn的data-ind
-                        const index = parseInt(btn.getAttribute('data-ind'));
-                        BingoBtns[index].style.display = 'block';
+                        if (API_addToCart(id)) {
+                            btn.style.display = 'none';
+                            // 获取btn的data-ind
+                            const index = parseInt(btn.getAttribute('data-ind'));
+                            BingoBtns[index].style.display = 'block';
+                            API_dialog("加入成功");
+                        }
                     });
                 });
                 BingoBtns.forEach(btn => {
@@ -326,7 +328,7 @@
             <span id="guitar">吉他</span>
             <img src="../Resource/Img/system/theme_guitar_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_guitar.html')">
             <span id="audio">音响</span>
-            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_audio.html')">
+            <img src="../Resource/Img/system/theme_audio_img.jpeg" alt="" onclick="API_dialog('暂未开放')">
             <span id="food">美食</span>
             <img src="../Resource/Img/system/theme_food_img.jpeg" alt="" onclick="API_jumpToPage('../WebContent/index_food.html')">
             <span id="racket">羽毛球拍</span>

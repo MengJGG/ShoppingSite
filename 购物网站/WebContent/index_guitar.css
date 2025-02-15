@@ -9,53 +9,6 @@
     --blue: #0078D7;
 }
 
-/* .series-container {
-    display: flex;
-    position: relative;
-    align-items: stretch;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    background-color: var(--gold);
-}
-
-.series-container > div {
-    display: flex;
-    position: relative;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: var(--light-bg);
-    cursor: pointer;
-}
-
-.series-container > div > img {
-    max-width: 100%;
-    max-height: 100%;
-    height: auto;
-}
-
-.series-container > div:hover img {
-    filter: blur(7px);
-    transition: 0.3s;
-}
-
-.series-container > div:hover span {
-    z-index: 2;
-    display: block;
-    cursor: pointer;
-}
-
-.series-container > div > span {
-    position: absolute;
-    display: none;
-    font-size: 2rem;
-    color: var(--dark-text);
-    background-color: #ffffff80;
-    border-radius: 10px;
-    width: 15rem;
-} */
-
 .series-container {
     position: relative;
     min-width: 90rem;

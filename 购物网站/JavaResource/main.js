@@ -171,7 +171,6 @@ function checkLoginState(timer=null) {
                 <span style="cursor: default;">|</span>
                 <a href="user.html" id="msg">注册</a>`;
         }
-        
     }
 }
 
@@ -217,7 +216,7 @@ function API_register() {
     let UserList = localStorage.getItem('UserList');  // 获取本地存储的用户列表
     for (let i = 0; i < UserList.length; i++) {
         if (UserList[i].username == username) {  // 注册失败
-            alert('用户名已被注册');  // 可以采用直接显示在用户名输入框的错误提示信息
+            API_dialog('用户名已被注册');  // 可以采用直接显示在用户名输入框的错误提示信息
             return;
         }
     }
@@ -248,13 +247,13 @@ function API_login() {
     let UserList = localStorage.getItem('UserList');  // 获取本地存储的用户列表
     for (let i = 0; i < UserList.length; i++) {
         if (UserList[i].username == username && UserList[i].password == password) {  // 登录成功
-            alert('登录成功');
+            API_dialog('登录成功');
             localStorage.setItem("CurrentUser", JSON.stringify(UserList[i]));  // 存储当前登录用户信息到本地存储中
             return true;
         }
     }
     /* 登录失败 */  
-    alert('用户名或密码错误');  // 可以采用直接显示在用户名输入框的错误提示信息
+    API_dialog('用户名或密码错误');  // 可以采用直接显示在用户名输入框的错误提示信息
     return false;
 }
 
@@ -307,20 +306,21 @@ function API_checkLogin() {
 // 当用户点击商品时，调用该接口, id为商品ID id: number
 function API_addToCart(id) {
     if (!API_checkLogin()) {
-        alert('请先登录');
-        return;
+        API_dialog('请先登录');
+        return false;
     }
     // 向购物车中添加商品
     const user = JSON.parse(localStorage.getItem("CurrentUser"));
     const cart = user.cart;
     cart.push(id);
+    return true;
 }
 
 // 从购物车中移除商品接口
 // 当用户点击购物车中的商品时，调用该接口, id为商品ID id: number
 function API_removeFromCart(id) {
     if (!API_checkLogin()) {
-        alert('请先登录');
+        API_dialog('请先登录');
         return;
     }
     // 从购物车中移除商品
@@ -352,7 +352,7 @@ function API_parseGoodId(id) {
 // 返回对应商品的详细信息的 字典列表，如果没有则返回null
 function API_getGoodsFromCart() {
     if (!API_checkLogin()) {
-        alert('请先登录');
+        API_dialog('请先登录');
         return;
     }
     // 获取购物车中的商品ID列表
@@ -369,7 +369,7 @@ function API_getGoodsFromCart() {
 // 当用户点击清空购物车时，调用该接口
 function API_clearCart() {
     if (!API_checkLogin()) {
-        alert('请先登录');
+        API_dialog('请先登录');
         return;
     }
     // 清空购物车
@@ -380,11 +380,13 @@ function API_clearCart() {
 
 function API_getGoods(num, category_paths=[]) {
     let goods_data = JSON.parse(localStorage.getItem("goods_data"));
-    if (category_paths == [] || category_paths == "null") {
+    if (category_paths.length == 0 || category_paths == "null") {
         category_paths = ["../Resource/JSONData/guitar/fender.json",
                         "../Resource/JSONData/food/xican.json",
-                        "../Resource/JSONData/racket/Yonex/gongjianxilie.json"
+                        "../Resource/JSONData/racket/Yonex/gongjianxilie.json",
+                        "../Resource/JSONData/food/xican.json"
         ];
+        num = 1;
     }
     // 根据分类路径获取商品列表
     let result = [];
@@ -401,9 +403,25 @@ function API_getGoods(num, category_paths=[]) {
     return result;
 }
 
+// 订阅接口
+// 当用户点击订阅时，调用该接口
 function API_subscribe() {
     const input = document.querySelector('.bottom-container .input-container input');
     // 选中内容
     input.select();
-    alert('订阅成功! 我们会第一时间推送最新消息。');
+    API_dialog('订阅成功! 我们会第一时间推送最新消息。', 4500);
+}
+
+function API_dialog(text, duration=1500) {
+    // 往页面中添加对话框
+    const dialog = document.createElement('div');
+    dialog.innerHTML = `<div class="dialog">${text}</div>`;
+    document.body.appendChild(dialog);
+    dialog.style.display = 'block';
+    setTimeout(function() {
+        dialog.style.animation = 'fade-out 0.3s forwards';
+        setTimeout(function() {
+            document.body.removeChild(dialog);
+        }, 300);
+    }, duration);
 }

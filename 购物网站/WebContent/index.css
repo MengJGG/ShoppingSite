@@ -127,6 +127,14 @@ body {
     }
 }
 
+@keyframes flip {
+    from {
+        transform: rotateY(0deg);
+    } to {
+        transform: rotateY(180deg);
+    }
+}
+
 /* 下拉菜单 */
 .top_drop_menu {
     position: absolute;
@@ -301,6 +309,7 @@ body {
     justify-content: center;
     font-size: 4rem;
     color: white;
+    cursor: pointer;
 }
 
 /* 导航按钮 */
@@ -341,6 +350,12 @@ body {
     gap: 0.5rem;
 }
 
+.carousel-container .carousel-track .carousel-item img {
+    width: auto;
+    height: 100%;
+    object-fit: cover;
+}
+
 .indicator {
     width: 12px;
     height: 12px;
@@ -362,16 +377,20 @@ body {
     align-items: center;
     max-width: 100%;
     width: 86rem;
-    height: 45rem;
+    height: auto;
+    margin-bottom: 3rem;
+    margin-top: 1rem;
 }
 
 .recommend_title {
     font-size: 2.8rem;
     color: var(--dark-text);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 #title {
-    font-size: 2.8rem;
+    font-size: 2rem;
     color: var(--dark-text);
 }
 
@@ -393,9 +412,8 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    object-fit: cover;
     width: 24%;
-    height: 100%;
+    height: 30rem;
 }
 
 .recommend_items .item .msg {
@@ -424,20 +442,25 @@ body {
     left: 3rem;
 }
 
+.recommend_items .item .good_img-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 82%;
+}
+
+.recommend_items .item .good_img-container:hover {
+    cursor: pointer;
+    transform: scale(1.02);
+    transition: transform 0.3s ease;
+}
+
 .recommend_items .item .good_img {
     object-fit: cover;
-    width: 95%;
+    width: 100%;
     max-width: 95%;
     max-height: 100%;
     height: auto;
-    margin-top: 1.3rem;
-    border-bottom: #21222C solid 2px;
-}
-
-.recommend_items .item .good_img:hover {
-    transform: scale(1.05);
-    transition: 0.3s;
-    cursor: pointer;
 }
 
 .recommend_items .item .info {
