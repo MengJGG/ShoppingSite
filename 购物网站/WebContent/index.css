@@ -190,13 +190,24 @@ body {
     border-bottom: var(--light-text) solid 1px;
 }
 
-.drop_content {
+.drop_left-content {
     position: relative;
     display: flex;
     font-size: 12px;
     flex-direction: column;
     row-gap: 1.1rem;
     padding-left: 8%;
+    text-align: left;
+    color: var(--dark-text);
+}
+
+.drop_right-content {
+    position: relative;
+    display: flex;
+    font-size: 12px;
+    flex-direction: column;
+    row-gap: 1.1rem;
+    padding-left: 20%;
     text-align: left;
     color: var(--dark-text);
 }

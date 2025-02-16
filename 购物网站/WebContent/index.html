@@ -104,8 +104,84 @@
             });
         </script>
         <!-- 下拉菜单 -->
-        <div class="top_drop_menu" id="top_drop_menu-container">
-            <div class="drop_content">
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="0">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">按类别选购</span>
+                <a>吉他Yonex</a> 
+                <a>音响</a>
+                <a>美食</a>
+                <a>羽毛球拍</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="1">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <a>Martin</a> 
+                <a>Fender</a>
+                <a>Taylor</a>
+                <a>Yamaha</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="2">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <a>尤尼克斯Yonex</a> 
+                <a>李宁LI-NING</a>
+                <a>威克多VICTORY</a>
+                <br>
+            </div>
+            <div class="drop_right-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门推荐</span>
+                <a>ARCSABER 11 PRO</a> 
+                <a>ARCSABER 7 PRO3</a>
+                <a>NANOFLARE 700 PRO</a>
+                <a>ASTROX 88S PRO</a> 
+                <a>ASTROX 100 ZZ</a>
+                <a>ASTROX 99 PRO</a>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="3">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">牛排系列</span>
+                <a>惠灵顿牛排</a> 
+                <a>烟熏牛排</a>
+                <a>番茄牛排</a>
+                <a>法式羊排</a>
+                <a>战斧牛排</a>
+                <a>西芹椒盐牛排</a>
+                <a>菲力牛排</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐菜品</span>
+                <img src="../Resource/Img/food/1.jpg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="4">
+            <div class="drop_left-content" id="drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
                 <a>尤尼克斯Yonex</a> 
@@ -119,22 +195,27 @@
                 <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
+        </div>
+        
         <!-- TODO: 后端返回数据 -->
         <script>
-            //const guitar = document.querySelector('.top_guide_nav .guitar');
-            //const audio = document.querySelector('.top_guide_nav .audio');
-            //const food = document.querySelector('.top_guide_nav .food');
-            const racket = document.querySelector('.top_guide_nav .racket');
             const topGuideNav = document.querySelector('.top_guide_nav');
-            const topDropMenu = document.querySelector('.top_drop_menu');
+            const topDropMenus = document.querySelectorAll('.top_drop_menu');
             const topDropMenuContainer = document.querySelector('#top_drop_menu-container');
-            topDropMenuContainer.addEventListener('mouseenter', function() {
-                topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
-                topDropMenu.style.display = 'flex';
+            topGuideNav.addEventListener('mouseover', function(e) {
+                const index = Array.from(topGuideNav.children).indexOf(e.target);
+                const topDropMenu = topDropMenus[index];
+                topDropMenu.addEventListener('mouseleave', function() {
+                    topDropMenu.style.display = 'none';
+                });
+                topDropMenuContainer.addEventListener('mouseenter', function() {
+                    topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+                    topDropMenu.style.display = 'flex';
+                });
             });
-            topDropMenu.addEventListener('mouseleave', function() {
-                topDropMenu.style.display = 'none';
-            });
+            
+            
+            
         </script>
         <!-- 登录注册 -->
         <div class="login-container">
