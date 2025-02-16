@@ -131,7 +131,7 @@ body {
     from {
         transform: rotateY(0deg);
     } to {
-        transform: rotateY(180deg);
+        transform: rotateY(360deg);
     }
 }
 
@@ -686,3 +686,93 @@ body {
     font-size: 0.8rem;
     color: gray;
 }
+
+.more_btn-container {
+    width: 110rem;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.more_btn-container:hover {
+    background-color: var(--light-text);
+}
+
+.good_main-container {
+	display: flex;
+	flex-direction: row;
+	width: 100rem;
+}
+
+.good_main-container .good-content {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	height: auto;
+}
+
+.good_main-container .good-content .item {
+	display: flex;
+	position: relative;
+	align-items: center;
+	flex-direction: column;
+	width: 90%;
+	height: auto;
+	margin: 1rem;
+    cursor: pointer;
+}
+
+.good_main-container .good-content .item .images {
+	width: 100%;
+	height: auto;
+}
+
+.good_main-container .good-content .item .images img {
+	width: 100%;
+	height: auto;
+    border-bottom: var(--dark-bg) solid 2px;
+}
+
+.good_main-container .good-content .item:hover {
+	box-shadow: 0 0 10px #ccc;
+	transition: 0.3s;
+	transform: scale(1.02);
+}
+
+.good_main-container .good-content .content {
+	text-align: center;
+}
+
+.good_main-container .good-content .content > p, .good_main-container .good-content .content > span {
+	font-size: 1rem;
+}
+
+.good_main-container .good-content .item .add-btn {
+    position: absolute;
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    bottom: 0;
+    right: 0.8rem;
+    font-size: 1.8rem;
+    font-weight: lighter;
+    justify-content: center;
+    align-items: center;
+    color: var(--dark-text);
+    z-index: 3;
+}
+
+.good_main-container .good-content .item .add-btn:hover {
+    color: var(--brown);
+    cursor: pointer;
+}
+
+.good_main-container .good-content .item:hover .add-btn {
+    display: flex;
+}
+
+.good_main-container .good-content .item .bingo-icon {
+    display: flex;
+}
+

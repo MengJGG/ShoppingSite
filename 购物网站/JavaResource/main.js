@@ -1,6 +1,7 @@
 'use strict';
 
 var good_id = 0;  // 当前商品ID
+var getGoods_index = 0;
 // 判断localStorage是否存在goods_data，如果不存在则初始化goods_data
 if (!localStorage.getItem("goods_data")) {
     localStorage.setItem("goods_data", JSON.stringify({}));
@@ -378,7 +379,7 @@ function API_clearCart() {
     localStorage.setItem("CurrentUser", JSON.stringify(user));
 }
 
-function API_getGoods(num, category_paths=[]) {
+function API_getGoods(num, category_paths=[], total=0) {
     let goods_data = JSON.parse(localStorage.getItem("goods_data"));
     if (category_paths.length == 0 || category_paths == "null") {
         category_paths = ["../Resource/JSONData/guitar/fender.json",
@@ -388,18 +389,27 @@ function API_getGoods(num, category_paths=[]) {
         ];
         num = 1;
     }
+    if (total != 0 && category_paths.length == 1) {  // 在只有一个分类的情况下，如果传入了total，则直接返回total个商品
+        num = total;
+    }
     // 根据分类路径获取商品列表
     let result = [];
     for (let category_path of category_paths) {
         if (goods_data[category_path].data.length < num) {  // 如果商品数量不足num，则返回全部商品
-            result.push(goods_data[category_path]);
+            result.push(goods_data[category_path].data);
             continue;
         }
-        for (let i = 0; i < num; i++) {  // 随机获取num个商品
-            let index = Math.floor(Math.random() * goods_data[category_path].data.length);
-            result.push(goods_data[category_path].data[index]);
+        for (let i = getGoods_index; i < num + getGoods_index; i++) {  // 随机获取num个商品
+            //let index = Math.floor(Math.random() * goods_data[category_path].data.length);
+            if (goods_data[category_path].data[i] != undefined) {
+                result.push(goods_data[category_path].data[i]);
+            } else {
+                break;
+            }
         }
     }
+    getGoods_index += num;
+
     return result;
 }
 
@@ -424,4 +434,27 @@ function API_dialog(text, duration=1500) {
             document.body.removeChild(dialog);
         }, 300);
     }, duration);
+}
+
+function API_showGoods(display_goods, GoodContainer) {
+    for (let i = 0; i < display_goods.length; i++) {
+        // 0-3余数循环
+        let row = i % 4;
+        let good = display_goods[i];
+        GoodContainer.children[row].innerHTML += `
+        <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
+            <div class="images">
+                <img src="${good.image_url}" alt="">
+            </div>
+            <div class="content">
+                <p>${good.name}</p>
+                <span>${good.price}</span>
+            </div>
+            <div class="add-btn" onclick="API_addToCart('${good.id}')">+</div>
+        </div>`;
+    }
+}
+
+function API_resetGetGoodsIndex() {
+    getGoods_index = 0;
 }

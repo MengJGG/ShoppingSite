@@ -41,6 +41,27 @@
             const clear = document.querySelector('.top-container .search-icon #clear');
             const GuideNav = document.querySelector('.top_guide_nav');
             const searchInput = document.querySelector('.top-container .search-icon #search_input');
+            // 处理外部点击的函数
+            function handleOutsideClick(e) {
+                // 判断点击目标是否在搜索区域外
+                if (!e.target.closest('.search-icon')) {
+                    // 执行关闭操作
+                    search.style.transform = 'translateX(0)';
+                    searchInput.style.transition = 'width 0.2s linear, transform 0.2s linear';
+                    searchInput.style.width = '0rem';
+                    searchInput.value = '';
+                    clear.style.display = 'none';
+                    GuideNav.style.display = 'flex';
+                    GuideNav.style.animation = 'fade-in 0.2s ease 1 forwards';
+                    searchInput.blur();
+                    setTimeout(() => {
+                        searchInput.style.display = 'none';
+                        // 移除全局点击监听
+                        document.removeEventListener('click', handleOutsideClick);
+                    }, 200);
+                }
+            }
+            
             search.addEventListener('click', function() {
                 search.style.transform = 'translateX(-32rem)';
                 searchInput.style.display = 'block';
@@ -52,11 +73,15 @@
                 setTimeout(() => {
                     GuideNav.style.display = 'none';
                 }, 200);
+                setTimeout(() => {
+                    document.addEventListener('click', handleOutsideClick);  // 添加全局点击监听
+                }, 300);
             });
+
             searchInput.addEventListener('keydown', function(e) {
                 // 按下回车键，跳转到搜索结果页面
                 if (e.keyCode === 13) {
-                    let keyword = toString(searchInput.value);
+                    let keyword = searchInput.value;
                     API_jumpToPage(keyword);
                 }
             });
@@ -71,7 +96,10 @@
                 searchInput.blur();
                 setTimeout(() => {
                     searchInput.style.display = 'none';
+                    // 清除时移除全局点击监听
+                    document.removeEventListener('click', handleOutsideClick);
                 }, 200);
+
             });
         </script>
         <!-- 下拉菜单 -->
@@ -142,10 +170,9 @@
         <!-- 轮播图 -->
         <div class="carousel-container">
             <div class="carousel-track">
-                <div class="carousel-item"><img src="../Resource/Img/food/2.jpeg" alt=""></div>
+                <div class="carousel-item"><img src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i1/651123949/O1CN01Xlsp5a1f2h53icEzQ_!!4611686018427387117-0-item_pic.jpg" alt=""></div>
                 <div class="carousel-item"><img src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/2204197015356/O1CN01FvKr4C1pR5t8tz7XI_!!0-item_pic.jpg" alt=""></div>
-                <div class="carousel-item"><img src="https://www.yonex.cn/public/uploads/20220224/3d37d74fd66ed1d06c00fbf35e2ba6e6.jpg" alt=""></div>
-                <div class="carousel-item"><img src="" alt=""></div>
+                <div class="carousel-item"><img src="https://gw.alicdn.com/imgextra/O1CN01gPhyrh1sFbGHLVgz8_!!2216712495737-0-yinheaigc.jpg" alt=""></div>
             </div>
             
             <button class="carousel-button button-prev">❮</button>
@@ -237,26 +264,33 @@
             </div>
             
             <script>
+                let recommend_items = ["../Resource/JSONData/guitar/martin.json",
+                    "../Resource/JSONData/guitar/fender.json",
+                    "../Resource/JSONData/guitar/taylor.json",
+                    "../Resource/JSONData/guitar/yamaha.json"
+                ];
+                let recommend_goods = [];
+                let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
                 // 从后端获取商品数据
-                let goods = API_getGoods(4);
+                recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
                 for (let i = 0; i < 4; i++) {
                     recommendItems.innerHTML += `
-                    <div class="item" id="item_1" data-GoodId="${goods[i].id}">
+                    <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                         <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
                         <div class="msg">
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                         </div>
                         <div class="good_img-container">
-                            <img src="${goods[i].image_url}" alt="" class="good_img">
+                            <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
                         <br>
                         <br>
                         <div class="info">
-                            <span class="name">${goods[i].name}</span>
-                            <span class="price">￥${goods[i].price}</span>
+                            <span class="name">${recommend_goods[loop][i].name}</span>
+                            <span class="price">￥${recommend_goods[loop][i].price}</span>
                         </div>
                     </div>`;
                 }
@@ -267,7 +301,15 @@
                 const ChangeBtn = document.querySelector('.recommend-container .change_btn');
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
-                    let goods = API_getGoods(4);
+                    loop++;  // 循环数组+1
+                    let goods = API_getGoods(1, recommend_items);
+                    if (goods.length != 0) {
+                        recommend_goods.push(goods);
+                    }
+                    if (goods.length === 0) {  // 商品到头了，从头开始
+                        loop = 0;
+                    }
+                    // 更新翻转动画
                     const items = document.querySelectorAll('.recommend-container .recommend_items .item');
                     items.forEach(item => {
                         item.style.animation = 'flip 0.5s ease 1 forwards';
@@ -278,26 +320,27 @@
                         
                         for (let i = 0; i < goods.length; i++) {
                             recommendItems.innerHTML += `
-                            <div class="item" id="item_1" data-GoodId="${goods[i].id}">
+                            <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                                 <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
                                 <div class="msg">
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                                 </div>
                                 <div class="good_img-container">
-                                    <img src="${goods[i].image_url}" alt="" class="good_img">
+                                    <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>
                                 <br>
                                 <br>
                                 <div class="info">
-                                    <span class="name">${goods[i].name}</span>
-                                    <span class="price">￥${goods[i].price}</span>
+                                    <span class="name">${recommend_goods[loop][i].name}</span>
+                                    <span class="price">${recommend_goods[loop][i].price}</span>
                                 </div>
                             </div>`;
                         }
                     }, 450);
                 });
+
                 BuyBtns.forEach(btn => {
                     btn.addEventListener('click', function() {
                         // 获取其父类的id
@@ -313,6 +356,7 @@
                         }
                     });
                 });
+                
                 BingoBtns.forEach(btn => {
                     btn.addEventListener('click', function() {
                         btn.style.display = 'none';
@@ -366,39 +410,70 @@
         <br>
         <!-- 商品主要内容 4*5 -->
         <span id="title">商品展览</span>
+        <br>
         <div class="good_main-container">
             <div class="good-content"></div>
             <div class="good-content"></div>
             <div class="good-content"></div>
             <div class="good-content"></div>
         </div>
+        <!-- 显示更多 -->
+        <div class="more_btn-container" style="cursor: pointer;">显示更多</div>
         <script>
-            let category_paths = ["../Resource/JSONData/guitar/fender.json",
-                                "../Resource/JSONData/guitar/martin.json",
-                                "../Resource/JSONData/guitar/taylor.json",
-                                "../Resource/JSONData/guitar/yamaha.json"];
-            // TODO: 异步获取商品信息
+            var category_items = ["../Resource/JSONData/guitar/martin.json",
+                    "../Resource/JSONData/guitar/fender.json",
+                    "../Resource/JSONData/guitar/taylor.json",
+                    "../Resource/JSONData/guitar/yamaha.json"];
 
-            let display_goods = API_getGoods(5, category_paths);  // display_goods: array of goods objects
-            // 显示商品信息
             const GoodContainer = document.querySelector('.good_main-container');
-            for (let i = 0; i < display_goods.length; i++) {
-                // 0-3余数循环
-                let row = i % 4;
-                let good = display_goods[i];
-                GoodContainer.children[row].innerHTML += `
-                <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
-                    <div class="images">
-                        <img src="${good.image_url}" alt="">
-                    </div>
-                    <div class="content">
-                        <p>${good.name}</p>
-                        <span>${good.price}</span>
-                    </div>
-                </div>`;
-            }
-            console.log(display_goods);
+            const SeriesContainer = document.querySelector('.series-container');
+            const GoodContent = document.querySelectorAll('.good_main-container .good-content');
+            SeriesContainer.addEventListener('click', function(e) {
+                // 清空good-content
+                GoodContent.forEach(content => {
+                    content.innerHTML = '';
+                });
+                const index = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);  // 获取系列索引
+                category_paths = [category_items[index]];
+                API_resetGetGoodsIndex();  // 重置商品索引
+                let display_goods = API_getGoods(20, category_paths);
+                API_showGoods(display_goods, GoodContainer);
+            });
+            // TODO: 异步获取商品信息
+            let display_goods = API_getGoods(5, category_items);  // display_goods: array of goods objects
+            // 显示商品信息
+            API_showGoods(display_goods, GoodContainer);
+
+            // 显示更多
+            const moreBtn = document.querySelector('.more_btn-container');
+            moreBtn.addEventListener('click', function() {
+                let show_more_goods = API_getGoods(5, category_items, 20);  // show_more_goods: array
+                if (show_more_goods.length == 0) {
+                    API_dialog("到底了~");
+                }
+                API_showGoods(show_more_goods, GoodContainer);
+            });
         </script>
+        <script>
+            const addBtns = document.querySelectorAll('.good_main-container .item .add-btn');
+            addBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    // 获取其父类的id
+                    const parent = btn.parentNode.parentNode;
+                    const id = parent.getAttribute('data-GoodId');
+                    // 加入到购物车
+                    if (API_addToCart(id)) {
+                        btn.style.display = 'none';
+                        API_dialog("加入成功");
+                        btn.innerHTML = '<img src="../Resource/Img/system/bingo_ico.png" alt="" style="display: flex; width: 70%;">';
+                        btn.classList.add('bingo-icon');
+                    } else {
+                        API_dialog("请先登录");
+                    }
+                });
+            });
+        </script>
+
         <!-- 底部信息栏 -->
         <br>
         <br>
