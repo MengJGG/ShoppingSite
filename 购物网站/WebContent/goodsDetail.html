@@ -136,13 +136,15 @@
     <div id="product-detail"></div>
 
     <script>
+
+
         function getProductIdFromURL() {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get('id');
         }
 
-        function APIparsestoredData(dataname = "") {
-            const data = sessionStorage.getItem(dataname);
+        function APIparsestoredData(data_name = "") {
+            const data = sessionStorage.getItem(data_name);
             if (data) {
                 return JSON.parse(data);
             }
@@ -151,7 +153,7 @@
         const productId = getProductIdFromURL();
         if (productId) {
             // 假设所有商品数据都在一个 JSON 文件中，根据实际情况修改文件路径
-            fetch('../Resource/JSONData')
+            fetch('../Resource/JSONData/guitar/yamaha.json')
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('网络响应异常');
