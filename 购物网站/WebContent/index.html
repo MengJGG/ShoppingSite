@@ -117,7 +117,6 @@
                     // 清除时移除全局点击监听
                     document.removeEventListener('click', handleOutsideClick);
                 }, 200);
-
             });
         </script>
         <!-- 下拉菜单 -->
@@ -384,7 +383,7 @@
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                         </div>
-                        <div class="good_img-container">
+                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${goods[i].id}, 'display_good', true)">
                             <img src="${goods[i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
@@ -392,7 +391,7 @@
                         <br>
                         <div class="info">
                             <span class="name">${goods[i].name}</span>
-                            <span class="price">￥${goods[i].price}</span>
+                            <span class="price">${goods[i].price}</span>
                         </div>
                     </div>`;
                 }
@@ -420,7 +419,7 @@
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                                 </div>
-                                <div class="good_img-container">
+                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${goods[i].id}, 'display_good', true)">
                                     <img src="${goods[i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>
