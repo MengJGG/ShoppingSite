@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>吉他-LuxeHarmony</title>
+    <title>美食-LuxeHarmony</title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="index_guitar.css">
@@ -221,6 +221,15 @@
                 const index = Array.from(topGuideNav.children).indexOf(e.target);
                 show(index);
             });
+            // topDropMenus.forEach(topDropMenu => {
+            //     topDropMenu.addEventListener('mouseleave', function() {
+            //         topDropMenu.style.display = 'none';
+            //     });
+            //     topDropMenuContainer.addEventListener('mouseenter', function() {
+            //         topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+            //         topDropMenu.style.display = 'flex';
+            //     });
+            // });
             topDropMenus.forEach(topDropMenu => {
                 topDropMenu.addEventListener('mouseleave', function() {
                     show(-1);
@@ -375,7 +384,7 @@
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                         </div>
-                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                        <div class="good_img-container">
                             <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
@@ -408,6 +417,7 @@
                     setTimeout(() => {
                         // 删除items所有子元素 items: NodeList
                         recommendItems.innerHTML = '';
+                        
                         for (let i = 0; i < goods.length; i++) {
                             recommendItems.innerHTML += `
                             <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
@@ -415,7 +425,7 @@
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                                 </div>
-                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                                <div class="good_img-container">
                                     <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>

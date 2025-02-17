@@ -10,6 +10,11 @@
     <script src="../JavaResource/main.js"></script>
 </head>
 <body>
+    <!-- <section>
+        <img src="./res/sky.jpg" alt="" id="sky">
+        <img src="./res/mountains.png" alt="" id="mt">
+        <h2 id="text">Deep Sky</h2>
+    </section> -->
     <div class="sky-banner" style="cursor: pointer;"></div>
     <!-- 顶部导航栏 -->
     <div class="top-container">
@@ -34,6 +39,18 @@
             <img src="../Resource/Img/system/clear_ico.png" id="clear" alt="X">
             <input type="text" id="search_input" placeholder="搜索...">
             <img src="../Resource/Img/system/search_ico.png" id="search" alt="搜索">
+        </div>
+        <!-- 登录注册 -->
+        <div class="login-container">
+            <img src="../Resource/Img/system/default_user_head.png" alt="">
+            <div class="login_mes-container">
+                <span style="cursor: default;" id="username">未登录</span>
+                <section>
+                    <a href="user.html" id="msg">登录</a>
+                    <span style="cursor: default;">|</span>
+                    <a href="user.html" id="msg">注册</a>
+                </section>
+            </div>
         </div>
         <script>
             const search = document.querySelector('.top-container .search-icon #search');
@@ -100,18 +117,17 @@
                     // 清除时移除全局点击监听
                     document.removeEventListener('click', handleOutsideClick);
                 }, 200);
-
             });
         </script>
         <!-- 下拉菜单 -->
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="0">
-            <div class="drop_left-content" id="drop_content">
+            <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">按类别选购</span>
-                <a>吉他Yonex</a> 
-                <a>音响</a>
-                <a>美食</a>
-                <a>羽毛球拍</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他</a> 
+                <a onclick="API_dialog('暂未开放')">音响</a>
+                <a onclick="API_jumpToPage('../WebContent/index_food.html')">美食</a>
+                <a onclick="API_jumpToPage('../WebContent/index_racket.html')">羽毛球拍</a>
                 <br>
             </div>
             <div class="img-container">
@@ -121,48 +137,41 @@
             </div>
         </div>
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="1">
-            <div class="drop_left-content" id="drop_content">
+            <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>Martin</a> 
-                <a>Fender</a>
-                <a>Taylor</a>
-                <a>Yamaha</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Martin</a> 
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Fender</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Taylor</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Yamaha</a>
                 <br>
             </div>
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
-                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+                <img src="http://g.search3.alicdn.com/img/i3/109964830/O1CN010fvEFy1lYC1uE8Qqf_!!4611686018427383326-0-saturn_solar.jpg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="2">
-            <div class="drop_left-content" id="drop_content">
+            <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>尤尼克斯Yonex</a> 
-                <a>李宁LI-NING</a>
-                <a>威克多VICTORY</a>
+                <a>JBL</a> 
+                <a>Harman Kardon</a>
+                <a>Denon</a>
+                <a>Sony</a> 
+                <a>Dynaudio</a>
+                <a>Bose</a>
                 <br>
-            </div>
-            <div class="drop_right-content" id="drop_content">
-                <br>
-                <span id="menu_title" style="color: #333333;">热门推荐</span>
-                <a>ARCSABER 11 PRO</a> 
-                <a>ARCSABER 7 PRO3</a>
-                <a>NANOFLARE 700 PRO</a>
-                <a>ASTROX 88S PRO</a> 
-                <a>ASTROX 100 ZZ</a>
-                <a>ASTROX 99 PRO</a>
             </div>
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
-                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+                <img src="https://cn.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc471195b/01.JBL_Live Beam 3_Product Image_Feature Screen 02_Black.png?sw=537&sfrm=png" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="3">
-            <div class="drop_left-content" id="drop_content">
+            <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">牛排系列</span>
                 <a>惠灵顿牛排</a> 
@@ -177,58 +186,75 @@
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐菜品</span>
-                <img src="../Resource/Img/food/1.jpg" alt="" onclick=""> <!--跳转到详细页面-->
+                <img src="../Resource/Img/food/41.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="4">
-            <div class="drop_left-content" id="drop_content">
+            <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>尤尼克斯Yonex</a> 
-                <a>李宁LI-NING</a>
-                <a>威克多VICTORY</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">尤尼克斯Yonex</a> 
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">李宁LI-NING</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">威克多VICTORY</a>
                 <br>
+            </div>
+            <div class="drop_right-content drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门推荐</span>
+                <a onclick="API_jumpToPage('../WebContent/index_racket.html', API_getIdByName('ARCSABER 11 PRO'), '')">ARCSABER 11 PRO</a> 
+                <a>ARCSABER 7 PRO3</a>
+                <a>NANOFLARE 700 PRO</a>
+                <a>ASTROX 88S PRO</a> 
+                <a>ASTROX 100 ZZ</a>
+                <a>ASTROX 99 PRO</a>
             </div>
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
-                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+                <img src="https://www.yonex.cn/public/uploads/20230904/bde83ff23ddde196fe2b3098ad993748.jpg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         </div>
         
         <!-- TODO: 后端返回数据 -->
         <script>
+            'use strict';
             const topGuideNav = document.querySelector('.top_guide_nav');
             const topDropMenus = document.querySelectorAll('.top_drop_menu');
             const topDropMenuContainer = document.querySelector('#top_drop_menu-container');
             topGuideNav.addEventListener('mouseover', function(e) {
                 const index = Array.from(topGuideNav.children).indexOf(e.target);
-                const topDropMenu = topDropMenus[index];
+                show(index);
+            });
+            // topDropMenus.forEach(topDropMenu => {
+            //     topDropMenu.addEventListener('mouseleave', function() {
+            //         topDropMenu.style.display = 'none';
+            //     });
+            //     topDropMenuContainer.addEventListener('mouseenter', function() {
+            //         topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+            //         topDropMenu.style.display = 'flex';
+            //     });
+            // });
+            topDropMenus.forEach(topDropMenu => {
                 topDropMenu.addEventListener('mouseleave', function() {
-                    topDropMenu.style.display = 'none';
-                });
-                topDropMenuContainer.addEventListener('mouseenter', function() {
-                    topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
-                    topDropMenu.style.display = 'flex';
+                    show(-1);
                 });
             });
-            
+
+            function show(index) {
+                topDropMenus.forEach(topDropMenu => {
+                    if (topDropMenu.dataset.index != index) {
+                        topDropMenu.style.display = 'none';
+                    }
+                    else {
+                        topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+                        topDropMenu.style.display = 'flex';
+                    }
+                });
+            }            
             
             
         </script>
-        <!-- 登录注册 -->
-        <div class="login-container">
-            <img src="../Resource/Img/system/default_user_head.png" alt="">
-            <div class="login_mes-container">
-                <span style="cursor: default;" id="username">未登录</span>
-                <section>
-                    <a href="user.html" id="msg">登录</a>
-                    <span style="cursor: default;">|</span>
-                    <a href="user.html" id="msg">注册</a>
-                </section>
-            </div>
-        </div>
     </div>
     <!-- 侧边工具栏 -->
     <div class="side_tool_bar">
@@ -346,37 +372,49 @@
             </div>
             
             <script>
+                let recommend_items = ["../Resource/JSONData/guitar/martin.json",
+                    "../Resource/JSONData/guitar/fender.json",
+                    "../Resource/JSONData/guitar/taylor.json",
+                    "../Resource/JSONData/guitar/yamaha.json"
+                ];
+                let recommend_goods = [];
+                let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
                 // 从后端获取商品数据
-                const goods = API_getGoods(4);
+                recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
                 for (let i = 0; i < 4; i++) {
                     recommendItems.innerHTML += `
-                    <div class="item" id="item_1" data-GoodId="${goods[i].id}">
-                        <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
+                    <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                         <div class="msg">
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                         </div>
-                        <div class="good_img-container">
-                            <img src="${goods[i].image_url}" alt="" class="good_img">
+                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                            <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
                         <br>
                         <br>
                         <div class="info">
-                            <span class="name">${goods[i].name}</span>
-                            <span class="price">￥${goods[i].price}</span>
+                            <span class="name">${recommend_goods[loop][i].name}</span>
+                            <span class="price">${recommend_goods[loop][i].price}</span>
                         </div>
                     </div>`;
                 }
 
-
-                const BingoBtns = document.querySelectorAll('.recommend-container .recommend_items .item .bingo-icon');
                 const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
                 const ChangeBtn = document.querySelector('.recommend-container .change_btn');
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
-                    const goods = API_getGoods(4);
+                    loop++;  // 循环数组+1
+                    let goods = API_getGoods(1, recommend_items);
+                    if (goods.length != 0) {
+                        recommend_goods.push(goods);
+                    }
+                    if (goods.length === 0) {  // 商品到头了，从头开始
+                        loop = 0;
+                    }
+                    // 更新翻转动画
                     const items = document.querySelectorAll('.recommend-container .recommend_items .item');
                     items.forEach(item => {
                         item.style.animation = 'flip 0.5s ease 1 forwards';
@@ -387,26 +425,26 @@
                         
                         for (let i = 0; i < goods.length; i++) {
                             recommendItems.innerHTML += `
-                            <div class="item" id="item_1" data-GoodId="${goods[i].id}">
-                                <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
+                            <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                                 <div class="msg">
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
                                 </div>
-                                <div class="good_img-container">
-                                    <img src="${goods[i].image_url}" alt="" class="good_img">
+                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                                    <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>
                                 <br>
                                 <br>
                                 <div class="info">
-                                    <span class="name">${goods[i].name}</span>
-                                    <span class="price">￥${goods[i].price}</span>
+                                    <span class="name">${recommend_goods[loop][i].name}</span>
+                                    <span class="price">${recommend_goods[loop][i].price}</span>
                                 </div>
                             </div>`;
                         }
                     }, 450);
                 });
+
                 BuyBtns.forEach(btn => {
                     btn.addEventListener('click', function() {
                         // 获取其父类的id
@@ -417,19 +455,11 @@
                             btn.style.display = 'none';
                             // 获取btn的data-ind
                             const index = parseInt(btn.getAttribute('data-ind'));
-                            BingoBtns[index].style.display = 'block';
                             API_dialog("加入成功");
                         }
                     });
                 });
-                BingoBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        btn.style.display = 'none';
-                        // 获取btn的data-ind
-                        const index = parseInt(btn.getAttribute('data-ind'));
-                        BuyBtns[index].style.display = 'block';
-                    });
-                });
+
             </script>
         </div>
         <!-- 主题分区 -->

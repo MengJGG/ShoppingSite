@@ -155,29 +155,31 @@ function parseGoodIdList(id_list) {
 // 检查登录状态
 function checkLoginState(timer=null) {
     //console.log('checkLoginState');
+    const UserMsg = document.querySelector('.login_mes-container #username');
+    const section = document.querySelector('.login_mes-container section');
     let user = localStorage.getItem("CurrentUser");
     if (user) {
-        const UserMsg = document.querySelector('.login_mes-container #username');
-        const section = document.querySelector('.login_mes-container section');
-        UserMsg.textContent = user;
-        section.innerHTML = `<a onclick="API_logout()" id="msg">退出登录</a>`;
+        UserMsg.textContent = JSON.parse(user).username;
+        section.innerHTML = `<a href="#" onclick="API_logout()" id="msg">退出登录</a>`;
+        sessionStorage.setItem("ui", "login");
         if (timer) {
             clearInterval(timer);
         }
     } else {
-        const section = document.querySelector('.login_mes-container section');
-        if (section.innerHTML == `<a onclick="API_logout()" id="msg">退出登录</a>`) {
+        if (sessionStorage.getItem("ui") == "login") {
             section.innerHTML = `
                 <a href="user.html" id="msg">登录</a>
                 <span style="cursor: default;">|</span>
                 <a href="user.html" id="msg">注册</a>`;
+            UserMsg.textContent = "未登录";
+            sessionStorage.setItem("ui", "logout");
         }
     }
 }
 
 // 监听页面加载事件，添加定时器检查登录状态
 function addCheckLoginTimer() {
-    const timerForCheckLogin = setInterval(() => checkLoginState(timerForCheckLogin), 1000);
+    const timerForCheckLogin = setInterval(() => checkLoginState(timerForCheckLogin), 500);
 }
 
 window.addEventListener('load', function() {
@@ -201,24 +203,31 @@ init();
 // 注册接口
 // 当用户点击注册按钮时，调用该接口
 // 注册失败显示错误信息，注册成功跳转到登录页面
-function API_register() {
-    const usernameInput = document.getElementsByName('username')[0];
-    const passwordInput = document.getElementsByName('password')[0];
-    // 预留方案，如果有email或者二次密码
-    // const email = document.getElementsByName('email')[0];
-    // const password_2 = document.getElementsByName('password2')[0];
+function API_register(username=null, password=null) {
+    if (username == null || password == null) {
+        const usernameInput = document.getElementsByName('username')[0];
+        const passwordInput = document.getElementsByName('password')[0];
+        // 预留方案，如果有email或者二次密码
+        // const email = document.getElementsByName('email')[0];
+        // const password_2 = document.getElementsByName('password2')[0];
 
-    // 验证用户输入的用户名是否已被注册
+        // 验证用户输入的用户名是否已被注册
 
-    const username = usernameInput.value;
-    const password = passwordInput.value;
-
+        username = usernameInput.value;
+        password = passwordInput.value;
+    }
     // 验证用户名是否已被注册
     let UserList = localStorage.getItem('UserList');  // 获取本地存储的用户列表
+    if (UserList === null) {
+        UserList = [];  // 如果UserList没有被存储过，初始化为一个空数组
+    } else {
+        UserList = JSON.parse(UserList);  // 将字符串解析为数组
+    }
+
     for (let i = 0; i < UserList.length; i++) {
         if (UserList[i].username == username) {  // 注册失败
             API_dialog('用户名已被注册');  // 可以采用直接显示在用户名输入框的错误提示信息
-            return;
+            return false;
         }
     }
     /* 注册成功 */
@@ -227,31 +236,46 @@ function API_register() {
         username: username,
         password: password
     };
-    UserList.push(user);
+
+    UserList.push(user);  // 直接添加对象到数组中
     localStorage.setItem('UserList', JSON.stringify(UserList));
     localStorage.setItem("CurrentUser", JSON.stringify(user));  // 存储当前登录用户信息到本地存储中
-
+    return true;
     // 跳转到登录页面
-    window.location.href = '../WebContent/user.html';
+    // window.location.href = '../WebContent/user.html';
 }
 
 // 登录接口
 // 当用户点击登录按钮时，调用该接口
 // 登录失败时显示错误信息，返回null
-function API_login() {
-    const usernameInput = document.getElementsByName('username')[0];
-    const passwordInput = document.getElementsByName('password')[0];
+function API_login(username=null, password=null, showWelcome=true) {
+    if (username == null || password == null) {
+        const usernameInput = document.getElementsByName('username')[0];
+        const passwordInput = document.getElementsByName('password')[0];
 
-    const username = usernameInput.value;
-    const password = passwordInput.value;
+        username = usernameInput.value;
+        password = passwordInput.value;
+    }
     // 验证用户名和密码是否匹配
     let UserList = localStorage.getItem('UserList');  // 获取本地存储的用户列表
-    for (let i = 0; i < UserList.length; i++) {
-        if (UserList[i].username == username && UserList[i].password == password) {  // 登录成功
-            API_dialog('登录成功');
-            localStorage.setItem("CurrentUser", JSON.stringify(UserList[i]));  // 存储当前登录用户信息到本地存储中
-            return true;
+    if (UserList === null) {
+        UserList = [];  // 如果UserList没有被存储过，初始化为一个空数组
+    } else {
+        UserList = JSON.parse(UserList);  // 将字符串解析为数组
+    }
+    if (UserList) {  // 判断UserList是否存在
+        for (let i = 0; i < UserList.length; i++) {
+            if (UserList[i].username == username && UserList[i].password == password) {  // 登录成功
+                if (showWelcome) {
+                    API_dialog('登录成功');
+                }
+                localStorage.setItem("CurrentUser", JSON.stringify(UserList[i]));  // 存储当前登录用户信息到本地存储中
+                return true;
+            }
         }
+    } else {
+        UserList = [];
+        localStorage.setItem('UserList', JSON.stringify(UserList));
     }
     /* 登录失败 */  
     API_dialog('用户名或密码错误');  // 可以采用直接显示在用户名输入框的错误提示信息
@@ -264,15 +288,32 @@ function API_logout() {
     localStorage.removeItem("CurrentUser");  // 清除本地存储的当前登录用户信息
     const timerForCheckLogin = setInterval(function() {
         checkLoginState(timerForCheckLogin);  // 重新检查登录状态
-    }, 1000);
+    }, 500);
 }
 
 // 跳转到指定页面接口
 // page: 要跳转的页面路径，如果传入空字符串则跳转到首页(../WebContent/index.html)
 // page: string  (格式："../WebContent/你要跳转的页面.html")
-function API_jumpToPage(page="../WebContent/index.html") {
-    // 采用伪无刷跳转
-    window.location.href = page;
+function API_jumpToPage(page="../WebContent/index.html", data=null, data_name="", flag=false) {
+    if (data != null && data_name != "") {
+        sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
+    }
+    if (flag) {
+        // 新增页面
+        window.open(page, "_blank");
+    } else {
+        window.location.href = page;
+    }
+    
+}
+
+// 获取sessionStorage中的数据接口
+// 返回sessionStorage中的数据，如果没有则返回null
+function API_parseStoredData(data_name="display_good") {
+    const data = sessionStorage.getItem(data_name);
+    if (data) {
+        return JSON.parse(data);
+    }
 }
 
 // 搜索接口
@@ -312,8 +353,14 @@ function API_addToCart(id) {
     }
     // 向购物车中添加商品
     const user = JSON.parse(localStorage.getItem("CurrentUser"));
-    const cart = user.cart;
+    var cart = user.cart;
+    if (!cart) {
+        cart = [];
+        user["cart"] = cart;
+    }
     cart.push(id);
+    user.cart = cart;
+    localStorage.setItem("CurrentUser", JSON.stringify(user));
     return true;
 }
 
@@ -326,7 +373,7 @@ function API_removeFromCart(id) {
     }
     // 从购物车中移除商品
     const user = JSON.parse(localStorage.getItem("CurrentUser"));
-    const cart = user.cart;
+    var cart = user.cart;
     for (let i = 0; i < cart.length; i++) {
         if (cart[i] == id) {
             cart.splice(i, 1);
@@ -340,9 +387,9 @@ function API_removeFromCart(id) {
 // 返回对应商品的详细信息的字典，如果没有则返回null
 function API_parseGoodId(id) {
     for (let key of goods_item) {
-        for (let i = 0; i < goods_data[key].length; i++) {
-            if (goods_data[key][i].id == id) {
-                return goods_data[key][i];
+        for (let i = 0; i < goods_data[key].data.length; i++) {
+            if (goods_data[key].data[i].id == id) {
+                return goods_data[key].data[i];
             }
         }
     }
@@ -443,7 +490,7 @@ function API_showGoods(display_goods, GoodContainer) {
         let good = display_goods[i];
         GoodContainer.children[row].innerHTML += `
         <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
-            <div class="images">
+            <div class="images" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${good.id}, 'display_good', true)">
                 <img src="${good.image_url}" alt="">
             </div>
             <div class="content">
@@ -457,4 +504,15 @@ function API_showGoods(display_goods, GoodContainer) {
 
 function API_resetGetGoodsIndex() {
     getGoods_index = 0;
+}
+
+function API_getIdByName(name) {
+    for (let key of goods_item) {
+        for (let i = 0; i < goods_data[key].data.length; i++) {
+            if (goods_data[key].data[i].name == name) {
+                return goods_data[key].data[i].id;
+            }
+        }
+    }
+    return null;
 }
