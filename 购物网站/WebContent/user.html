@@ -7,6 +7,7 @@
     <title>登录/注册</title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="user.css"> 
+    <script src="../JavaResource/main.js"></script>
 </head>
 <body>
     <div class="container">
@@ -14,8 +15,8 @@
         <div id="login-form" class="form">
              <h2>登录</h2>
              <form id="login">
-                <input type="text" id="login-username" placeholder="用户名" required>
-                <input type="password" id="login-password" placeholder="密码" required>
+                <input type="text" id="login-username" placeholder="用户名" required maxlength="20">
+                <input type="password" id="login-password" placeholder="密码" required maxlength="20">
                 <br>
                 <button type="submit">登录</button>
              </form>
@@ -48,38 +49,42 @@
          // 切换登录和注册表单
         document.getElementById('show-register').addEventListener(
             'click', function (e) {
-                 e.preventDefault()
-                 document.getElementById('login-form').classList.add('hidden')
-                 document.getElementById('register-form').classList.remove('hidden')
+                 e.preventDefault();
+                 document.getElementById('login-form').classList.add('hidden');
+                 document.getElementById('register-form').classList.remove('hidden');
                 })
 
         document.getElementById('show-login').addEventListener(
              'click', function (e) {
-                 e.preventDefault()
-                 document.getElementById('register-form').classList.add('hidden')
-                 document.getElementById('login-form').classList.remove('hidden')
+                 e.preventDefault();
+                 document.getElementById('register-form').classList.add('hidden');
+                 document.getElementById('login-form').classList.remove('hidden');
                 })
 
         // 注册表单提交
         document.getElementById('register').addEventListener(
              'submit', function (e) {
-                 e.preventDefault()
-                 const username = document.getElementById('register-username').value
-                 const password = document.getElementById('register-password').value
-                 const confirmPassword = document.getElementById('confirm-password').value
+                e.preventDefault()
+                const username = document.getElementById('register-username').value;
+                const password = document.getElementById('register-password').value;
+                const confirmPassword = document.getElementById('confirm-password').value;
 
-                 // 检查密码是否一致
-                 if (password !== confirmPassword) {
-                    alert('两次输入的密码不一致，请重新输入！')
-                    return
-                 }
-
-                 // 模拟注册成功
-                 alert(`注册成功！用户名：${username}`)
-                 document.getElementById('register').reset()
-                 document.getElementById('register-form').classList.add('hidden')
-                 document.getElementById('login-form').classList.remove('hidden')
-                })
+                // 检查密码是否一致
+                if (password !== confirmPassword) {
+                    API_dialog('两次输入的密码不一致，请重新输入！', 1500);
+                    return;
+                } else {
+                    if (API_register(username, password)) {
+                        API_dialog(`注册成功！用户名：${username}`, 1500);
+                    }
+                }
+                
+                // 模拟注册成功
+                // alert(`注册成功！用户名：${username}`);
+                // document.getElementById('register').reset();
+                // document.getElementById('register-form').classList.add('hidden');
+                // document.getElementById('login-form').classList.remove('hidden');
+            });
 
         // 登录表单提交
         document.getElementById('login').addEventListener('submit', function (e) {
@@ -87,24 +92,29 @@
             const username = document.getElementById('login-username').value
             const password = document.getElementById('login-password').value
             // 模拟登录成功
-            alert(`登录成功！欢迎回来，${username}`)
-            document.getElementById('login').reset()
-            const WelcomeMsg = document.querySelector('#user-home h2');
-            const LoginOutBtn = document.querySelector('#user-home button');
-            LoginForm.style.display = 'none';
-            // 显示用户主页
-            WelcomeMsg.style.display = 'block';
-            LoginOutBtn.style.display = 'block';
-            document.getElementById('welcome-username').textContent = username
+            if (API_login(username, password, false)) {
+                API_dialog(`登录成功！欢迎回来，${username}`, 1500);
+                setTimeout(function() {
+                    API_jumpToPage("../WebContent/index.html");
+                }, 1500);
+            }
+            // document.getElementById('login').reset()
+            // const WelcomeMsg = document.querySelector('#user-home h2');
+            // const LoginOutBtn = document.querySelector('#user-home button');
+            // LoginForm.style.display = 'none';
+            // // 显示用户主页
+            // WelcomeMsg.style.display = 'block';
+            // LoginOutBtn.style.display = 'block';
+            // document.getElementById('welcome-username').textContent = username
         })
 
         //退出登录
         document.getElementById('logout').addEventListener('click', function(e){
-            e.preventDefault()
+            e.preventDefault();
             //返回登录页面(TODO)
-            document.getElementById('user-home').classList.add('hidden')
-            document.getElementById('login-form').classList.remove('hidden')
-            alert('已退出登录')
+            document.getElementById('user-home').classList.add('hidden');
+            document.getElementById('login-form').classList.remove('hidden');
+            alert('已退出登录');
         })
     </script>
 </body>
