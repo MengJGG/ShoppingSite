@@ -371,7 +371,6 @@
                 for (let i = 0; i < 4; i++) {
                     recommendItems.innerHTML += `
                     <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
-                        <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
                         <div class="msg">
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
@@ -384,13 +383,11 @@
                         <br>
                         <div class="info">
                             <span class="name">${recommend_goods[loop][i].name}</span>
-                            <span class="price">￥${recommend_goods[loop][i].price}</span>
+                            <span class="price">${recommend_goods[loop][i].price}</span>
                         </div>
                     </div>`;
                 }
 
-
-                const BingoBtns = document.querySelectorAll('.recommend-container .recommend_items .item .bingo-icon');
                 const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
                 const ChangeBtn = document.querySelector('.recommend-container .change_btn');
                 ChangeBtn.addEventListener('click', function() {
@@ -411,11 +408,9 @@
                     setTimeout(() => {
                         // 删除items所有子元素 items: NodeList
                         recommendItems.innerHTML = '';
-                        
                         for (let i = 0; i < goods.length; i++) {
                             recommendItems.innerHTML += `
                             <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
-                                <img src="../Resource/Img/system/bingo_ico.png" data-ind="0" alt="已购入" class="bingo-icon">
                                 <div class="msg">
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
@@ -445,20 +440,11 @@
                             btn.style.display = 'none';
                             // 获取btn的data-ind
                             const index = parseInt(btn.getAttribute('data-ind'));
-                            BingoBtns[index].style.display = 'block';
                             API_dialog("加入成功");
                         }
                     });
                 });
-                
-                BingoBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        btn.style.display = 'none';
-                        // 获取btn的data-ind
-                        const index = parseInt(btn.getAttribute('data-ind'));
-                        BuyBtns[index].style.display = 'block';
-                    });
-                });
+
             </script>
         </div>
         <!-- 系列展示 -->
