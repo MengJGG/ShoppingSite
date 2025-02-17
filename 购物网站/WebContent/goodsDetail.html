@@ -4,111 +4,269 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>xxxx商品</title>
-    <script>
-        // 获取商品名称，并添加到页面标题
-        document.addEventListener('DOMContentLoaded', function () {
-            const productTitle = document.querySelector('.product-title').textContent;
-            document.title = productTitle;
-        });
-    </script>
+    <title>商品详情</title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="goodsDetail.css">
+    <script src="../JavaResource/main.js"></script>
 </head>
 
 <body>
-    <header>
-        <div class="logo"></div>
-        <!-- 模拟导航栏 -->
-        <nav>
-            <a href="index.html">首页</a>
-            <a href="#">吉他</a>
-            <a href="#">音响</a>
-            <a href="#">美食</a>
-        </nav>
-    </header>
-    <!-- 头部区域 -->
-    <header>
-        <div class="contact-buttons">
-            <button class="contact-btn">联系客服</button>
-            <button class="enter-store-btn">进入店铺</button>
-        </div>
-    </header>
-    <!-- 主体内容区域 -->
-    <main>
-        <div class="product-container">
-            <div class="product-image-gallery">
-                <img src="../Resource/Img/food/20.jpeg" alt="主商品图" class="main-product-img">
+    <div class="sky-banner" style="cursor: pointer;"></div>
+    <!-- 顶部导航栏 -->
+    <div class="top-container">
+        <span class="main_logo">LUXEHARMONY</span>
+        <!-- 导航栏 -->
+        <div class="top_guide_nav" id="top_drop_menu-container">
+            <div class="header" onclick="API_jumpToPage('../WebContent/index.html')">首页
             </div>
-            <div class="product-details">
-                <h2 class="product-title">非常无敌巨好吃的风味三明治</h2>
-                <div class="price-info">
-                    <span class="after-coupon-price">券后￥169</span>
-                    <span class="before-coupon-price">优惠前￥180</span>
-                    <span class="sold-num">已售10w+</span>
-                    <div class="red-packet-info">
-                        <span>新春开门红</span>
-                        <span>2月23日24点结束</span>
-                    </div>
-                </div>
-                <div class="discount-info">
-                    <span>每300减40</span>
-                    <span>店铺券满20减2</span>
-                </div>
-                <div class="delivery-info">
-                    <span>配送：多仓发货 至 湖北 武汉</span>
-                    <span>快递：免运费 预计明天发货 | 承诺48小时内发货</span>
-                </div>
-                <div class="warranty-info">
-                    <span>保障：大促价保7天无理由退货 极速退款</span>
-                </div>
-                <div class="color-options">
-                    <span>颜色分类：</span>
-                    <input type="radio" id="option1" name="color" checked>
-                    <label for="option1">三明治原味</label>
-                    <input type="radio" id="option2" name="color">
-                    <label for="option2">三明治香辣味</label>
-                    <input type="radio" id="option3" name="color">
-                    <label for="option3">三明治黑椒味</label>
-                    <input type="radio" id="option4" name="color">
-                    <label for="option4">三明治奶酪味</label>
-                </div>
-                <div class="quantity-control">
-                    <span>数量：</span>
-                    <button class="minus-btn">-</button>
-                    <input type="number" value="1" class="quantity-input">
-                    <button class="plus-btn">+</button>
-                    <span class="stock-info">有货</span>
-                </div>
-                <div class="action-buttons">
-                    <button class="coupon-buy-btn">领券购买</button>
-                    <button class="add-cart-btn">加入购物车</button>
-                </div>
+            <div class="guitar" onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他
+            </div>
+            <div class="audio" onclick="API_dialog('暂未开放')">音响
+            </div>
+            <div class="food">美食
+            </div>
+            <div class="racket">羽毛球拍
             </div>
         </div>
-    </main>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // 获取加入购物车按钮元素
-            const addCartBtn = document.querySelector('.add-cart-btn');
-            // 为按钮添加点击事件监听器
-            addCartBtn.addEventListener('click', function () {
-                // 跳转到购物车界面，这里购物车界面的 URL 是 cart.html
-                window.location.href = 'cart.html';
-            });
-        });
-    </script>
-    <div class="product-reviews">
-        <h2>用户评价</h2>
-        <div class="review">
-            <p class="review-author">用户 A</p>
-            <p class="review-content">商品质量很好，非常满意！</p>
+        <div class="search-container">
+
         </div>
-        <div class="review">
-            <p class="review-author">用户 B</p>
-            <p class="review-content">物流速度很快，值得购买！</p>
+        <div class="search-icon">
+            <img src="../Resource/Img/system/clear_ico.png" id="clear" alt="X">
+            <input type="text" id="search_input" placeholder="搜索...">
+            <img src="../Resource/Img/system/search_ico.png" id="search" alt="搜索">
         </div>
 
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="0">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">按类别选购</span>
+                <a>吉他Yonex</a>
+                <a>音响</a>
+                <a>美食</a>
+                <a>羽毛球拍</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="1">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <a>Martin</a>
+                <a>Fender</a>
+                <a>Taylor</a>
+                <a>Yamaha</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="2">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <a>尤尼克斯Yonex</a>
+                <a>李宁LI-NING</a>
+                <a>威克多VICTORY</a>
+                <br>
+            </div>
+            <div class="drop_right-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门推荐</span>
+                <a>ARCSABER 11 PRO</a>
+                <a>ARCSABER 7 PRO3</a>
+                <a>NANOFLARE 700 PRO</a>
+                <a>ASTROX 88S PRO</a>
+                <a>ASTROX 100 ZZ</a>
+                <a>ASTROX 99 PRO</a>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="3">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">牛排系列</span>
+                <a>惠灵顿牛排</a>
+                <a>烟熏牛排</a>
+                <a>番茄牛排</a>
+                <a>法式羊排</a>
+                <a>战斧牛排</a>
+                <a>西芹椒盐牛排</a>
+                <a>菲力牛排</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐菜品</span>
+                <img src="../Resource/Img/food/1.jpg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+        <div class="top_drop_menu" id="top_drop_menu-container" data-index="4">
+            <div class="drop_left-content" id="drop_content">
+                <br>
+                <span id="menu_title" style="color: #333333;">热门品牌</span>
+                <a>尤尼克斯Yonex</a>
+                <a>李宁LI-NING</a>
+                <a>威克多VICTORY</a>
+                <br>
+            </div>
+            <div class="img-container">
+                <br>
+                <span id="menu_title" style="color: #333333;">推荐商品</span>
+                <img src="../Resource/Img/food/11.jpeg" alt="" onclick=""> <!--跳转到详细页面-->
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- 用于显示商品详情的容器 -->
+    <div id="product-detail"></div>
+
+    <script>
+        function getProductIdFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('id');
+        }
+
+        function APIparsestoredData(dataname = "") {
+            const data = sessionStorage.getItem(dataname);
+            if (data) {
+                return JSON.parse(data);
+            }
+        }
+
+        const productId = getProductIdFromURL();
+        if (productId) {
+            // 假设所有商品数据都在一个 JSON 文件中，根据实际情况修改文件路径
+            fetch('../Resource/JSONData')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('网络响应异常');
+                    }
+                    return response.json();
+                })
+                .then(allProductsData => {
+                    const product = allProductsData.data.find(item => item.id === parseInt(productId));
+                    if (product) {
+                        const productDetail = document.getElementById('product-detail');
+                        productDetail.innerHTML = `
+                               <h2>${product.name}</h2>
+                               <p>价格：${product.price}</p>
+                               <img src="${product.image_url}" alt="${product.name}" width="200">
+
+                               <!-- 添加购物车按钮 -->
+                               <button id="add-to-cart" onclick="API_jumpToPage('cart.html')">加入购物车</button>
+                           `;
+                    } else {
+                        console.error('未找到对应的商品');
+                    }
+                })
+                .catch(error => {
+                    console.error('请求数据时出现错误:', error);
+                });
+        } else {
+            console.error('未获取到商品 ID');
+        }
+    </script>
+
+
+    <!-- 底部信息栏 -->
+    <br>
+    <br>
+    <div class="bottom-container">
+        <br>
+        <div class="logo">LUXEHARMONY</div>
+        <span class="quick-msg">立即订阅LuxeHarmony官方时讯快报，抢先获取最新商品资讯</span>
+        <!-- 输入框 -->
+        <div class="input-container">
+            <input type="text" placeholder="请在此处输入您的邮箱地址..." maxlength="30" autocomplete="off">
+            <span id="msg">使用订阅服务，即表示您同意我们向您的邮箱地址发送LuxeHarmony官方时讯快报，</span>
+            <span id="msg">并同意我们对您的个人信息的使用和保护。</span>
+            <button>订阅</button>
+
+        </div>
+        <br>
+        <div class="help_main-container">
+            <div class="left" id="items">
+                <a href="#">联系我们</a>
+                <a href="#">付款方式</a>
+                <a href="#">配送说明</a>
+                <a href="#">退货与换货</a>
+            </div>
+            <div class="right" id="items">
+                <a href="#">关于我们</a>
+                <a href="#">加入我们</a>
+            </div>
+        </div>
+
+        <div class="copyright_msg-container">
+            <span>使用条款</span>
+            <span>隐私政策</span>
+            <span>版本声明</span>
+        </div>
+        <div class="copyright">copyright © 2025 LUXEHARMONY. All rights reserved.</div>
+    </div>
+    <script>
+        // 当有用户输入时，才显示按钮
+        const input = document.querySelector('.input-container input');
+        const button = document.querySelector('.input-container button');
+        const msg = document.querySelectorAll('.input-container #msg');
+        const helpContainer = document.querySelector('.help_main-container');
+        input.addEventListener('input', function () {
+            if (input.value.trim() != '') {
+                // 从上方慢慢出现
+                button.style.display = 'block';
+                msg.forEach(it => {
+                    it.style.display = 'block';
+                    it.style.animation = 'fade-in 0.3s ease 1 forwards';
+                    it.style.transform = 'translateY(0)';
+                });
+                button.style.animation = 'fade-in 0.3s ease 1 forwards';
+                // helpContainer缓慢下降
+                helpContainer.style.transform = 'translateY(-10%)';
+                // 判断输入的内容是否为邮箱
+                const email = input.value.trim();
+                const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (emailRegex.test(email)) {
+                    button.disabled = false;
+                    button.style.cursor = 'pointer';
+                    // 悬浮时按钮变色
+                    button.addEventListener('mouseover', function () {
+                        button.style.backgroundColor = '#1f1f1f';
+                    });
+                    button.addEventListener('mouseout', function () {
+                        button.style.backgroundColor = '#111111';
+                    });
+                    button.style.backgroundColor = '#111111';
+                } else {
+                    button.disabled = true;
+                    button.style.cursor = 'default';
+                    button.style.backgroundColor = 'gray';
+                }
+
+            } else {
+                msg.forEach(it => {
+                    it.style.animation = 'fade-out 0.3s ease 1 forwards';
+                    it.style.transform = 'translateY(-10%)';
+                });
+                button.style.animation = 'fade-out 0.3s ease 1 forwards';
+                helpContainer.style.transform = 'translateY(-40%)';
+            }
+        });
+    </script>
 </body>
 
 </html>
