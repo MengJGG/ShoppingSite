@@ -196,7 +196,7 @@ body {
     font-size: 12px;
     flex-direction: column;
     row-gap: 1.1rem;
-    padding-left: 8%;
+    padding-left: 10%;
     text-align: left;
     color: var(--dark-text);
 }
@@ -242,7 +242,7 @@ body {
 .top_drop_menu .img-container {
     display: flex;
     flex-direction: column;
-    margin-left: 35%;
+    margin-left: 30%;
 }
 
 .top_drop_menu .img-container span {

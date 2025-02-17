@@ -221,6 +221,15 @@
                 const index = Array.from(topGuideNav.children).indexOf(e.target);
                 show(index);
             });
+            // topDropMenus.forEach(topDropMenu => {
+            //     topDropMenu.addEventListener('mouseleave', function() {
+            //         topDropMenu.style.display = 'none';
+            //     });
+            //     topDropMenuContainer.addEventListener('mouseenter', function() {
+            //         topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+            //         topDropMenu.style.display = 'flex';
+            //     });
+            // });
             topDropMenus.forEach(topDropMenu => {
                 topDropMenu.addEventListener('mouseleave', function() {
                     show(-1);

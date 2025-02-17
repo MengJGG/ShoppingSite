@@ -270,9 +270,20 @@ function API_logout() {
 // 跳转到指定页面接口
 // page: 要跳转的页面路径，如果传入空字符串则跳转到首页(../WebContent/index.html)
 // page: string  (格式："../WebContent/你要跳转的页面.html")
-function API_jumpToPage(page="../WebContent/index.html") {
-    // 采用伪无刷跳转
+function API_jumpToPage(page="../WebContent/index.html", data=null, data_name="") {
+    if (data != null && data_name != "") {
+        sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
+    }
     window.location.href = page;
+}
+
+// 获取sessionStorage中的数据接口
+// 返回sessionStorage中的数据，如果没有则返回null
+function API_parseStoredData(data_name="") {
+    const data = sessionStorage.getItem(data_name);
+    if (data) {
+        return JSON.parse(data);
+    }
 }
 
 // 搜索接口
