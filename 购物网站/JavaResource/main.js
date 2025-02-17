@@ -353,8 +353,14 @@ function API_addToCart(id) {
     }
     // 向购物车中添加商品
     const user = JSON.parse(localStorage.getItem("CurrentUser"));
-    const cart = user.cart;
+    var cart = user.cart;
+    if (!cart) {
+        cart = [];
+        user["cart"] = cart;
+    }
     cart.push(id);
+    user.cart = cart;
+    localStorage.setItem("CurrentUser", JSON.stringify(user));
     return true;
 }
 
@@ -367,7 +373,7 @@ function API_removeFromCart(id) {
     }
     // 从购物车中移除商品
     const user = JSON.parse(localStorage.getItem("CurrentUser"));
-    const cart = user.cart;
+    var cart = user.cart;
     for (let i = 0; i < cart.length; i++) {
         if (cart[i] == id) {
             cart.splice(i, 1);
