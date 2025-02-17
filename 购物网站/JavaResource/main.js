@@ -309,7 +309,7 @@ function API_jumpToPage(page="../WebContent/index.html", data=null, data_name=""
 
 // 获取sessionStorage中的数据接口
 // 返回sessionStorage中的数据，如果没有则返回null
-function API_parseStoredData(data_name="") {
+function API_parseStoredData(data_name="display_good") {
     const data = sessionStorage.getItem(data_name);
     if (data) {
         return JSON.parse(data);
@@ -484,7 +484,7 @@ function API_showGoods(display_goods, GoodContainer) {
         let good = display_goods[i];
         GoodContainer.children[row].innerHTML += `
         <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
-            <div class="images">
+            <div class="images" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${good.id}, 'display_good', true)">
                 <img src="${good.image_url}" alt="">
             </div>
             <div class="content">
@@ -498,4 +498,15 @@ function API_showGoods(display_goods, GoodContainer) {
 
 function API_resetGetGoodsIndex() {
     getGoods_index = 0;
+}
+
+function API_getIdByName(name) {
+    for (let key of goods_item) {
+        for (let i = 0; i < goods_data[key].data.length; i++) {
+            if (goods_data[key].data[i].name == name) {
+                return goods_data[key].data[i].id;
+            }
+        }
+    }
+    return null;
 }
