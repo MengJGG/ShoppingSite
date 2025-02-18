@@ -142,15 +142,18 @@ function fetchData(path) {
 // 返回对应商品的详细信息的列表，如果没有则返回空列表
 function parseGoodIdList(id_list) {
     let result = [];
-    for (let key of goods_item) {
-        for (let i = 0; i < goods_data[key].length; i++) {
-            if (id_list.includes(goods_data[key][i].id)) {
-                result.push(goods_data[key][i]);
+    goods_data = JSON.parse(localStorage.getItem("goods_data"));
+    for (let key of Object.keys(goods_item)) { // 使用 Object.keys() 获取键
+        for (let i = 0; i < goods_data[key].data.length; i++) {
+            let id = "" + goods_data[key].data[i].id;
+            if (id_list.includes(id)) {
+                result.push(goods_data[key].data[i]);
             }
         }
     }
     return result;
 }
+
 
 // 检查登录状态
 function checkLoginState(timer=null) {
