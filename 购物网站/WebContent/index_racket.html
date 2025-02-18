@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>美食-LuxeHarmony</title>
+    <title>吉他-LuxeHarmony</title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="index_guitar.css">
@@ -264,9 +264,9 @@
         <!-- 轮播图 -->
         <div class="carousel-container">
             <div class="carousel-track">
-                <div class="carousel-item"><img src="../Resource/Img/food/30.jpg" alt=""></div>
-                <div class="carousel-item"><img src="../Resource/Img/food/38.jpeg" alt=""></div>
-                <div class="carousel-item"><img src="../Resource/Img/food/41.jpeg" alt=""></div>
+                <div class="carousel-item"><img src="https://www.yonex.cn/public/uploads/20230904/bde83ff23ddde196fe2b3098ad993748.jpg" alt=""></div>
+                <div class="carousel-item"><img src="https://www.yonex.cn/public/uploads/20220224/3d37d74fd66ed1d06c00fbf35e2ba6e6.jpg" alt=""></div>
+                <div class="carousel-item"><img src="https://www.yonex.cn/public/uploads/20240819/d0943f4dc3d450c38e495de529cdd74f.jpg" alt=""></div>
             </div>
             
             <button class="carousel-button button-prev">❮</button>
@@ -358,11 +358,14 @@
             </div>
             
             <script>
-                let recommend_items = ["../Resource/JSONData/food/xican.json"];
+                let recommend_items = ["../Resource/JSONData/racket/Yonex/gongjianxilie.json",
+                    "../Resource/JSONData/racket/Yonex/jiguangxilie.json",
+                    "../Resource/JSONData/racket/Yonex/tianfuxilie.json",
+                ];
                 let recommend_goods = [];
                 let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
                 // 从后端获取商品数据
-                recommend_goods.push(API_getGoods(1, recommend_items, 4));  // 获取的商品添加到recommend_goods
+                recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
                 for (let i = 0; i < 4; i++) {
                     recommendItems.innerHTML += `
@@ -389,7 +392,7 @@
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
                     loop++;  // 循环数组+1
-                    let goods = API_getGoods(4, recommend_items, 4);
+                    let goods = API_getGoods(1, recommend_items);
                     if (goods.length != 0) {
                         recommend_goods.push(goods);
                     }
@@ -443,6 +446,38 @@
 
             </script>
         </div>
+        <!-- 系列展示 -->
+        <span id="title">热门系列</span>
+        <div class="series-container">
+            <div class="box">
+                <div class="images">
+                    <img src="https://www.yonex.cn/public/uploads/20220224/3d37d74fd66ed1d06c00fbf35e2ba6e6.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>弓箭系列</h2>
+                    <p>精准控制</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="images">
+                    <img src="https://www.yonex.cn/public/uploads/20240819/d0943f4dc3d450c38e495de529cdd74f.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>极光系列系列</h2>
+                    <p>速度与敏捷</p>
+                </div>
+            </div>
+            <div class="box">
+                <div class="images">
+                    <img src="https://www.yonex.cn/public/uploads/20230904/bde83ff23ddde196fe2b3098ad993748.jpg" alt="">
+                </div>
+                <div class="content">
+                    <h2>天斧系列</h2>
+                    <p>力量与进攻性</p>
+                </div>
+            </div>
+        </div>
+        <br>
         <!-- 商品主要内容 4*5 -->
         <span id="title">商品展览</span>
         <br>
@@ -455,18 +490,33 @@
         <!-- 显示更多 -->
         <div class="more_btn-container" style="cursor: pointer;">显示更多</div>
         <script>
-            var category_items = ["../Resource/JSONData/food/xican.json"];
+            var category_items = ["../Resource/JSONData/racket/Yonex/gongjianxilie.json",
+                    "../Resource/JSONData/racket/Yonex/jiguangxilie.json",
+                    "../Resource/JSONData/racket/Yonex/tianfuxilie.json"];
+
             const GoodContainer = document.querySelector('.good_main-container');
+            const SeriesContainer = document.querySelector('.series-container');
             const GoodContent = document.querySelectorAll('.good_main-container .good-content');
+            SeriesContainer.addEventListener('click', function(e) {
+                // 清空good-content
+                GoodContent.forEach(content => {
+                    content.innerHTML = '';
+                });
+                const index = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);  // 获取系列索引
+                category_paths = [category_items[index]];
+                API_resetGetGoodsIndex();  // 重置商品索引
+                let display_goods = API_getGoods(20, category_paths);
+                API_showGoods(display_goods, GoodContainer);
+            });
             // TODO: 异步获取商品信息
-            let display_goods = API_getGoods(20, category_items, 20);  // display_goods: array of goods objects
+            let display_goods = API_getGoods(5, category_items);  // display_goods: array of goods objects
             // 显示商品信息
             API_showGoods(display_goods, GoodContainer);
 
             // 显示更多
             const moreBtn = document.querySelector('.more_btn-container');
             moreBtn.addEventListener('click', function() {
-                let show_more_goods = API_getGoods(20, category_items, 20);  // show_more_goods: array
+                let show_more_goods = API_getGoods(5, category_items, 20);  // show_more_goods: array
                 if (show_more_goods.length == 0) {
                     API_dialog("到底了~");
                 }

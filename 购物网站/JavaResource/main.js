@@ -319,18 +319,40 @@ function API_parseStoredData(data_name="display_good") {
 // 搜索接口
 // 当用户输入搜索内容时，调用该接口, text为搜索内容 text: string
 // 跳转到搜索结果的页面
-function API_search(text) {
-    if (text == '') {
+function API_search(keyword) {
+    const keyword = localStorage.getItem("search_keyword");
+    if (keyword == null) {
         return;
-    }  // TODO: 优化搜索功能，实现模糊搜索
-    for (let key of goods_item) {
-        for (let i = 0; i < goods_data[key].length; i++) {
-            if (goods_data[key][i].name.includes(text)) {
-                API_jumpToPage(`../WebContent/search_result.html?id=${goods_data[key][i].id}`);
-                return;
-            }
-        }
     }
+    let goods_data = JSON.parse(localStorage.getItem("goods_data"));
+    if (!keyword) {
+        return goods_data; // 如果没有关键词，返回所有商品
+    }
+    
+    // 将关键词转换为小写（假设名称也需要比较大小写）
+    keyword = keyword.toLowerCase();
+    
+    return goods_data.filter(function(good) {
+        const name = good.name || ''; // 获取商品名称，如果没有则使用空字符串
+        // 检查名称是否包含关键词（不区分大小写）
+        return name.toLowerCase().includes(keyword);
+    });
+}
+
+function API_sortGoodsByPrice(goodsList, order = 'asc') {
+    // 复制商品列表以避免修改原数组
+    const sortedList = [...goodsList];
+    
+    // 使用sort()方法对价格进行排序
+    sortedList.sort((a, b) => {
+        if (order === 'desc') {  // 降序排列（从高到低）
+            return b.price - a.price;
+        } else {  // 升序排列（默认，从低到高）
+            return a.price - b.price;
+        }
+    });
+    
+    return sortedList;
 }
 
 // 检查登录状态接口

@@ -27,9 +27,9 @@
             </div>
             <div class="audio" onclick="API_dialog('暂未开放')">音响
             </div>
-            <div class="food">美食
+            <div class="food" onclick="API_jumpToPage('../WebContent/index_food.html')">美食
             </div>
-            <div class="racket">羽毛球拍
+            <div class="racket" onclick="API_jumpToPage('../WebContent/index_racket.html')">羽毛球拍
             </div>
         </div>
         <div class="search-container">
@@ -100,7 +100,12 @@
                 // 按下回车键，跳转到搜索结果页面
                 if (e.keyCode === 13) {
                     let keyword = searchInput.value;
-                    API_jumpToPage(keyword);
+                    // 如果关键字为空，则不跳转
+                    if (keyword === '') {
+                        return;
+                    }
+                    localStorage.setItem("search_keyword", keyword);
+                    API_jumpToPage('../WebContent/index_search.html');
                 }
             });
             clear.addEventListener('click', function() {
