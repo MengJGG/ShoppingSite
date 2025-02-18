@@ -299,6 +299,63 @@
             </div>
         </div>
     </div>
+    <!-- 底部信息栏 -->
+    <br>
+    <br>
+    <div class="bottom-container">
+        <br>
+        <div class="logo">LUXEHARMONY</div>
+        <span class="quick-msg">立即订阅LuxeHarmony官方时讯快报，抢先获取最新商品资讯</span>
+        <!-- 输入框 -->
+        <div class="input-container">
+            <input type="text" placeholder="请在此处输入您的邮箱地址..." maxlength="30" autocomplete="off">
+            <span id="msg">使用订阅服务，即表示您同意我们向您的邮箱地址发送LuxeHarmony官方时讯快报，</span>
+            <span id="msg">并同意我们对您的个人信息的使用和保护。</span>
+            <button>订阅</button>
+
+        </div>
+        <br>
+        <div class="help_main-container">
+            <div class="left" id="items">
+                <a href="#">联系我们</a>
+                <a href="#">付款方式</a>
+                <a href="#">配送说明</a>
+                <a href="#">退货与换货</a>
+            </div>
+            <div class="right" id="items">
+                <a href="#">关于我们</a>
+                <a href="#">加入我们</a>
+            </div>
+        </div>
+
+        <div class="copyright_msg-container">
+            <span>使用条款</span>
+            <span>隐私政策</span>
+            <span>版本声明</span>
+        </div>
+        <div class="copyright">copyright © 2025 LUXEHARMONY. All rights reserved.</div>
+    </div>
+    <script>
+        // 当有用户输入时，才显示按钮
+        const input = document.querySelector('.input-container input');
+        const button = document.querySelector('.input-container button');
+        const msg = document.querySelectorAll('.input-container #msg');
+        const helpContainer = document.querySelector('.help_main-container');
+        input.addEventListener('input', function () {
+            if (input.value.trim() != '') {
+                // 从上方慢慢出现
+                button.style.display = 'block';
+                msg.forEach(it => {
+                    it.style.display = 'block';
+                    it.style.animation = 'fade-in 0.3s ease 1 forwards';
+                    it.style.transform = 'translateY(0)';
+                });
+                button.style.animation = 'fade-in 0.3s ease 1 forwards';
+                // helpContainer缓慢下降
+                helpContainer.style.transform = 'translateY(-10%)';
+            }
+        });
+    </script>
 
     <script>
 
