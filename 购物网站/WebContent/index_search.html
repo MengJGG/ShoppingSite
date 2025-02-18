@@ -278,14 +278,14 @@
             const GoodContent = document.querySelectorAll('.good_main-container .good-content');
             // TODO: 异步获取商品信息
             //let display_goods = API_getGoods(20, category_items, 20);  // display_goods: array of goods objects
-            let display_goods = API_search(localStorage.getItem('search_input'));
+            let display_goods = API_search(localStorage.getItem('search_keyword'));
             // 显示商品信息
             API_showGoods(display_goods, GoodContainer);
 
             // 显示更多
             const moreBtn = document.querySelector('.more_btn-container');
             moreBtn.addEventListener('click', function() {
-                let show_more_goods = API_search(localStorage.getItem('search_input'));  // show_more_goods: array
+                let show_more_goods = API_search(localStorage.getItem('search_keyword'));  // show_more_goods: array
                 if (show_more_goods.length == 0) {
                     API_dialog("到底了~");
                 }

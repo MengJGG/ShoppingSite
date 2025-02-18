@@ -320,11 +320,8 @@ function API_parseStoredData(data_name="display_good") {
 // 当用户输入搜索内容时，调用该接口, text为搜索内容 text: string
 // 跳转到搜索结果的页面
 function API_search(keyword) {
-    const keyword = localStorage.getItem("search_keyword");
-    if (keyword == null) {
-        return;
-    }
-    let goods_data = JSON.parse(localStorage.getItem("goods_data"));
+    let goods_data = localStorage.getItem("goods_data");  // 获取本地存储的商品数据
+    goods_data = JSON.parse(goods_data);  // 将字符串解析为对象
     if (!keyword) {
         return goods_data; // 如果没有关键词，返回所有商品
     }
@@ -337,22 +334,6 @@ function API_search(keyword) {
         // 检查名称是否包含关键词（不区分大小写）
         return name.toLowerCase().includes(keyword);
     });
-}
-
-function API_sortGoodsByPrice(goodsList, order = 'asc') {
-    // 复制商品列表以避免修改原数组
-    const sortedList = [...goodsList];
-    
-    // 使用sort()方法对价格进行排序
-    sortedList.sort((a, b) => {
-        if (order === 'desc') {  // 降序排列（从高到低）
-            return b.price - a.price;
-        } else {  // 升序排列（默认，从低到高）
-            return a.price - b.price;
-        }
-    });
-    
-    return sortedList;
 }
 
 // 检查登录状态接口
