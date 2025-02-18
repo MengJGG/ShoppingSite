@@ -261,188 +261,6 @@
     </script>
     <!-- 主要内容 -->
     <div class="main-container">
-        <!-- 轮播图 -->
-        <div class="carousel-container">
-            <div class="carousel-track">
-                <div class="carousel-item"><img src="../Resource/Img/food/30.jpg" alt=""></div>
-                <div class="carousel-item"><img src="../Resource/Img/food/38.jpeg" alt=""></div>
-                <div class="carousel-item"><img src="../Resource/Img/food/41.jpeg" alt=""></div>
-            </div>
-            
-            <button class="carousel-button button-prev">❮</button>
-            <button class="carousel-button button-next">❯</button>
-            
-            <div class="carousel-indicators"></div>
-        </div>
-        <script>
-            class Carousel {
-                constructor(container) {
-                    this.container = container;
-                    this.track = container.querySelector('.carousel-track');
-                    this.items = Array.from(container.querySelectorAll('.carousel-item'));
-                    this.currentIndex = 0;
-                    this.isAnimating = false;
-                    this.init();  // TODO: 这里需要传入是由哪个主题的页面，从而决定播放什么
-                }
-    
-                init() {
-                    // 创建指示器
-                    this.createIndicators();
-        
-                    // 添加事件监听
-                    container.querySelector('.button-prev').addEventListener('click', () => this.slideToPrev());
-                    container.querySelector('.button-next').addEventListener('click', () => this.slideToNext());
-
-                    // 自动播放
-                    this.startAutoPlay();
-                }
-    
-                createIndicators() {
-                    const indicatorsContainer = this.container.querySelector('.carousel-indicators');
-                    this.items.forEach((_, index) => {
-                        const indicator = document.createElement('div');
-                        indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-                        indicator.addEventListener('click', () => this.slideTo(index));
-                        indicatorsContainer.appendChild(indicator);
-                    });
-                }
-    
-                updateIndicators() {
-                    const indicators = this.container.querySelectorAll('.indicator');
-                    indicators.forEach((indicator, index) => {
-                        indicator.classList.toggle('active', index === this.currentIndex);
-                    });
-                }
-    
-                slideTo(index) {
-                    if (this.isAnimating) return;
-                    
-                    this.currentIndex = (index + this.items.length) % this.items.length;
-                    this.track.style.transform = `translateX(-${this.currentIndex * 100}%)`;
-                    this.updateIndicators();
-                    
-                    this.isAnimating = true;
-                    setTimeout(() => {
-                        this.isAnimating = false;
-                    }, 500);
-                }
-    
-                slideToPrev() {
-                    this.slideTo(this.currentIndex - 1);
-                }
-    
-                slideToNext() {
-                    this.slideTo(this.currentIndex + 1);
-                }
-
-                startAutoPlay(interval = 6000) {
-                    setInterval(() => {
-                        if (!document.hidden) {
-                            this.slideToNext();
-                        }
-                    }, interval);
-                }
-            }
-            // 初始化轮播
-            const container = document.querySelector('.carousel-container');
-            new Carousel(container);
-        </script>
-        <div></div>
-        <!-- 推荐商品 -->
-        <div class="recommend-container">
-            <span class="recommend_title" id="title">新品推荐</span>
-            <span class="change_btn">换一批</span>
-            <br>
-            <div class="recommend_items">
-                
-            </div>
-            
-            <script>
-                let recommend_items = ["../Resource/JSONData/food/xican.json"];
-                let recommend_goods = [];
-                let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
-                // 从后端获取商品数据
-                recommend_goods.push(API_getGoods(1, recommend_items, 4));  // 获取的商品添加到recommend_goods
-                const recommendItems = document.querySelector('.recommend-container .recommend_items');
-                for (let i = 0; i < 4; i++) {
-                    recommendItems.innerHTML += `
-                    <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
-                        <div class="msg">
-                            <span id="s">新品上新</span>
-                            <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
-                        </div>
-                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
-                            <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
-                        </div>
-                        <br>
-                        <br>
-                        <br>
-                        <div class="info">
-                            <span class="name">${recommend_goods[loop][i].name}</span>
-                            <span class="price">${recommend_goods[loop][i].price}</span>
-                        </div>
-                    </div>`;
-                }
-
-                const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
-                const ChangeBtn = document.querySelector('.recommend-container .change_btn');
-                ChangeBtn.addEventListener('click', function() {
-                    // 为每个item添加卡片翻转动画
-                    loop++;  // 循环数组+1
-                    let goods = API_getGoods(4, recommend_items, 4);
-                    if (goods.length != 0) {
-                        recommend_goods.push(goods);
-                    }
-                    if (goods.length === 0) {  // 商品到头了，从头开始
-                        loop = 0;
-                    }
-                    // 更新翻转动画
-                    const items = document.querySelectorAll('.recommend-container .recommend_items .item');
-                    items.forEach(item => {
-                        item.style.animation = 'flip 0.5s ease 1 forwards';
-                    });
-                    setTimeout(() => {
-                        // 删除items所有子元素 items: NodeList
-                        recommendItems.innerHTML = '';
-                        for (let i = 0; i < goods.length; i++) {
-                            recommendItems.innerHTML += `
-                            <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
-                                <div class="msg">
-                                    <span id="s">新品上新</span>
-                                    <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
-                                </div>
-                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
-                                    <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
-                                </div>
-                                <br>
-                                <br>
-                                <br>
-                                <div class="info">
-                                    <span class="name">${recommend_goods[loop][i].name}</span>
-                                    <span class="price">${recommend_goods[loop][i].price}</span>
-                                </div>
-                            </div>`;
-                        }
-                    }, 450);
-                });
-
-                BuyBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 获取其父类的id
-                        const parent = btn.parentNode.parentNode;
-                        const id = parent.getAttribute('data-GoodId');
-                        // 加入到购物车
-                        if (API_addToCart(id)) {
-                            btn.style.display = 'none';
-                            // 获取btn的data-ind
-                            const index = parseInt(btn.getAttribute('data-ind'));
-                            API_dialog("加入成功");
-                        }
-                    });
-                });
-
-            </script>
-        </div>
         <!-- 商品主要内容 4*5 -->
         <span id="title">商品展览</span>
         <br>
@@ -459,14 +277,15 @@
             const GoodContainer = document.querySelector('.good_main-container');
             const GoodContent = document.querySelectorAll('.good_main-container .good-content');
             // TODO: 异步获取商品信息
-            let display_goods = API_getGoods(20, category_items, 20);  // display_goods: array of goods objects
+            //let display_goods = API_getGoods(20, category_items, 20);  // display_goods: array of goods objects
+            let display_goods = API_search(localStorage.getItem('search_keyword'));
             // 显示商品信息
             API_showGoods(display_goods, GoodContainer);
 
             // 显示更多
             const moreBtn = document.querySelector('.more_btn-container');
             moreBtn.addEventListener('click', function() {
-                let show_more_goods = API_getGoods(20, category_items, 20);  // show_more_goods: array
+                let show_more_goods = API_search(localStorage.getItem('search_keyword'));  // show_more_goods: array
                 if (show_more_goods.length == 0) {
                     API_dialog("到底了~");
                 }

@@ -319,18 +319,21 @@ function API_parseStoredData(data_name="display_good") {
 // 搜索接口
 // 当用户输入搜索内容时，调用该接口, text为搜索内容 text: string
 // 跳转到搜索结果的页面
-function API_search(text) {
-    if (text == '') {
-        return;
-    }  // TODO: 优化搜索功能，实现模糊搜索
-    for (let key of goods_item) {
-        for (let i = 0; i < goods_data[key].length; i++) {
-            if (goods_data[key][i].name.includes(text)) {
-                API_jumpToPage(`../WebContent/search_result.html?id=${goods_data[key][i].id}`);
-                return;
-            }
-        }
+function API_search(keyword) {
+    let goods_data = localStorage.getItem("goods_data");  // 获取本地存储的商品数据
+    goods_data = JSON.parse(goods_data);  // 将字符串解析为对象
+    if (!keyword) {
+        return goods_data; // 如果没有关键词，返回所有商品
     }
+    
+    // 将关键词转换为小写（假设名称也需要比较大小写）
+    keyword = keyword.toLowerCase();
+    
+    return goods_data.filter(function(good) {
+        const name = good.name || ''; // 获取商品名称，如果没有则使用空字符串
+        // 检查名称是否包含关键词（不区分大小写）
+        return name.toLowerCase().includes(keyword);
+    });
 }
 
 // 检查登录状态接口
