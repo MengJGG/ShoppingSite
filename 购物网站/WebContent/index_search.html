@@ -94,7 +94,12 @@
                 // 按下回车键，跳转到搜索结果页面
                 if (e.keyCode === 13) {
                     let keyword = searchInput.value;
-                    API_jumpToPage(keyword);
+                    // 如果关键字为空，则不跳转
+                    if (keyword === '') {
+                        return;
+                    }
+                    localStorage.setItem("search_keyword", keyword);
+                    API_jumpToPage('../WebContent/index_search.html', flag=true);
                 }
             });
             clear.addEventListener('click', function() {
@@ -262,7 +267,11 @@
     <!-- 主要内容 -->
     <div class="main-container">
         <!-- 商品主要内容 4*5 -->
-        <span id="title">商品展览</span>
+        <br>
+        <span id="title">的搜索结果</span>
+        <script>
+            document.querySelector('.main-container #title').innerHTML = `"${localStorage.getItem('search_keyword')}"的搜索结果`;
+        </script>
         <br>
         <div class="good_main-container">
             <div class="good-content"></div>
@@ -271,7 +280,6 @@
             <div class="good-content"></div>
         </div>
         <!-- 显示更多 -->
-        <div class="more_btn-container" style="cursor: pointer;">显示更多</div>
         <script>
             var category_items = ["../Resource/JSONData/food/xican.json"];
             const GoodContainer = document.querySelector('.good_main-container');
@@ -281,16 +289,6 @@
             let display_goods = API_search(localStorage.getItem('search_keyword'));
             // 显示商品信息
             API_showGoods(display_goods, GoodContainer);
-
-            // 显示更多
-            const moreBtn = document.querySelector('.more_btn-container');
-            moreBtn.addEventListener('click', function() {
-                let show_more_goods = API_search(localStorage.getItem('search_keyword'));  // show_more_goods: array
-                if (show_more_goods.length == 0) {
-                    API_dialog("到底了~");
-                }
-                API_showGoods(show_more_goods, GoodContainer);
-            });
         </script>
         <script>
             const addBtns = document.querySelectorAll('.good_main-container .item .add-btn');

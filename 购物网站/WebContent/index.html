@@ -105,7 +105,7 @@
                         return;
                     }
                     localStorage.setItem("search_keyword", keyword);
-                    API_jumpToPage('../WebContent/index_search.html');
+                    API_jumpToPage('../WebContent/index_search.html', flag=true);
                 }
             });
             clear.addEventListener('click', function() {

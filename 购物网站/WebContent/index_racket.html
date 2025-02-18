@@ -94,7 +94,12 @@
                 // 按下回车键，跳转到搜索结果页面
                 if (e.keyCode === 13) {
                     let keyword = searchInput.value;
-                    API_jumpToPage(keyword);
+                    // 如果关键字为空，则不跳转
+                    if (keyword === '') {
+                        return;
+                    }
+                    localStorage.setItem("search_keyword", keyword);
+                    API_jumpToPage('../WebContent/index_search.html', flag=true);
                 }
             });
             clear.addEventListener('click', function() {
