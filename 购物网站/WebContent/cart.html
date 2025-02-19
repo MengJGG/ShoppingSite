@@ -359,7 +359,7 @@
 
     <script>
         let cart = API_getGoodsFromCart(); // 从服务器获取购物车数据
-        if (cart == null || cart.length === 0)  {
+        if (cart == null || cart.length === 0) {
             document.querySelector(".cart-msg").style.display = "block";
         }
         // cart: Array<dict>

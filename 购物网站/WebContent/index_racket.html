@@ -391,8 +391,8 @@
                         </div>
                     </div>`;
                 }
-
-                const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                listenAddBtns();
+                
                 const ChangeBtn = document.querySelector('.recommend-container .change_btn');
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
@@ -431,23 +431,33 @@
                                 </div>
                             </div>`;
                         }
+                        listenAddBtns();
                     }, 450);
                 });
-
-                BuyBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 获取其父类的id
-                        const parent = btn.parentNode.parentNode;
-                        const id = parent.getAttribute('data-GoodId');
-                        // 加入到购物车
-                        if (API_addToCart(id)) {
-                            btn.style.display = 'none';
-                            // 获取btn的data-ind
-                            const index = parseInt(btn.getAttribute('data-ind'));
-                            API_dialog("加入成功");
+                
+                function listenAddBtns() {
+                    const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                    BuyBtns.forEach(btn => {
+                        // 判断btn是否已经被监听
+                        if (btn.getAttribute('data-listened') == 'true') {
+                            return;
                         }
+                        btn.setAttribute('data-listened', 'true');
+                        btn.addEventListener('click', function() {
+                            // 获取其父类的id
+                            const parent = btn.parentNode.parentNode;
+                            const id = parent.getAttribute('data-GoodId');
+                            // 加入到购物车
+                            if (API_addToCart(id)) {
+                                btn.style.display = 'none';
+                                // 获取btn的data-ind
+                                const index = parseInt(btn.getAttribute('data-ind'));
+                                API_dialog("加入成功");
+                            }
+                        });
                     });
-                });
+                }
+                
 
             </script>
         </div>
