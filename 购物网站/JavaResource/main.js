@@ -8,16 +8,16 @@ if (!localStorage.getItem("goods_data")) {
 }
 
 var goods_data = localStorage.getItem("goods_data");  // 商品数据字典
-var goods_item = {
-    "../Resource/JSONData/guitar/fender.json" : [],
-    "../Resource/JSONData/guitar/martin.json" : [],
-    "../Resource/JSONData/guitar/taylor.json" : [],
-    "../Resource/JSONData/guitar/yamaha.json" : [],
-    "../Resource/JSONData/food/xican.json" : [],
-    "../Resource/JSONData/racket/Yonex/gongjianxilie.json" : [],
-    "../Resource/JSONData/racket/Yonex/jiguangxilie.json" : [],
-    "../Resource/JSONData/racket/Yonex/tianfuxilie.json" : []
-};  // 商品数据字典
+var goods_item = [
+    "../Resource/JSONData/guitar/fender.json",
+    "../Resource/JSONData/guitar/martin.json",
+    "../Resource/JSONData/guitar/taylor.json",
+    "../Resource/JSONData/guitar/yamaha.json",
+    "../Resource/JSONData/food/xican.json",
+    "../Resource/JSONData/racket/Yonex/gongjianxilie.json",
+    "../Resource/JSONData/racket/Yonex/jiguangxilie.json",
+    "../Resource/JSONData/racket/Yonex/tianfuxilie.json"
+];  // 商品数据字典
 
 const search_tree = [
     {"guitar": ["../Resource/JSONData/guitar/fender.json",
@@ -198,7 +198,11 @@ window.addEventListener('load', function() {
 
 function init() {
     console.log('main.json init');
-    initGoodsData();
+    try {
+        initGoodsData();
+    } catch (error) {
+        console.error(error);
+    }
 }
 init();
 
@@ -403,6 +407,7 @@ function API_removeFromCart(id) {
 // id: 商品ID
 // 返回对应商品的详细信息的字典，如果没有则返回null
 function API_parseGoodId(id) {
+    let goods_data = JSON.parse(localStorage.getItem("goods_data"));
     for (let key of goods_item) {
         for (let i = 0; i < goods_data[key].data.length; i++) {
             if (goods_data[key].data[i].id == id) {
