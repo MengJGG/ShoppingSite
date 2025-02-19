@@ -57,7 +57,7 @@ function initGoodsData() {
     };  // 商品数据字典
     good_id = 0;  // 重置商品ID
     let init_flag = false;
-    const keys = Object.keys(goods_item);
+    const keys = goods_item;
     for (let i = 0; i < keys.length; i++) {
         if (goods_data[keys[i]].length == 0) {
             init_flag = true;
@@ -143,7 +143,7 @@ function fetchData(path) {
 function parseGoodIdList(id_list) {
     let result = [];
     goods_data = JSON.parse(localStorage.getItem("goods_data"));
-    for (let key of Object.keys(goods_item)) { // 使用 Object.keys() 获取键
+    for (let key of goods_item) { // 使用 Object.keys() 获取键
         for (let i = 0; i < goods_data[key].data.length; i++) {
             let id = "" + goods_data[key].data[i].id;
             if (id_list.includes(id)) {
@@ -379,9 +379,11 @@ function API_addToCart(id) {
         cart = [];
         user["cart"] = cart;
     }
-    cart.push(id);
-    user.cart = cart;
-    localStorage.setItem("CurrentUser", JSON.stringify(user));
+    let good = API_parseGoodId(id);
+    if (good != null) {
+        cart.push(good);
+    }
+    API_updateUserInfo(null, "cart", cart);
     return true;
 }
 
@@ -407,6 +409,7 @@ function API_removeFromCart(id) {
 // id: 商品ID
 // 返回对应商品的详细信息的字典，如果没有则返回null
 function API_parseGoodId(id) {
+    if (id == null) return null;
     let goods_data = JSON.parse(localStorage.getItem("goods_data"));
     for (let key of goods_item) {
         for (let i = 0; i < goods_data[key].data.length; i++) {
@@ -427,12 +430,7 @@ function API_getGoodsFromCart() {
     }
     // 获取购物车中的商品ID列表
     const user = JSON.parse(localStorage.getItem("CurrentUser"));
-    const cart = user.cart;  // 购物车中的商品ID列表
-    const goods_list = parseGoodIdList(cart);
-    if (goods_list.length == 0) {
-        return null;
-    }
-    return goods_list;
+    return user.cart;
 }
 
 // 清空购物车接口
@@ -537,4 +535,31 @@ function API_getIdByName(name) {
         }
     }
     return null;
+}
+
+function API_updateUserInfo(username=null, data_name, data) {
+    const current_user = JSON.parse(localStorage.getItem("CurrentUser"));
+    if (username == null) {
+        username = current_user.username;
+    }
+    try {
+        if (current_user.username == username) {
+            current_user[data_name] = data;
+            localStorage.setItem("CurrentUser", JSON.stringify(current_user));
+        }
+    } catch (error) {
+        return;
+    }
+    const user_list = JSON.parse(localStorage.getItem("UserList"));
+    try {
+        for (let i = 0; i < user_list.length; i++) {
+            if (user_list[i].username == username) {
+                user_list[i][data_name] = data;
+                localStorage.setItem("UserList", JSON.stringify(user_list));
+                return;
+            }
+        }
+    } catch (error) {
+        return;
+    }
 }

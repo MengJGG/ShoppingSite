@@ -372,7 +372,7 @@
                 // 从后端获取商品数据
                 recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 3; i++) {
                     recommendItems.innerHTML += `
                     <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                         <div class="msg">
@@ -495,6 +495,32 @@
         <!-- 显示更多 -->
         <div class="more_btn-container" style="cursor: pointer;">显示更多</div>
         <script>
+            function listenAddBtns() {
+                const addBtns = document.querySelectorAll('.good_main-container .item .add-btn');
+                addBtns.forEach(btn => {
+                    // 判断btn是否已经被监听
+                    if (btn.getAttribute('data-listened') == 'true') {
+                        return;
+                    }
+                    btn.addEventListener('click', function() {
+                        // 添加data-listened属性，防止重复点击
+                        btn.setAttribute('data-listened', 'true');
+                        // 获取其父类的id
+                        const parent = btn.parentNode.parentNode;
+                        const id = parent.getAttribute('data-GoodId');
+                        // 加入到购物车
+                        if (API_addToCart(id)) {
+                            btn.style.display = 'none';
+                            API_dialog("加入成功");
+                            btn.innerHTML = '<img src="../Resource/Img/system/bingo_ico.png" alt="" style="display: flex; width: 70%;">';
+                            btn.classList.add('bingo-icon');
+                        } else {
+                            API_dialog("请先登录");
+                        }
+                    });
+                });
+            }
+
             var category_items = ["../Resource/JSONData/racket/Yonex/gongjianxilie.json",
                     "../Resource/JSONData/racket/Yonex/jiguangxilie.json",
                     "../Resource/JSONData/racket/Yonex/tianfuxilie.json"];
@@ -512,40 +538,24 @@
                 API_resetGetGoodsIndex();  // 重置商品索引
                 let display_goods = API_getGoods(20, category_paths);
                 API_showGoods(display_goods, GoodContainer);
+                listenAddBtns();
             });
             // TODO: 异步获取商品信息
-            let display_goods = API_getGoods(5, category_items);  // display_goods: array of goods objects
+            let display_goods = API_getGoods(6, category_items);  // display_goods: array of goods objects
             // 显示商品信息
             API_showGoods(display_goods, GoodContainer);
 
             // 显示更多
             const moreBtn = document.querySelector('.more_btn-container');
             moreBtn.addEventListener('click', function() {
-                let show_more_goods = API_getGoods(5, category_items, 20);  // show_more_goods: array
+                let show_more_goods = API_getGoods(6, category_items);  // show_more_goods: array
                 if (show_more_goods.length == 0) {
                     API_dialog("到底了~");
                 }
                 API_showGoods(show_more_goods, GoodContainer);
+                listenAddBtns();
             });
-        </script>
-        <script>
-            const addBtns = document.querySelectorAll('.good_main-container .item .add-btn');
-            addBtns.forEach(btn => {
-                btn.addEventListener('click', function() {
-                    // 获取其父类的id
-                    const parent = btn.parentNode.parentNode;
-                    const id = parent.getAttribute('data-GoodId');
-                    // 加入到购物车
-                    if (API_addToCart(id)) {
-                        btn.style.display = 'none';
-                        API_dialog("加入成功");
-                        btn.innerHTML = '<img src="../Resource/Img/system/bingo_ico.png" alt="" style="display: flex; width: 70%;">';
-                        btn.classList.add('bingo-icon');
-                    } else {
-                        API_dialog("请先登录");
-                    }
-                });
-            });
+            listenAddBtns();
         </script>
 
         <!-- 底部信息栏 -->
