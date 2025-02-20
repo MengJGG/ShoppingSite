@@ -386,6 +386,7 @@
                 let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
                 // 从后端获取商品数据
                 recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
+                
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
                 for (let i = 0; i < 3; i++) {
                     recommendItems.innerHTML += `

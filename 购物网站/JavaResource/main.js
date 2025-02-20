@@ -503,24 +503,56 @@ function API_dialog(text, duration=1500) {
     }, duration);
 }
 
-function API_showGoods(display_goods, GoodContainer) {
-    for (let i = 0; i < display_goods.length; i++) {
-        // 0-3余数循环
-        let row = i % 4;
-        let good = display_goods[i];
+function API_showGoods(display_goods, GoodContainer, sort = 0) {
+    // 根据sort参数对display_goods进行排序
+    let goodsCopy = [...display_goods]; // 创建一个拷贝避免修改原数组
+    
+    if (sort === 1) { 
+        // 升序（按价格从低到高）
+        goodsCopy.sort((a, b) => {
+            // 提取价格字符串中的数字并转换为数字
+            // 判断a.prices是不是字符串
+            if (typeof b.price == "string") {
+                b.price = parseFloat(b.price.replace("¥","").replace("￥","").replace("$","").replace(" ",""));
+            }
+            if (typeof a.price == "string") {
+                a.price = parseFloat(a.price.replace("¥","").replace("￥","").replace("$","").replace(" ",""));
+            }
+            return a.price - b.price; // 按price属性升序排列
+        });
+    } else if (sort === 2) {
+        // 降序（按价格从高到低）
+        goodsCopy.sort((a, b) => {
+            if (typeof b.price == "string") {
+                b.price = parseFloat(b.price.replace("¥","").replace("￥","").replace("$","").replace(" ",""));
+            }
+            if (typeof a.price == "string") {
+                a.price = parseFloat(a.price.replace("¥","").replace("￥","").replace("$","").replace(" ",""));
+            }
+            return b.price - a.price; // 按price属性降序排列
+        });
+    }
+
+    // 如果sort参数不为1或2，则保持原顺序
+
+    for (let i = 0; i < goodsCopy.length; i++) { 
+        let row = i % 4; // 0-3循环，实现四列布局
+        let good = goodsCopy[i];
+        
         GoodContainer.children[row].innerHTML += `
-        <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
-            <div class="images" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${good.id}, 'display_good', true)">
-                <img src="${good.image_url}" alt="">
-            </div>
-            <div class="content">
-                <p>${good.name}</p>
-                <span>${good.price}</span>
-            </div>
-            <div class="add-btn" onclick="API_addToCart('${good.id}')">+</div>
-        </div>`;
+            <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
+                <div class="images" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${good.id}, 'display_good', true)">
+                    <img src="${good.image_url}" alt="">
+                </div>
+                <div class="content">
+                    <p>${good.name}</p>
+                    <span>${good.price}.00</span> <!-- 假设价格为整数，显示为两位小数 -->
+                </div>
+                <div class="add-btn" onclick="API_addToCart('${good.id}')">+</div>
+            </div>`;
     }
 }
+
 
 function API_resetGetGoodsIndex() {
     getGoods_index = 0;

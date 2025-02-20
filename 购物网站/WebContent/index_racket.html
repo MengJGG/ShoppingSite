@@ -544,14 +544,15 @@
                 const index = Array.from(e.target.parentNode.parentNode.children).indexOf(e.target.parentNode);  // 获取系列索引
                 category_paths = [category_items[index]];
                 API_resetGetGoodsIndex();  // 重置商品索引
-                let display_goods = API_getGoods(20, category_paths);
-                API_showGoods(display_goods, GoodContainer);
+                let display_goods = API_getGoods(21, category_paths);
+                API_showGoods(display_goods, GoodContainer, 0, 20, 1);
                 listenAddBtns();
             });
+            
             // TODO: 异步获取商品信息
             let display_goods = API_getGoods(6, category_items);  // display_goods: array of goods objects
             // 显示商品信息
-            API_showGoods(display_goods, GoodContainer);
+            API_showGoods(display_goods, GoodContainer, 1);
 
             // 显示更多
             const moreBtn = document.querySelector('.more_btn-container');
@@ -560,7 +561,7 @@
                 if (show_more_goods.length == 0) {
                     API_dialog("到底了~");
                 }
-                API_showGoods(show_more_goods, GoodContainer);
+                API_showGoods(show_more_goods, GoodContainer, 1);
                 listenAddBtns();
             });
             listenAddBtns();
