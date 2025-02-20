@@ -373,12 +373,12 @@
                 // 从后端获取商品数据
                 recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 3; i++) {
                     recommendItems.innerHTML += `
                     <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                         <div class="msg">
                             <span id="s">新品上新</span>
-                            <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                            <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                         </div>
                         <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
                             <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
@@ -392,8 +392,8 @@
                         </div>
                     </div>`;
                 }
-
-                const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                listenBuyBtns();
+                
                 const ChangeBtn = document.querySelector('.recommend-container .change_btn');
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
@@ -418,7 +418,7 @@
                             <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                                 <div class="msg">
                                     <span id="s">新品上新</span>
-                                    <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                                    <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                                 </div>
                                 <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
                                     <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
@@ -432,24 +432,32 @@
                                 </div>
                             </div>`;
                         }
+                        listenBuyBtns();
                     }, 450);
                 });
-
-                BuyBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 获取其父类的id
-                        const parent = btn.parentNode.parentNode;
-                        const id = parent.getAttribute('data-GoodId');
-                        // 加入到购物车
-                        if (API_addToCart(id)) {
-                            btn.style.display = 'none';
-                            // 获取btn的data-ind
-                            const index = parseInt(btn.getAttribute('data-ind'));
-                            API_dialog("加入成功");
+                
+                function listenBuyBtns() {
+                    const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                    BuyBtns.forEach(btn => {
+                        // 判断btn是否已经被监听
+                        if (btn.getAttribute('data-listened') == 'true') {
+                            return;
                         }
+                        btn.setAttribute('data-listened', 'true');
+                        btn.addEventListener('click', function() {
+                            // 获取其父类的id
+                            const parent = btn.parentNode.parentNode;
+                            const id = parent.getAttribute('data-GoodId');
+                            // 加入到购物车
+                            if (API_addToCart(id)) {
+                                btn.style.display = 'none';
+                                // 获取btn的data-ind
+                                const index = parseInt(btn.getAttribute('data-ind'));
+                                API_dialog("加入成功");
+                            }
+                        });
                     });
-                });
-
+                }
             </script>
         </div>
         <!-- 系列展示 -->
