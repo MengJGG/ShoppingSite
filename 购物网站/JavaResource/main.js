@@ -559,6 +559,7 @@ function API_resetGetGoodsIndex() {
 }
 
 function API_getIdByName(name) {
+    let goods_data = JSON.parse(localStorage.getItem("goods_data"));
     for (let key of goods_item) {
         for (let i = 0; i < goods_data[key].data.length; i++) {
             if (goods_data[key].data[i].name == name) {
