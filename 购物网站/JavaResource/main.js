@@ -19,25 +19,6 @@ var goods_item = [
     "../Resource/JSONData/racket/Yonex/tianfuxilie.json"
 ];  // 商品数据字典
 
-const search_tree = [
-    {"guitar": ["../Resource/JSONData/guitar/fender.json",
-                "../Resource/JSONData/guitar/martin.json",
-                "../Resource/JSONData/guitar/taylor.json",
-                "../Resource/JSONData/guitar/yamaha.json"]
-    },
-    {"food":["../Resource/JSONData/food/xican.json"]},
-    {"racket":
-        {
-            "Yonex":[
-                "../Resource/JSONData/racket/Yonex/gongjianxilie.json",
-                "../Resource/JSONData/racket/Yonex/jiguangxilie.json",
-                "../Resource/JSONData/racket/Yonex/tianfuxilie.json"
-            ],    
-            "Li-Ning": [],
-            "Victor": []
-        }
-    }
-];
 
 // localStorage { user: { username: "admin", password: "123456" }, cart: [] }
 // localStorage { UserList: [ user, user, user,...] }

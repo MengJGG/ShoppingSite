@@ -283,9 +283,15 @@
         <!-- 轮播图 -->
         <div class="carousel-container">
             <div class="carousel-track">
-                <div class="carousel-item"><img src="../Resource/Img/food/2.jpeg" alt=""></div>
-                <div class="carousel-item"><img src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/2204197015356/O1CN01FvKr4C1pR5t8tz7XI_!!0-item_pic.jpg" alt=""></div>
-                <div class="carousel-item"><img src="https://www.yonex.cn/public/uploads/20220224/3d37d74fd66ed1d06c00fbf35e2ba6e6.jpg" alt=""></div>
+                <div class="carousel-item">
+                    <img src="../Resource/Img/food/2.jpeg" alt="" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('烟熏牛排'), true)">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://g-search3.alicdn.com/img/bao/uploaded/i4/i4/2204197015356/O1CN01FvKr4C1pR5t8tz7XI_!!0-item_pic.jpg" alt="" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('美产全新正品 Martin马丁D28 全单民谣吉他木吉他 D型桶弹唱吉他'), true)">
+                </div>
+                <div class="carousel-item">
+                    <img src="https://www.yonex.cn/public/uploads/20220224/3d37d74fd66ed1d06c00fbf35e2ba6e6.jpg" alt="" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 11 PRO'), true)">
+                </div>
             </div>
             
             <button class="carousel-button button-prev">❮</button>
@@ -450,7 +456,7 @@
                         listenBuyBtns();
                     }, 450);
                 });
-                
+                // 添加监听器
                 function listenBuyBtns() {
                     const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
                     BuyBtns.forEach(btn => {
