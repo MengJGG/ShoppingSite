@@ -283,6 +283,7 @@
                 <span>
                     <input type="checkbox" id="select-all" > 全选
                 </span>
+                <span style="right: 5rem; position: absolute; cursor: pointer;" onclick="clearSelected()">删除选中</span>
             </div>
             <div class="cart-msg">您还没有购买任何商品，赶紧选购吧！</div>
             <!-- 商品栏 -->
@@ -450,6 +451,18 @@
         // 删除商品
         function removeItem(index) {
             cart.splice(index, 1);
+            API_updateUserInfo(null,"cart", cart);
+            if (cart.length === 0) {
+                document.querySelector(".cart-msg").style.display = "block";
+            }
+            renderCart();
+        }
+
+        function clearSelected() {
+            const selectedItems = cart.filter((item) => item.selected)
+            selectedItems.forEach((item) => {
+                cart.splice(cart.indexOf(item), 1);
+            });
             API_updateUserInfo(null,"cart", cart);
             if (cart.length === 0) {
                 document.querySelector(".cart-msg").style.display = "block";
