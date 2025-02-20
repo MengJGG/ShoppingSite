@@ -99,7 +99,7 @@
                         return;
                     }
                     localStorage.setItem("search_keyword", keyword);
-                    API_jumpToPage('../WebContent/index_search.html', flag=true);
+                    API_jumpToPage('../WebContent/index_search.html', null, '', flag=true);
                 }
             });
             clear.addEventListener('click', function() {
@@ -250,7 +250,7 @@
     <!-- 侧边工具栏 -->
     <div class="side_tool_bar">
         <div class="lamp" onclick=""><img src="../Resource/Img/system/lamp.png" style="width: 2.5rem; height: 2.5rem; margin-top: 5px;" alt="开关灯"></div>
-        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html')"><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
+        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html', null, '', flag=true)"><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
         <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
@@ -588,7 +588,7 @@
             const topBar = document.querySelector('.top-container');
             const skyBar = document.querySelector('.sky-banner');
             const mainContainer = document.querySelector('.main-container');
-            const guideMenu = document.querySelector('.top_drop_menu');
+            const guideMenus = document.querySelectorAll('.top_drop_menu');
             const topGuideNav = document.querySelector('.top_guide_nav');
             const loginSpan = document.querySelector('.login_mes-container #username');
             const loginSection = document.querySelector('.login_mes-container section');
@@ -596,19 +596,17 @@
             const clearIcon = document.querySelector('.search-icon #clear');
             const searchInput = document.querySelector('.search-icon #search_input');
             const topBarHeight = skyBar.offsetHeight;
-            console.log(topBarHeight);
-            console.log(document.body.offsetHeight);
             window.addEventListener('scroll', function() {
                 const offset = window.pageYOffset || document.documentElement.scrollTop;
 
                 if (offset > topBarHeight) {
                     topBar.classList.add('sticky');
                     mainContainer.style.paddingTop = 5 + 'rem';
-                    guideMenu.style.top = 5 + 'rem';
+                    moveUpDropMenu(5);
                 } else {
                     topBar.classList.remove('sticky');
                     mainContainer.style.paddingTop = 0;
-                    guideMenu.style.top = 6.25 + 'rem';
+                    moveUpDropMenu(6.25);
                 }
                 // 如果页面到达底部
                 console.log("gi" + offset + topBarHeight);
@@ -640,6 +638,11 @@
                     topBar.style.backgroundColor = '#111111';
                 }
             });
+            function moveUpDropMenu(val) {
+                guideMenus.forEach(menu => {
+                    menu.style.top = val + 'rem';
+                });
+            }
         });
     </script>
 </body>
