@@ -99,7 +99,7 @@
                         return;
                     }
                     localStorage.setItem("search_keyword", keyword);
-                    API_jumpToPage('../WebContent/index_search.html', flag=true);
+                    API_jumpToPage('../WebContent/index_search.html', null, '', flag=true);
                 }
             });
             clear.addEventListener('click', function() {
@@ -124,10 +124,10 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">按类别选购</span>
-                <a>吉他</a> 
-                <a>音响</a>
-                <a>美食</a>
-                <a>羽毛球拍</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他</a> 
+                <a onclick="API_dialog('暂未开放')">音响</a>
+                <a onclick="API_jumpToPage('../WebContent/index_food.html')">美食</a>
+                <a onclick="API_jumpToPage('../WebContent/index_racket.html')">羽毛球拍</a>
                 <br>
             </div>
             <div class="img-container">
@@ -140,10 +140,10 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>Martin</a> 
-                <a>Fender</a>
-                <a>Taylor</a>
-                <a>Yamaha</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Martin</a> 
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Fender</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Taylor</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Yamaha</a>
                 <br>
             </div>
             <div class="img-container">
@@ -156,12 +156,12 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>JBL</a> 
-                <a>Harman Kardon</a>
-                <a>Denon</a>
-                <a>Sony</a> 
-                <a>Dynaudio</a>
-                <a>Bose</a>
+                <a onclick="API_dialog('暂未开放')">JBL</a> 
+                <a onclick="API_dialog('暂未开放')">Harman Kardon</a>
+                <a onclick="API_dialog('暂未开放')">Denon</a>
+                <a onclick="API_dialog('暂未开放')">Sony</a> 
+                <a onclick="API_dialog('暂未开放')">Dynaudio</a>
+                <a onclick="API_dialog('暂未开放')">Bose</a>
                 <br>
             </div>
             <div class="img-container">
@@ -174,13 +174,13 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">牛排系列</span>
-                <a>惠灵顿牛排</a> 
-                <a>烟熏牛排</a>
-                <a>番茄牛排</a>
-                <a>法式羊排</a>
-                <a>战斧牛排</a>
-                <a>西芹椒盐牛排</a>
-                <a>菲力牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('惠灵顿牛排'), true)">惠灵顿牛排</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('烟熏牛排'), true)">烟熏牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('番茄牛排'), true)">番茄牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('法式羊排'), true)">法式羊排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('战斧牛排'), true)">战斧牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('西芹椒盐牛排'), true)">西芹椒盐牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('菲力牛排'), true)">菲力牛排</a>
                 <br>
             </div>
             <div class="img-container">
@@ -193,20 +193,20 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>尤尼克斯Yonex</a> 
-                <a>李宁LI-NING</a>
-                <a>威克多VICTORY</a>
+                <a onclick="API_jumpToPage('../WebContent/index_racket.html')">尤尼克斯Yonex</a> 
+                <a onclick="API_dialog('暂未开放')">李宁LI-NING</a>
+                <a onclick="API_dialog('暂未开放')">威克多VICTORY</a>
                 <br>
             </div>
             <div class="drop_right-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门推荐</span>
-                <a>ARCSABER 11 PRO</a> 
-                <a>ARCSABER 7 PRO3</a>
-                <a>NANOFLARE 700 PRO</a>
-                <a>ASTROX 88S PRO</a> 
-                <a>ASTROX 100 ZZ</a>
-                <a>ASTROX 99 PRO</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 11 PRO'), true)">ARCSABER 11 PRO</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 7 PRO3'), true)">ARCSABER 7 PRO3</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('NANOFLARE 700 PRO'), true)">NANOFLARE 700 PRO</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 88S PRO'), true)">ASTROX 88S PRO</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 100 ZZ'), true)">ASTROX 100 ZZ</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 99 PRO'), true)">ASTROX 99 PRO</a>
             </div>
             <div class="img-container">
                 <br>
@@ -250,7 +250,7 @@
     <!-- 侧边工具栏 -->
     <div class="side_tool_bar">
         <div class="lamp" onclick=""><img src="../Resource/Img/system/lamp.png" style="width: 2.5rem; height: 2.5rem; margin-top: 5px;" alt="开关灯"></div>
-        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html')"><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
+        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html', null, '', flag=true)"><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
         <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
@@ -269,9 +269,15 @@
         <!-- 轮播图 -->
         <div class="carousel-container">
             <div class="carousel-track">
-                <div class="carousel-item"><img src="../Resource/Img/food/30.jpg" alt=""></div>
-                <div class="carousel-item"><img src="../Resource/Img/food/38.jpeg" alt=""></div>
-                <div class="carousel-item"><img src="../Resource/Img/food/41.jpeg" alt=""></div>
+                <div class="carousel-item">
+                    <img src="../Resource/Img/food/30.jpg" alt="" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('水果奶昔'), true)">
+                </div>
+                <div class="carousel-item">
+                    <img src="../Resource/Img/food/38.jpeg" alt="" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('鲜柠檬烤翅根'), true)">
+                </div>
+                <div class="carousel-item">
+                    <img src="../Resource/Img/food/41.jpeg" alt="" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('猪排配烤薯虾米'), true)">
+                </div>
             </div>
             
             <button class="carousel-button button-prev">❮</button>
@@ -367,14 +373,14 @@
                 let recommend_goods = [];
                 let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
                 // 从后端获取商品数据
-                recommend_goods.push(API_getGoods(1, recommend_items, 4));  // 获取的商品添加到recommend_goods
+                recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
-                for (let i = 0; i < 4; i++) {
+                for (let i = 0; i < 3; i++) {
                     recommendItems.innerHTML += `
                     <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                         <div class="msg">
                             <span id="s">新品上新</span>
-                            <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                            <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                         </div>
                         <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
                             <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
@@ -388,13 +394,13 @@
                         </div>
                     </div>`;
                 }
-
-                const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                listenBuyBtns();
+                
                 const ChangeBtn = document.querySelector('.recommend-container .change_btn');
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
                     loop++;  // 循环数组+1
-                    let goods = API_getGoods(4, recommend_items, 4);
+                    let goods = API_getGoods(1, recommend_items);
                     if (goods.length != 0) {
                         recommend_goods.push(goods);
                     }
@@ -414,7 +420,7 @@
                             <div class="item" id="item_1" data-GoodId="${recommend_goods[loop][i].id}">
                                 <div class="msg">
                                     <span id="s">新品上新</span>
-                                    <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0">购入</span>
+                                    <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                                 </div>
                                 <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
                                     <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
@@ -428,24 +434,32 @@
                                 </div>
                             </div>`;
                         }
+                        listenBuyBtns();
                     }, 450);
                 });
-
-                BuyBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 获取其父类的id
-                        const parent = btn.parentNode.parentNode;
-                        const id = parent.getAttribute('data-GoodId');
-                        // 加入到购物车
-                        if (API_addToCart(id)) {
-                            btn.style.display = 'none';
-                            // 获取btn的data-ind
-                            const index = parseInt(btn.getAttribute('data-ind'));
-                            API_dialog("加入成功");
+                
+                function listenBuyBtns() {
+                    const BuyBtns = document.querySelectorAll('.recommend-container .recommend_items .item .msg #buy');
+                    BuyBtns.forEach(btn => {
+                        // 判断btn是否已经被监听
+                        if (btn.getAttribute('data-listened') == 'true') {
+                            return;
                         }
+                        btn.setAttribute('data-listened', 'true');
+                        btn.addEventListener('click', function() {
+                            // 获取其父类的id
+                            const parent = btn.parentNode.parentNode;
+                            const id = parent.getAttribute('data-GoodId');
+                            // 加入到购物车
+                            if (API_addToCart(id)) {
+                                btn.style.display = 'none';
+                                // 获取btn的data-ind
+                                const index = parseInt(btn.getAttribute('data-ind'));
+                                API_dialog("加入成功");
+                            }
+                        });
                     });
-                });
-
+                }
             </script>
         </div>
         <!-- 商品主要内容 4*5 -->
@@ -588,7 +602,7 @@
             const topBar = document.querySelector('.top-container');
             const skyBar = document.querySelector('.sky-banner');
             const mainContainer = document.querySelector('.main-container');
-            const guideMenu = document.querySelector('.top_drop_menu');
+            const guideMenus = document.querySelectorAll('.top_drop_menu');
             const topGuideNav = document.querySelector('.top_guide_nav');
             const loginSpan = document.querySelector('.login_mes-container #username');
             const loginSection = document.querySelector('.login_mes-container section');
@@ -596,19 +610,17 @@
             const clearIcon = document.querySelector('.search-icon #clear');
             const searchInput = document.querySelector('.search-icon #search_input');
             const topBarHeight = skyBar.offsetHeight;
-            console.log(topBarHeight);
-            console.log(document.body.offsetHeight);
             window.addEventListener('scroll', function() {
                 const offset = window.pageYOffset || document.documentElement.scrollTop;
 
                 if (offset > topBarHeight) {
                     topBar.classList.add('sticky');
                     mainContainer.style.paddingTop = 5 + 'rem';
-                    guideMenu.style.top = 5 + 'rem';
+                    moveUpDropMenu(5);
                 } else {
                     topBar.classList.remove('sticky');
                     mainContainer.style.paddingTop = 0;
-                    guideMenu.style.top = 6.25 + 'rem';
+                    moveUpDropMenu(6.25);
                 }
                 // 如果页面到达底部
                 console.log("gi" + offset + topBarHeight);
@@ -640,6 +652,11 @@
                     topBar.style.backgroundColor = '#111111';
                 }
             });
+            function moveUpDropMenu(val) {
+                guideMenus.forEach(menu => {
+                    menu.style.top = val + 'rem';
+                });
+            }
         });
     </script>
 </body>

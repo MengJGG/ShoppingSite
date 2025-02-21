@@ -104,7 +104,7 @@
                         return;
                     }
                     localStorage.setItem("search_keyword", keyword);
-                    API_jumpToPage('../WebContent/index_search.html', flag=true);
+                    API_jumpToPage('../WebContent/index_search.html', null, '', flag=true);
                 }
             });
             clear.addEventListener('click', function() {
@@ -160,12 +160,12 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>JBL</a> 
-                <a>Harman Kardon</a>
-                <a>Denon</a>
-                <a>Sony</a> 
-                <a>Dynaudio</a>
-                <a>Bose</a>
+                <a onclick="API_dialog('暂未开放')">JBL</a> 
+                <a onclick="API_dialog('暂未开放')">Harman Kardon</a>
+                <a onclick="API_dialog('暂未开放')">Denon</a>
+                <a onclick="API_dialog('暂未开放')">Sony</a> 
+                <a onclick="API_dialog('暂未开放')">Dynaudio</a>
+                <a onclick="API_dialog('暂未开放')">Bose</a>
                 <br>
             </div>
             <div class="img-container">
@@ -178,13 +178,13 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">牛排系列</span>
-                <a>惠灵顿牛排</a> 
-                <a>烟熏牛排</a>
-                <a>番茄牛排</a>
-                <a>法式羊排</a>
-                <a>战斧牛排</a>
-                <a>西芹椒盐牛排</a>
-                <a>菲力牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('惠灵顿牛排'), true)">惠灵顿牛排</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('烟熏牛排'), true)">烟熏牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('番茄牛排'), true)">番茄牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('法式羊排'), true)">法式羊排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('战斧牛排'), true)">战斧牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('西芹椒盐牛排'), true)">西芹椒盐牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('菲力牛排'), true)">菲力牛排</a>
                 <br>
             </div>
             <div class="img-container">
@@ -197,26 +197,27 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">尤尼克斯Yonex</a> 
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">李宁LI-NING</a>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">威克多VICTORY</a>
+                <a onclick="API_jumpToPage('../WebContent/index_racket.html')">尤尼克斯Yonex</a> 
+                <a onclick="API_dialog('暂未开放')">李宁LI-NING</a>
+                <a onclick="API_dialog('暂未开放')">威克多VICTORY</a>
                 <br>
             </div>
             <div class="drop_right-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门推荐</span>
-                <a onclick="API_jumpToPage('../WebContent/index_racket.html', API_getIdByName('ARCSABER 11 PRO'), '')">ARCSABER 11 PRO</a> 
-                <a>ARCSABER 7 PRO3</a>
-                <a>NANOFLARE 700 PRO</a>
-                <a>ASTROX 88S PRO</a> 
-                <a>ASTROX 100 ZZ</a>
-                <a>ASTROX 99 PRO</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 11 PRO'), true)">ARCSABER 11 PRO</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 7 PRO3'), true)">ARCSABER 7 PRO3</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('NANOFLARE 700 PRO'), true)">NANOFLARE 700 PRO</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 88S PRO'), true)">ASTROX 88S PRO</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 100 ZZ'), true)">ASTROX 100 ZZ</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 99 PRO'), true)">ASTROX 99 PRO</a>
             </div>
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
                 <img src="https://www.yonex.cn/public/uploads/20230904/bde83ff23ddde196fe2b3098ad993748.jpg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
+        </div>
         </div>
         <!-- TODO: 后端返回数据 -->
         <script>
@@ -283,8 +284,9 @@
                 <span>
                     <input type="checkbox" id="select-all" > 全选
                 </span>
+                <span style="right: 5rem; position: absolute; cursor: pointer;" onclick="clearSelected()">删除选中</span>
             </div>
-
+            <div class="cart-msg">您还没有购买任何商品，赶紧选购吧！</div>
             <!-- 商品栏 -->
             <div id="cart-items">
                 <!-- 商品图片会通过JavaScript动态插入到这里 -->
@@ -358,58 +360,19 @@
     </script>
 
     <script>
-
-        // 购物车（商品）数据
-        // let cart = [
-        //     {
-        //         id: 1,
-        //         name: "商品A",
-        //         price: 156,
-        //         quantity: 1,
-        //         image: "image/2.jpeg",
-        //         selected: true,
-        //     },
-        //     {
-        //         id: 2,
-        //         name: "商品B",
-        //         price: 243,
-        //         quantity: 2,
-        //         image: "image/21.jpeg", 
-        //         selected: false,
-        //     },
-        //     {
-        //         id: 3,
-        //         name: "商品C",
-        //         price: 99,
-        //         quantity: 1,
-        //         image: "image/3.jpeg", 
-        //         selected: true,
-        //     },
-        //     {
-        //         id: 4,
-        //         name: "商品D",
-        //         price: 106,
-        //         quantity: 3,
-        //         image: "image/22.jpeg", 
-        //         selected: false,
-        //     },
-        //     {
-        //         id: 5,
-        //         name: "商品E",
-        //         price: 188,
-        //         quantity: 2,
-        //         image: "image/16.jpeg", 
-        //         selected: true,
-        //     },
-        // ]
-
         let cart = API_getGoodsFromCart(); // 从服务器获取购物车数据
-
+        if (cart == null || cart.length === 0) {
+            document.querySelector(".cart-msg").style.display = "block";
+        }
         // cart: Array<dict>
         // 为每个商品添加"quantity"属性，用于记录购买数量，以及"selected"属性，用于记录是否被选中默认true
         cart.forEach((item) => {
-            item["quantity"] = 1;
-            item["selected"] = true;
+            if (!item.hasOwnProperty("quantity")) {
+                item["quantity"] = 1;
+            }
+            if (!item.hasOwnProperty("selected")) {
+                item["selected"] = true;
+            }
         });
 
         // 渲染购物车
@@ -428,7 +391,7 @@
 
                 itemElement.innerHTML = `
                     <label>
-                        <input type="checkbox" class="item-checkbox" data-index="${index}" ${item.selected ? "checked" : ""}>
+                        <input type="checkbox" class="item-checkbox" data-index="${index}" ${item.selected ? "checked" : ""} onchange="changeSelected(${index})">
                     </label>
                     <img src="${item.image_url}" alt="${item.name}">
                     <div class="info">
@@ -437,7 +400,7 @@
                     </div>
                     <div class="quantity">
                         <button onclick="changeQuantity(${index}, -1)">-</button>
-                        <input type="text" value="${item.quantity}" onchange="updateQuantity(${index}, this.value)">
+                        <input type="text" value="${item.quantity}" onchange="updateQuantity(${index}, ${item.price})">
                         <button onclick="changeQuantity(${index}, 1)">+</button>
                     </div>
                     <div class="delete" onclick="removeItem(${index})">删除</div>
@@ -460,12 +423,19 @@
             totalPrice.textContent = total
         }
 
+        function changeSelected(index) {
+            cart[index].selected = !cart[index].selected;
+            API_updateUserInfo(null,"cart", cart);
+            renderCart()
+        }
+
         // 修改商品数量
         function changeQuantity(index, delta) {
             cart[index].quantity += delta
             if (cart[index].quantity < 1) {
                 cart[index].quantity = 1
             }
+            API_updateUserInfo(null,"cart", cart);
             renderCart()
         }
 
@@ -474,14 +444,31 @@
             const quantity = parseInt(value, 10)
             if (!isNaN(quantity)) {
                 cart[index].quantity = quantity
+                API_updateUserInfo(null,"cart", cart);
                 renderCart()
             }
         }
 
         // 删除商品
         function removeItem(index) {
-            cart.splice(index, 1)
-            renderCart()
+            cart.splice(index, 1);
+            API_updateUserInfo(null,"cart", cart);
+            if (cart.length === 0) {
+                document.querySelector(".cart-msg").style.display = "block";
+            }
+            renderCart();
+        }
+
+        function clearSelected() {
+            const selectedItems = cart.filter((item) => item.selected)
+            selectedItems.forEach((item) => {
+                cart.splice(cart.indexOf(item), 1);
+            });
+            API_updateUserInfo(null,"cart", cart);
+            if (cart.length === 0) {
+                document.querySelector(".cart-msg").style.display = "block";
+            }
+            renderCart();
         }
 
         // 全选/反选
@@ -501,6 +488,68 @@
             }
         })
         renderCart()
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topBar = document.querySelector('.top-container');
+            const skyBar = document.querySelector('.sky-banner');
+            const mainContainer = document.querySelector('.main-container');
+            const guideMenus = document.querySelectorAll('.top_drop_menu');
+            const topGuideNav = document.querySelector('.top_guide_nav');
+            const loginSpan = document.querySelector('.login_mes-container #username');
+            const loginSection = document.querySelector('.login_mes-container section');
+            const searchIcon = document.querySelector('.search-icon #search');
+            const clearIcon = document.querySelector('.search-icon #clear');
+            const searchInput = document.querySelector('.search-icon #search_input');
+            const topBarHeight = skyBar.offsetHeight;
+            window.addEventListener('scroll', function() {
+                const offset = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (offset > topBarHeight) {
+                    topBar.classList.add('sticky');
+                    mainContainer.style.paddingTop = 5 + 'rem';
+                    moveUpDropMenu(5);
+                } else {
+                    topBar.classList.remove('sticky');
+                    mainContainer.style.paddingTop = 0;
+                    moveUpDropMenu(6.25);
+                }
+                // 如果页面到达底部
+                console.log("gi" + offset + topBarHeight);
+                if (offset + topBarHeight >= document.body.offsetHeight - 1000) {
+                    for (let i = 0; i < topGuideNav.children.length; i++) {
+                        topGuideNav.children[i].style.color = '#333333';
+                    }
+                    for (let i = 0; i < loginSection.children.length; i++) {
+                        loginSection.children[i].style.color = '#333333';
+                    }
+                    // 获取searchInput的style的border-bottom
+                    searchInput.style.borderBottom = '1px solid #333333';
+                    searchIcon.src = '../Resource/Img/system/searchd_ico.png';
+                    clearIcon.src = '../Resource/Img/system/cleard_ico.png';
+                    loginSpan.style.color = '#333333';
+                    topBar.style.transition = 'background-color 0.3s ease';
+                    topBar.style.backgroundColor = '#f2f2f2';
+                } else {
+                    for (let i = 0; i < topGuideNav.children.length; i++) {
+                        topGuideNav.children[i].style.color = '#e0e0e0';
+                    }
+                    for (let i = 0; i < loginSection.children.length; i++) {
+                        loginSection.children[i].style.color = '#e0e0e0';
+                    }
+                    searchIcon.src = '../Resource/Img/system/search_ico.png';
+                    clearIcon.src = '../Resource/Img/system/clear_ico.png';
+                    loginSpan.style.color = '#e0e0e0';
+                    topBar.style.transition = 'background-color 0.3s ease';
+                    topBar.style.backgroundColor = '#111111';
+                }
+            });
+            function moveUpDropMenu(val) {
+                guideMenus.forEach(menu => {
+                    menu.style.top = val + 'rem';
+                });
+            }
+        });
     </script>
 </body>
 </html>

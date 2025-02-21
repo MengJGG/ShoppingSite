@@ -54,7 +54,7 @@
             const clear = document.querySelector('.top-container .search-icon #clear');
             const GuideNav = document.querySelector('.top_guide_nav');
             const searchInput = document.querySelector('.top-container .search-icon #search_input');
-
+            
             // 处理外部点击的函数
             function handleOutsideClick(e) {
                 // 判断点击目标是否在搜索区域外
@@ -73,11 +73,11 @@
                         // 移除全局点击监听
                         document.removeEventListener('click', handleOutsideClick);
                     }, 200);
-
+                    
                 }
             }
-
-            search.addEventListener('click', function () {
+            
+            search.addEventListener('click', function() {
                 search.style.transform = 'translateX(-32rem)';
                 searchInput.style.display = 'block';
                 searchInput.focus();
@@ -93,7 +93,7 @@
                 }, 300);
             });
 
-            searchInput.addEventListener('keydown', function (e) {
+            searchInput.addEventListener('keydown', function(e) {
                 // 按下回车键，跳转到搜索结果页面
                 if (e.keyCode === 13) {
                     let keyword = searchInput.value;
@@ -102,10 +102,10 @@
                         return;
                     }
                     localStorage.setItem("search_keyword", keyword);
-                    API_jumpToPage('../WebContent/index_search.html', flag = true);
+                    API_jumpToPage('../WebContent/index_search.html', null, '', flag=true);
                 }
             });
-            clear.addEventListener('click', function () {
+            clear.addEventListener('click', function() {
                 search.style.transform = 'translateX(0)';
                 searchInput.style.transition = 'width 0.2s linear, transform 0.2s linear'; // 添加transform的过渡
                 searchInput.style.width = '0rem';
@@ -126,7 +126,7 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">按类别选购</span>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">吉他</a> 
                 <a onclick="API_dialog('暂未开放')">音响</a>
                 <a onclick="API_jumpToPage('../WebContent/index_food.html')">美食</a>
                 <a onclick="API_jumpToPage('../WebContent/index_racket.html')">羽毛球拍</a>
@@ -142,7 +142,7 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Martin</a>
+                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Martin</a> 
                 <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Fender</a>
                 <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Taylor</a>
                 <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">Yamaha</a>
@@ -151,40 +151,38 @@
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
-                <img src="http://g.search3.alicdn.com/img/i3/109964830/O1CN010fvEFy1lYC1uE8Qqf_!!4611686018427383326-0-saturn_solar.jpg"
-                    alt="" onclick=""> <!--跳转到详细页面-->
+                <img src="http://g.search3.alicdn.com/img/i3/109964830/O1CN010fvEFy1lYC1uE8Qqf_!!4611686018427383326-0-saturn_solar.jpg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="2">
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a>JBL</a>
-                <a>Harman Kardon</a>
-                <a>Denon</a>
-                <a>Sony</a>
-                <a>Dynaudio</a>
-                <a>Bose</a>
+                <a onclick="API_dialog('暂未开放')">JBL</a> 
+                <a onclick="API_dialog('暂未开放')">Harman Kardon</a>
+                <a onclick="API_dialog('暂未开放')">Denon</a>
+                <a onclick="API_dialog('暂未开放')">Sony</a> 
+                <a onclick="API_dialog('暂未开放')">Dynaudio</a>
+                <a onclick="API_dialog('暂未开放')">Bose</a>
                 <br>
             </div>
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
-                <img src="https://cn.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc471195b/01.JBL_Live Beam 3_Product Image_Feature Screen 02_Black.png?sw=537&sfrm=png"
-                    alt="" onclick=""> <!--跳转到详细页面-->
+                <img src="https://cn.jbl.com/dw/image/v2/AAUJ_PRD/on/demandware.static/-/Sites-masterCatalog_Harman/default/dwc471195b/01.JBL_Live Beam 3_Product Image_Feature Screen 02_Black.png?sw=537&sfrm=png" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
         <div class="top_drop_menu" id="top_drop_menu-container" data-index="3">
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">牛排系列</span>
-                <a>惠灵顿牛排</a>
-                <a>烟熏牛排</a>
-                <a>番茄牛排</a>
-                <a>法式羊排</a>
-                <a>战斧牛排</a>
-                <a>西芹椒盐牛排</a>
-                <a>菲力牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('惠灵顿牛排'), true)">惠灵顿牛排</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('烟熏牛排'), true)">烟熏牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('番茄牛排'), true)">番茄牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('法式羊排'), true)">法式羊排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('战斧牛排'), true)">战斧牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('西芹椒盐牛排'), true)">西芹椒盐牛排</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('菲力牛排'), true)">菲力牛排</a>
                 <br>
             </div>
             <div class="img-container">
@@ -197,79 +195,74 @@
             <div class="drop_left-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门品牌</span>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">尤尼克斯Yonex</a>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">李宁LI-NING</a>
-                <a onclick="API_jumpToPage('../WebContent/index_guitar.html')">威克多VICTORY</a>
+                <a onclick="API_jumpToPage('../WebContent/index_racket.html')">尤尼克斯Yonex</a> 
+                <a onclick="API_dialog('暂未开放')">李宁LI-NING</a>
+                <a onclick="API_dialog('暂未开放')">威克多VICTORY</a>
                 <br>
             </div>
             <div class="drop_right-content drop_content">
                 <br>
                 <span id="menu_title" style="color: #333333;">热门推荐</span>
-                <a onclick="API_jumpToPage('../WebContent/index_racket.html', API_getIdByName('ARCSABER 11 PRO'), '')">ARCSABER
-                    11 PRO</a>
-                <a>ARCSABER 7 PRO3</a>
-                <a>NANOFLARE 700 PRO</a>
-                <a>ASTROX 88S PRO</a>
-                <a>ASTROX 100 ZZ</a>
-                <a>ASTROX 99 PRO</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 11 PRO'), true)">ARCSABER 11 PRO</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ARCSABER 7 PRO3'), true)">ARCSABER 7 PRO3</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('NANOFLARE 700 PRO'), true)">NANOFLARE 700 PRO</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 88S PRO'), true)">ASTROX 88S PRO</a> 
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 100 ZZ'), true)">ASTROX 100 ZZ</a>
+                <a onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', API_getIdByName('ASTROX 99 PRO'), true)">ASTROX 99 PRO</a>
             </div>
             <div class="img-container">
                 <br>
                 <span id="menu_title" style="color: #333333;">推荐商品</span>
-                <img src="https://www.yonex.cn/public/uploads/20230904/bde83ff23ddde196fe2b3098ad993748.jpg" alt=""
-                    onclick=""> <!--跳转到详细页面-->
+                <img src="https://www.yonex.cn/public/uploads/20230904/bde83ff23ddde196fe2b3098ad993748.jpg" alt="" onclick=""> <!--跳转到详细页面-->
             </div>
         </div>
-    </div>
-
-    <!-- TODO: 后端返回数据 -->
-    <script>
-        'use strict';
-        const topGuideNav = document.querySelector('.top_guide_nav');
-        const topDropMenus = document.querySelectorAll('.top_drop_menu');
-        const topDropMenuContainer = document.querySelector('#top_drop_menu-container');
-        topGuideNav.addEventListener('mouseover', function (e) {
-            const index = Array.from(topGuideNav.children).indexOf(e.target);
-            show(index);
-        });
-        // topDropMenus.forEach(topDropMenu => {
-        //     topDropMenu.addEventListener('mouseleave', function() {
-        //         topDropMenu.style.display = 'none';
-        //     });
-        //     topDropMenuContainer.addEventListener('mouseenter', function() {
-        //         topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
-        //         topDropMenu.style.display = 'flex';
-        //     });
-        // });
-        topDropMenus.forEach(topDropMenu => {
-            topDropMenu.addEventListener('mouseleave', function () {
-                show(-1);
+        </div>
+        
+        <!-- TODO: 后端返回数据 -->
+        <script>
+            'use strict';
+            const topGuideNav = document.querySelector('.top_guide_nav');
+            const topDropMenus = document.querySelectorAll('.top_drop_menu');
+            const topDropMenuContainer = document.querySelector('#top_drop_menu-container');
+            topGuideNav.addEventListener('mouseover', function(e) {
+                const index = Array.from(topGuideNav.children).indexOf(e.target);
+                show(index);
             });
-        });
-
-        function show(index) {
+            // topDropMenus.forEach(topDropMenu => {
+            //     topDropMenu.addEventListener('mouseleave', function() {
+            //         topDropMenu.style.display = 'none';
+            //     });
+            //     topDropMenuContainer.addEventListener('mouseenter', function() {
+            //         topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+            //         topDropMenu.style.display = 'flex';
+            //     });
+            // });
             topDropMenus.forEach(topDropMenu => {
-                if (topDropMenu.dataset.index != index) {
-                    topDropMenu.style.display = 'none';
-                }
-                else {
-                    topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
-                    topDropMenu.style.display = 'flex';
-                }
+                topDropMenu.addEventListener('mouseleave', function() {
+                    show(-1);
+                });
             });
-        }
 
-
-    </script>
+            function show(index) {
+                topDropMenus.forEach(topDropMenu => {
+                    if (topDropMenu.dataset.index != index) {
+                        topDropMenu.style.display = 'none';
+                    }
+                    else {
+                        topDropMenu.style.animation = 'fade-in 0.5s ease 1 forwards';
+                        topDropMenu.style.display = 'flex';
+                    }
+                });
+            }            
+            
+            
+        </script>
     </div>
     <!-- 侧边工具栏 -->
     <div class="side_tool_bar">
-        <div class="lamp" onclick=""><img src="../Resource/Img/system/lamp.png"
-                style="width: 2.5rem; height: 2.5rem; margin-top: 5px;" alt="开关灯"></div>
-        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html')"><img src="../Resource/Img/system/cart.png"
-                style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
-        <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png"
-                style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
+        <div class="lamp" onclick=""><img src="../Resource/Img/system/lamp.png" style="width: 2.5rem; height: 2.5rem; margin-top: 5px;" alt="开关灯"></div>
+        <div class="cart" onclick="API_jumpToPage('../WebContent/cart.html', null, '', flag=true)"><img src="../Resource/Img/system/cart.png" style="width: 2.4rem; height: 2.4rem; margin-top: 6px;" alt="购物车"></div>
+        <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
         const lamp = document.querySelector('.side_tool_bar .lamp');
@@ -290,50 +283,20 @@
         const id = API_parseStoredData("display_good");  // 获取商品 ID
         const good = API_parseGoodId(id);  // 解析商品 ID 得到商品详细信息（字典）
         const goodDetail = document.getElementById('good-detail');
-
         if (good) {
             goodDetail.innerHTML = `
-            <div class="product-item">
-                <img src="${good.image_url}" alt="${good.name}">
-                <div class="text-info">
-                    <h2>${good.name}</h2>
-                    <div class="price-button-container">
-                        <div class="price">价格：${good.price}</div>
-                        <button onclick="addToCart(${good.id})">加入购物车</button>
-                    </div>
-                </div>
-            </div>
+                <h2>${good.name}</h2>
+                <p>价格：${good.price}</p>
+                <img src="${good.image_url}" alt="${good.name}" width="200">
+                <!-- 添加购物车按钮 -->
+                <button id="add-to-cart" onclick="API_jumpToPage('cart.html')">加入购物车</button>
             `;
-
         } else {
             showError('未找到对应的商品，请检查商品 ID 是否正确。');
         }
 
-        function addToCart(productId) {
-            // 重新获取商品信息
-            const currentGood = API_parseGoodId(productId);
-
-            // 从 sessionStorage 中获取已有的购物车数据
-            let cartItems = JSON.parse(sessionStorage.getItem('cartItems')) || [];
-
-            // 检查商品是否已经在购物车中
-            const existingItemIndex = cartItems.findIndex(item => item.id === productId);
-            if (existingItemIndex > -1) {
-                // 如果商品已存在，增加数量
-                cartItems[existingItemIndex].quantity++;
-            } else {
-                // 如果商品不存在，添加到购物车并设置初始数量为 1
-                currentGood.quantity = 1;
-                cartItems.push(currentGood);
-            }
-
-            // 将更新后的购物车数据存回 sessionStorage
-            sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
-
-            // 跳转到购物车页面
-            API_jumpToPage('cart.html');
-        }
     </script>
+
     <!-- 底部信息栏 -->
     <br>
     <br>
@@ -388,6 +351,68 @@
                 button.style.animation = 'fade-in 0.3s ease 1 forwards';
                 // helpContainer缓慢下降
                 helpContainer.style.transform = 'translateY(-10%)';
+            }
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const topBar = document.querySelector('.top-container');
+            const skyBar = document.querySelector('.sky-banner');
+            const mainContainer = document.querySelector('.main-container');
+            const guideMenus = document.querySelectorAll('.top_drop_menu');
+            const topGuideNav = document.querySelector('.top_guide_nav');
+            const loginSpan = document.querySelector('.login_mes-container #username');
+            const loginSection = document.querySelector('.login_mes-container section');
+            const searchIcon = document.querySelector('.search-icon #search');
+            const clearIcon = document.querySelector('.search-icon #clear');
+            const searchInput = document.querySelector('.search-icon #search_input');
+            const topBarHeight = skyBar.offsetHeight;
+            window.addEventListener('scroll', function() {
+                const offset = window.pageYOffset || document.documentElement.scrollTop;
+
+                if (offset > topBarHeight) {
+                    topBar.classList.add('sticky');
+                    mainContainer.style.paddingTop = 5 + 'rem';
+                    moveUpDropMenu(5);
+                } else {
+                    topBar.classList.remove('sticky');
+                    mainContainer.style.paddingTop = 0;
+                    moveUpDropMenu(6.25);
+                }
+                // 如果页面到达底部
+                console.log("gi" + offset + topBarHeight);
+                if (offset + topBarHeight >= document.body.offsetHeight - 1000) {
+                    for (let i = 0; i < topGuideNav.children.length; i++) {
+                        topGuideNav.children[i].style.color = '#333333';
+                    }
+                    for (let i = 0; i < loginSection.children.length; i++) {
+                        loginSection.children[i].style.color = '#333333';
+                    }
+                    // 获取searchInput的style的border-bottom
+                    searchInput.style.borderBottom = '1px solid #333333';
+                    searchIcon.src = '../Resource/Img/system/searchd_ico.png';
+                    clearIcon.src = '../Resource/Img/system/cleard_ico.png';
+                    loginSpan.style.color = '#333333';
+                    topBar.style.transition = 'background-color 0.3s ease';
+                    topBar.style.backgroundColor = '#f2f2f2';
+                } else {
+                    for (let i = 0; i < topGuideNav.children.length; i++) {
+                        topGuideNav.children[i].style.color = '#e0e0e0';
+                    }
+                    for (let i = 0; i < loginSection.children.length; i++) {
+                        loginSection.children[i].style.color = '#e0e0e0';
+                    }
+                    searchIcon.src = '../Resource/Img/system/search_ico.png';
+                    clearIcon.src = '../Resource/Img/system/clear_ico.png';
+                    loginSpan.style.color = '#e0e0e0';
+                    topBar.style.transition = 'background-color 0.3s ease';
+                    topBar.style.backgroundColor = '#111111';
+                }
+            });
+            function moveUpDropMenu(val) {
+                guideMenus.forEach(menu => {
+                    menu.style.top = val + 'rem';
+                });
             }
         });
     </script>
