@@ -238,23 +238,131 @@ body {
     color: gray;
 }
 
-/* 商品的css */
-#product-detail {
+.product-item {
+    display: flex;
+    align-items: flex-start;
+    /* 顶部对齐 */
+    gap: 20px;
+    /* 图片和文字信息之间的间距 */
+    position: relative;
+    /* 删除无效的 position: left */
+    width: 100%;
+}
+
+#good-detail {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+
+/* 优化后的商品项布局 */
+.product-item {
+    display: flex;
+    gap: 40px;
+    align-items: flex-start;
+    position: relative;
+}
+
+.product-item img {
+    width: 45%;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    flex-shrink: 0;
+    transition: transform 0.3s ease;
+    /* 添加过渡效果，让放大过程更平滑 */
+}
+
+.product-item img:hover {
+    transform: scale(1.2);
+    /* 鼠标悬停时，图片放大到原来的 1.2 倍 */
+}
+
+/* 为下拉菜单中的图片也添加悬停放大效果 */
+.top_drop_menu .img-container img {
+    transition: transform 0.3s ease;
+    /* 添加过渡效果，让放大过程更平滑 */
+}
+
+.top_drop_menu .img-container img:hover {
+    transform: scale(1.1);
+    /* 鼠标悬停时，图片放大到原来的 1.1 倍 */
+}
+
+.text-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.product-item h2 {
+    font-size: 2.4rem;
+    margin: 0 0 30px 0;
+    color: #333;
+    text-align: center;
+    position: relative;
+    padding-bottom: 15px;
+}
+
+.product-item h2::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 2px;
+    background: #007bff;
+}
+
+.price-button-container {
+    margin-top: auto;
+    text-align: center;
     padding: 20px;
-    border: 1px solid #ccc;
-    margin: 20px;
+    background: #f8f9fa;
+    border-radius: 8px;
 }
 
-#product-detail h2 {
-    font-size: 24px;
-    margin-bottom: 10px;
+.price {
+    font-size: 1.8rem;
+    color: #e91e63;
+    font-weight: bold;
+    margin-bottom: 15px;
 }
 
-#product-detail p {
-    font-size: 16px;
-    margin-bottom: 5px;
+.product-item button {
+    padding: 12px 35px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s;
+    font-size: 1.1rem;
 }
 
-#product-detail img {
-    margin-top: 10px;
+.product-item button:hover {
+    background: #0056b3;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .product-item {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .product-item img {
+        width: 100%;
+    }
+
+    .price-button-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .product-item h2 {
+        font-size: 2rem;
+    }
 }
