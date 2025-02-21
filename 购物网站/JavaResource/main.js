@@ -292,7 +292,18 @@ function API_jumpToPage(page="../WebContent/index.html", data=null, data_name=""
     } else {
         window.location.href = page;
     }
-    
+}
+
+function API_jumpToPage(page="../WebContent/index.html", data_name="", data=null, flag=false) {
+    if (data != null && data_name != "") {
+        sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
+    }
+    if (flag) {
+        // 新增页面
+        window.open(page, "_blank");
+    } else {
+        window.location.href = page;
+    }
 }
 
 // 获取sessionStorage中的数据接口
