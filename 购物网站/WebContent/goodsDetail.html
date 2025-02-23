@@ -312,19 +312,32 @@
     </script>
 
     <!-- 用于显示商品详情的容器 -->
-    <div id="good-detail"></div>
+    <div id="good-detail">
+
+    </div>
 
     <script>
+        
         const id = API_parseStoredData("display_good");  // 获取商品 ID
         const good = API_parseGoodId(id);  // 解析商品 ID 得到商品详细信息（字典）
         const goodDetail = document.getElementById('good-detail');
+        function addGoodToCart() {
+            if (API_addToCart(id)) {
+                API_dialog('加入成功');
+            }
+        }
         if (good) {
             goodDetail.innerHTML = `
-                <h2>${good.name}</h2>
-                <p>价格：${good.price}</p>
-                <img src="${good.image_url}" alt="${good.name}" width="200">
+                <div class="good_img-container">
+                    <img src="${good.image_url}" alt="${good.name}" width="200">
+                </div>
+                <div class="good-info">
+                    <h2>${good.name}</h2>
+                    <p>价格：${good.price}</p>
+                    <button id="add-to-cart" onclick="API_addGoodToCart()">加入购物车</button>
+                </div>
                 <!-- 添加购物车按钮 -->
-                <button id="add-to-cart" onclick="API_jumpToPage('cart.html')">加入购物车</button>
+                
             `;
         } else {
             showError('未找到对应的商品，请检查商品 ID 是否正确。');
