@@ -324,6 +324,12 @@
         function addGoodToCart() {
             if (API_addToCart(id)) {
                 API_dialog('加入成功');
+                const D_addBtn = document.getElementById('add-to-cart');
+                D_addBtn.disabled = true;
+                D_addBtn.style.backgroundColor = '#ccc';
+                D_addBtn.style.color = '#333';
+                D_addBtn.innerText = '已加入购物车';
+                D_addBtn.style.cursor = 'not-allowed';
             }
         }
         if (good) {
@@ -334,7 +340,7 @@
                 <div class="good-info">
                     <h2>${good.name}</h2>
                     <p>价格：${good.price}</p>
-                    <button id="add-to-cart" onclick="API_addGoodToCart()">加入购物车</button>
+                    <button id="add-to-cart" onclick="addGoodToCart()">加入购物车</button>
                 </div>
                 <!-- 添加购物车按钮 -->
                 

@@ -282,22 +282,12 @@ function API_logout() {
 // 跳转到指定页面接口
 // page: 要跳转的页面路径，如果传入空字符串则跳转到首页(../WebContent/index.html)
 // page: string  (格式："../WebContent/你要跳转的页面.html")
-function API_jumpToPage(page="../WebContent/index.html", data=null, data_name="", flag=false) {
-    if (data != null && data_name != "") {
-        sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
-    }
-    if (flag) {
-        // 新增页面
-        window.open(page, "_blank");
-    } else {
-        window.location.href = page;
-    }
-}
 
 function API_jumpToPage(page="../WebContent/index.html", data_name="", data=null, flag=false) {
-    if (data != null && data_name != "") {
-        sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
-    }
+    
+    sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
+   
+    sessionStorage.setItem(data_name, JSON.stringify(data));  // 缓存数据到sessionStorage中
     if (flag) {
         // 新增页面
         window.open(page, "_blank");
@@ -533,7 +523,7 @@ function API_showGoods(display_goods, GoodContainer, sort = 0) {
         
         GoodContainer.children[row].innerHTML += `
             <div class="item" data-GoodId="${good.id}" onclick="console.log('${good.id}')">
-                <div class="images" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${good.id}, 'display_good', true)">
+                <div class="images" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${good.id}, true)">
                     <img src="${good.image_url}" alt="">
                 </div>
                 <div class="content">

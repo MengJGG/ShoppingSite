@@ -410,7 +410,7 @@
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                         </div>
-                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${recommend_goods[loop][i].id}, true)">
                             <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
@@ -450,7 +450,7 @@
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                                 </div>
-                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${recommend_goods[loop][i].id}, true)">
                                     <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>

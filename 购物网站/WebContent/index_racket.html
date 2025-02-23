@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>吉他-LuxeHarmony</title>
+    <title>羽毛球拍-LuxeHarmony</title>
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="index_guitar.css">
@@ -394,7 +394,7 @@
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                         </div>
-                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${recommend_goods[loop][i].id}, true)">
                             <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
@@ -434,7 +434,7 @@
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                                 </div>
-                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${recommend_goods[loop][i].id}, true)">
                                     <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>

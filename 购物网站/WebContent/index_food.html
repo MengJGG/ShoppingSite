@@ -382,7 +382,7 @@
                 let recommend_goods = [];
                 let loop = 0;  // 用于循环recommend_goods，当商品获取到头时，从头开始
                 // 从后端获取商品数据
-                recommend_goods.push(API_getGoods(1, recommend_items));  // 获取的商品添加到recommend_goods
+                recommend_goods.push(API_getGoods(1, recommend_items, 4));  // 获取的商品添加到recommend_goods
                 const recommendItems = document.querySelector('.recommend-container .recommend_items');
                 for (let i = 0; i < 3; i++) {
                     recommendItems.innerHTML += `
@@ -391,7 +391,7 @@
                             <span id="s">新品上新</span>
                             <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                         </div>
-                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                        <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${recommend_goods[loop][i].id}, true)">
                             <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                         </div>
                         <br>
@@ -409,7 +409,7 @@
                 ChangeBtn.addEventListener('click', function() {
                     // 为每个item添加卡片翻转动画
                     loop++;  // 循环数组+1
-                    let goods = API_getGoods(1, recommend_items);
+                    let goods = API_getGoods(1, recommend_items, 4);
                     if (goods.length != 0) {
                         recommend_goods.push(goods);
                     }
@@ -431,7 +431,7 @@
                                     <span id="s">新品上新</span>
                                     <span style="margin-left: 3rem; cursor: pointer;" id="buy" data-ind="0" data-listened="false">购入</span>
                                 </div>
-                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', ${recommend_goods[loop][i].id}, 'display_good', true)">
+                                <div class="good_img-container" onclick="API_jumpToPage('../WebContent/goodsDetail.html', 'display_good', ${recommend_goods[loop][i].id}, true)">
                                     <img src="${recommend_goods[loop][i].image_url}" alt="" class="good_img">
                                 </div>
                                 <br>
