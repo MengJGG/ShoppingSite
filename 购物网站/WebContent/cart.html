@@ -310,7 +310,7 @@
                 <div class="total">
                     <span>总价：<span id="total-price">0</span>元</span>
                 </div>
-                <button id="checkout" onclick="check()">结算</button>
+                <button id="checkout">结算</button>
             </div>
         </div>
     </div>
@@ -484,30 +484,21 @@
             renderCart();
         }
 
-        function check() {
-            const selectedItems = cart.filter((item) => item.selected)
-            if (selectedItems.length === 0) {
-                API_dialog("请选择至少一件商品！")
-            } else {
-                clearSelected();
-                alert(`结算成功！共 ${selectedItems.length} 件商品，总价：${document.getElementById("total-price").textContent}元`)
-            }
-        }
-
         // 全选/反选
         document.getElementById("select-all").addEventListener("change", function () {
-            const isChecked = this.checked
-            cart.forEach((item) => (item.selected = isChecked))
-            renderCart()
+            const isChecked = this.checked;
+            cart.forEach((item) => (item.selected = isChecked));
+            renderCart();
         })
 
         // 结算
         document.getElementById("checkout").addEventListener("click", function () {
             const selectedItems = cart.filter((item) => item.selected)
             if (selectedItems.length === 0) {
-                alert("请选择至少一件商品！")
+                API_dialog("请选择至少一件商品！");
             } else {
                 alert(`结算成功！共 ${selectedItems.length} 件商品，总价：${document.getElementById("total-price").textContent}元`)
+                clearSelected();
             }
         })
         renderCart()
