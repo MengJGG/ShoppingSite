@@ -637,7 +637,7 @@ body {
 
 .bottom-container .quick-msg {
     font-size: 1.5rem;
-    color: #111111;
+    color: var(--dark-text);
 }
 
 .bottom-container .input-container input {
@@ -651,6 +651,7 @@ body {
     font-size: 1rem;
     text-align: center;
     color: var(--dark-text);
+    background-color: inherit;
 }
 
 .bottom-container .input-container input:focus {

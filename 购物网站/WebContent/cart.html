@@ -5,15 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>xxx的购物车</title>
-    <script>
-        // TODO: 获取名字，添加到title标签当中
-    </script>
+    
     <link rel="stylesheet" href="main_css.css">
     <link rel="stylesheet" href="cart.css">
     <link rel="stylesheet" href="index.css">
     <script src="../JavaResource/main.js"></script>
 </head>
 <body>
+    <script>
+        const title = document.querySelector('title');
+        const username = document.querySelector('#username');
+        title.textContent = `${API_getUsername()}的购物车`;
+    </script>
     <div class="sky-banner" style="cursor: pointer;"></div>
     <!-- 顶部导航栏 -->
     <div class="top-container">
@@ -266,8 +269,18 @@
         <div class="scroll_top" onclick="scrollToTop()"><img src="../Resource/Img/system/arrow_up.png" style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
+        let flag = true;
         const lamp = document.querySelector('.side_tool_bar .lamp');
-        const scrollTop = document.querySelector('.side_tool_bar .scroll_top');
+        lamp.addEventListener('click', function() {
+            
+            if (flag) {
+                API_offLamp();
+                flag = false;
+            } else {
+                API_onLamp();
+                flag = true;
+            }
+        });
         function scrollToTop() {
             window.scrollTo({
                 top: 0,

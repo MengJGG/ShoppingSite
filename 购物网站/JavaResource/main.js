@@ -588,3 +588,22 @@ function API_updateUserInfo(username=null, data_name, data) {
         return;
     }
 }
+
+function API_offLamp() {   
+    const body = document.querySelector('body');
+    const bottom = document.querySelector('.bottom-container');
+    body.style.backgroundColor = 'black';
+    bottom.style.backgroundColor = 'black';
+}
+
+function API_onLamp() {
+    const body = document.querySelector('body');
+    const bottom = document.querySelector('.bottom-container');
+    body.style.backgroundColor = 'white';    
+    bottom.style.backgroundColor = 'white';
+}
+
+function API_getUsername() {
+    const current_user = JSON.parse(localStorage.getItem("CurrentUser"));
+    return current_user.username;
+}

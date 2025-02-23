@@ -291,9 +291,18 @@
                 style="width: 2.7rem; height: 2.7rem;" alt="回到顶部"></div>
     </div>
     <script>
+        let flag = true;
         const lamp = document.querySelector('.side_tool_bar .lamp');
-        const cart = document.querySelector('.side_tool_bar .cart');
-        const scrollTop = document.querySelector('.side_tool_bar .scroll_top');
+        lamp.addEventListener('click', function() {
+            
+            if (flag) {
+                API_offLamp();
+                flag = false;
+            } else {
+                API_onLamp();
+                flag = true;
+            }
+        });
         function scrollToTop() {
             window.scrollTo({
                 top: 0,
